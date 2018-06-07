@@ -1,0 +1,74 @@
+// Here you can add other styles
+
+  .Appbarstyle{
+    text-align: 'center';
+    width: 100%;
+  
+   
+  }
+
+  .app-bar-title
+  {
+    font-size:'700px !important';
+  }
+  
+ 
+
+
+  .appointmentMainDivStyle{
+    align-items: 'center';
+    font-size: 16pt ;
+    
+  }
+.appointmentSpanStyle{
+    color:rgb(0, 188, 212);
+}
+  .product{
+    padding:5px;
+    border-bottom:1px solid gray;
+    margin-bottom:5px;
+  }
+
+  .mainProductDes{
+    margin-top:20px;
+  }
+
+  .productBtn{
+    height: 35px;
+    font-size: 19px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: white !important;
+    border-radius: 5px;
+    width: 100%;
+    background: #20a8d8 !important;
+    float: none;
+  }
+
+  #root h1 { font-weight: bold !important;}
+
+  .main-class{margin:0 auto;max-width:400px;}
+
+  @media (max-width:767px)
+  {.appointment{
+    margin-top:20px;
+   // font-size: 5ch;
+  }
+   .product img{width:100%;}
+   
+  
+  }
+  
+
+  @media (max-width:1024px) {
+    .appointment{
+      margin-top:20px;
+      font-size: '';
+     }
+
+  }
+
+
+
+
+  
