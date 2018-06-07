@@ -62,9 +62,9 @@ class Experiences extends Component {
           <TableHeaderColumn dataField="sr" dataSort>Sr No.</TableHeaderColumn>
             <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
 
-            <TableHeaderColumn dataField="frontside" dataSort>FrontSide</TableHeaderColumn>
+            <TableHeaderColumn dataField="front" dataSort>FrontSide</TableHeaderColumn>
 
-            <TableHeaderColumn dataField="backside" dataSort>
+            <TableHeaderColumn dataField="back" dataSort>
             BackSide</TableHeaderColumn>
 
             <TableHeaderColumn isKey dataField="email">Email</TableHeaderColumn>
