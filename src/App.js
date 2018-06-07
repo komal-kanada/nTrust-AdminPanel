@@ -55,9 +55,7 @@ class Full extends Component {
               <Breadcrumb />
               <Container fluid>
                 <Switch>
-                  
-                   <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                  
+                  <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                   <Route path="/experiences" name="Experiences" component={Experiences}/>
                   <Route path="/sub" name="Sub" component={Sub}/>
                   <Route path="/users" name="Users" component={Users}/>
@@ -65,7 +63,7 @@ class Full extends Component {
                 
 
 
-                  <Redirect from="/" to="/dashboard"/>
+                  <Redirect from="/" to="/login"/>
                 </Switch>
                 
               </Container>

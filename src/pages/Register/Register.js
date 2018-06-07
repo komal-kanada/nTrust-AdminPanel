@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Card, CardBody, CardFooter, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Register extends Component {
   render() {
@@ -43,18 +44,10 @@ class Register extends Component {
                     </div>
                     <Input type="password" placeholder="Repeat password"/>
                   </InputGroup>
-                  <Button color="success" block>Create Account</Button>
+                    <Link to="/dashboard" >
+                    <Button color="success" block>Create Account</Button>
+                    </Link>
                 </CardBody>
-                <CardFooter className="p-4">
-                  <Row>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-facebook" block><span>facebook</span></Button>
-                    </Col>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-twitter" block><span>twitter</span></Button>
-                    </Col>
-                  </Row>
-                </CardFooter>
               </Card>
             </Col>
           </Row>
