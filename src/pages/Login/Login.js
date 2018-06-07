@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup, InputGroupAddon} from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -32,7 +33,9 @@ class Login extends Component {
                     </InputGroup>
                     <Row>
                       <Col xs="6">
-                        <Button color="primary" className="px-4">Login</Button>
+                          <Link to="/dashboard" >
+                              <Button color="primary" className="px-4">Login</Button>
+                          </Link>
                       </Col>
                       <Col xs="6" className="text-right">
                         <Button color="link" className="px-0">Forgot password?</Button>
@@ -44,9 +47,10 @@ class Login extends Component {
                   <CardBody className="text-center">
                     <div>
                       <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
+                      <p>If not a user already.. Register!</p>
+                        <Link to="/register" >
+                          <Button color="primary" className="mt-3" active>Register Now!</Button>
+                        </Link>
                     </div>
                   </CardBody>
                 </Card>

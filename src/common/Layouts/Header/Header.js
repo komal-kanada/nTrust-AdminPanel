@@ -94,11 +94,11 @@ class Header extends Component {
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"/>
         </NavbarToggler>
-        <NavbarBrand href="#"></NavbarBrand>
+        <NavbarBrand href="#"/>
         <NavbarToggler className= "d-md-down-none" onClick={this.sidebarToggle}>
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"/>
         </NavbarToggler>
       <Nav className="ml-auto" navbar>
           <HeaderDropdown notif/>
@@ -112,4 +112,3 @@ class Header extends Component {
 }
 
 export default Header;
-

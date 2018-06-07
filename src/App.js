@@ -48,17 +48,12 @@ class Full extends Component {
             <main className="main">
               <Container fluid>
                 <Switch>
-                  
-                 
-                  
+
                   <Route path="/experiences" name="Experiences" component={Experiences}/>
                   <Route path="/sub" name="Sub" component={Sub}/>
                   <Route path="/users" name="Users" component={Users}/>
                   <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
-                
-
-
-                  {/* <Redirect from="/" to="/dashboard"/> */}
+                  <Redirect from="/" to="/login"/>
                 </Switch>
                 
               </Container>
