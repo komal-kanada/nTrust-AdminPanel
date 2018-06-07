@@ -21,7 +21,7 @@ class Product extends Component {
     render() {
         const {products} = this.state;
         const attributes = products[0].attributes;
-        if(products != ""){
+        if(products !== ""){
             return (
                 <div className="row main-class">
                     <div className="col-md-12">
@@ -38,7 +38,7 @@ class Product extends Component {
                                 Object.keys(attributes).map(function(key){
                                     console.log(key+":"+attributes[key] ) 
                                     var attr = attributes[key];
-                                    var arr = []
+                                    var arr = [];
                                     if(attr && $.isArray(attr)) {
                                         for(var i=0; i < attr.length; i++){
                                             arr.push(attr[i])
