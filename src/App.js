@@ -4,12 +4,9 @@ import { Link, Switch,Router, Route, browserHistory, Redirect } from 'react-rout
 import {Container} from 'reactstrap';
 import Header from './common/Layouts/Header/';
 import Sidebar from './common/Layouts/Sidebar/';
-import Breadcrumb from './common/Layouts/Breadcrumb/';
 import Aside from './common/Layouts/Aside/';
 import Footer from './common/Layouts/Footer/';
 import Login from './pages/Login/Login.js'; 
-import Dashboard from './pages/Dashboard/Dashboard.js';
-import Product from './pages/ManageProduct/ProductDetails.js';
 import Appointment from './pages/Appointment/Appointment';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Register from './pages/Register/Register.js';
@@ -23,20 +20,17 @@ class Full extends Component {
   render() {
    
     var path = window.location.href;
-    var n = path.indexOf("/product");
     var m = path.indexOf("/appointment");
     var p = path.indexOf("/login");
     var q = path.indexOf("/register");
     
 
-    if( p > -1 || q > -1 || n > -1 || m > -1 ){
+    if( p > -1 || q > -1 || m > -1 ){
       return (
         <Container fluid>
           <Switch>
             <Route path ="/login" name="Login" component={Login}/>
             <Route path ="/register" name="Register" component={Register}/>
-            <Route path="/product" name="Product" component={Product}/>
-          
               <MuiThemeProvider>
                 <Route path="/appointment" name="Appointment" component={Appointment}/>
               </MuiThemeProvider>
@@ -52,17 +46,13 @@ class Full extends Component {
           <div className="app-body">
             <Sidebar {...this.props}/>
             <main className="main">
-              <Breadcrumb />
               <Container fluid>
                 <Switch>
-                  <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+
                   <Route path="/experiences" name="Experiences" component={Experiences}/>
                   <Route path="/sub" name="Sub" component={Sub}/>
                   <Route path="/users" name="Users" component={Users}/>
                   <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
-                
-
-
                   <Redirect from="/" to="/login"/>
                 </Switch>
                 
