@@ -16,7 +16,7 @@ export default {
 
         },
         {
-          
+           
             'rating':'3',
             'items':'ajhjfhaj',
             'lifetime':'3',

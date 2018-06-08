@@ -95,7 +95,7 @@ class Users extends Component {
 
                             <TableHeaderColumn dataField="lifetime"  >Lifetime Earnings</TableHeaderColumn>
 
-                           <TableHeaderColumn dataField="block"  >Access</TableHeaderColumn>
+                           <TableHeaderColumn dataField="access"  >Access</TableHeaderColumn>
 
 
                           
@@ -110,4 +110,5 @@ class Users extends Component {
 }
 
 export default Users;
+
 

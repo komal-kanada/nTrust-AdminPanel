@@ -61,8 +61,6 @@ class Experiences extends Component {
 
                             <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
 
-                            
-
                             <TableHeaderColumn dataField="front"  dataSort>FrontSide</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="back"  dataSort>
