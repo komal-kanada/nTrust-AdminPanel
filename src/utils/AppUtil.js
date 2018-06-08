@@ -71,14 +71,13 @@ const AppUtils = {
         return fetch(API_BASE_URL + '/admin/deleteExp', {
             method: 'POST',
             headers: {
-                'Accept':'*/*',
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: await data
+            body: JSON.stringify(data)
         })
             .then((response) => {
                 setTimeout(() => null, 0);
-                console.log(response);
+                console.log(response );
                 return response;
             })
             .catch((err) => {

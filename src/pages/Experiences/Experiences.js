@@ -67,6 +67,14 @@ export default class Experiences extends Component {
 
     render() {
 
+        // API.ExperienceList()
+        //     .then((response) => {
+        //         console.log(response)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+
         // let data = {
         //     "name": "test-admin",
         //     'header': this.state.header,
@@ -91,16 +99,16 @@ export default class Experiences extends Component {
         //         console.log(err)
         //     });
 
-        let data = {
-            expId: '5b1a62eed9b3f80e72db4ad6'
-        };
-        API.DeleteExperience(data)
-            .then((resp) => {
-                console.log(resp)
-            })
-            .catch((err) => {
-                console.log(err)
-            });
+        // let data = {
+        //     expId: '5b1a5cac37de61021e4a2eeb'
+        // };
+        // API.DeleteExperience(data)
+        //     .then((resp) => {
+        //         console.log(resp)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
 
         return (
             <div className="animated">
@@ -131,6 +139,3 @@ export default class Experiences extends Component {
         )
     }
 }
-
-export default Experiences;
-
