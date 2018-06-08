@@ -8,6 +8,11 @@ function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
 }
 
+
+  const selectRowProp = {
+    mode: 'checkbox'
+  };
+
 function onAfterInsertRow(row) {
     let newRowStr = '';
   
@@ -18,16 +23,10 @@ function onAfterInsertRow(row) {
   }
   
   const options = {
-    afterInsertRow: onAfterInsertRow   // A hook for after insert rows
+    afterInsertRow: onAfterInsertRow ,
+   afterDeleteRow: onAfterDeleteRow 
   };
-  
-const selectRowProp = {
-    mode: 'checkbox'
-};
 
-function imageFormatter(cell, row){
-    return "<img src='"+cell+"'/>" ;
-  }
 
 
 
@@ -52,25 +51,24 @@ class Experiences extends Component {
             <div className="animated">
                 <Card>
                     <CardHeader>
-                        Experiences
+                    Experiences
                     </CardHeader>
                     <CardBody>
                         <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
 
 
-                            <TableHeaderColumn dataField="sr" dataSort>Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="sr" dataSort isKey>Sr No.</TableHeaderColumn>
+
                             <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
 
                             
-                            <TableHeaderColumn dataField="frontside" dataFormat={imageFormatter} isKey >FrontSide</TableHeaderColumn>
 
-                             <TableHeaderColumn dataField="edit"  dataSort>
-                                Edit</TableHeaderColumn>
+                            <TableHeaderColumn dataField="front"  dataSort>FrontSide</TableHeaderColumn>
 
+                            <TableHeaderColumn dataField="back"  dataSort>
+                                BackSide</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="edit"  dataSort>
-                                Edit</TableHeaderColumn>
-
+                            
                         </BootstrapTable>
                     </CardBody>
                 </Card>
@@ -80,3 +78,4 @@ class Experiences extends Component {
 }
 
 export default Experiences;
+

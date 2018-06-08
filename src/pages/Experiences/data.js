@@ -1,13 +1,11 @@
-import React from 'react';
-import Button from 'reactstrap';
+
 export default {
     rows: [
         {
             'name': 'Wing',
             'email': 'tellus.eu.augue@arcu.com',
             'regDate': '2016-01-09T14:48:34-08:00',
-            'front':'',
-            'edit': <Button/>
+          
         },
         {
             'name': 'Whitney',
