@@ -1,15 +1,15 @@
 export default {
   items: [
-    {
-      name: 'Dashboard',
-      url: '/dashboard',
+    // {
+    //   name: 'Dashboard',
+    //   url: '/dashboard',
     
-      icon: 'icon-home',
-      badge: {
-        variant: 'info',
-        text: 'NEW'
-      }
-    },
+    //   icon: 'icon-home',
+    //   badge: {
+    //     variant: 'info',
+    //     text: 'NEW'
+    //   }
+    // },
  
     {
       
