@@ -1,12 +1,20 @@
-import { API_BASE_URL } from '../common/global';
+import {API_BASE_URL} from '../common/global';
+
+const convertFormData = async (data) => {
+    var formData = new FormData();
+    for (var k in data) {
+        formData.append(k, data[k]);
+    }
+    return formData;
+}
 
 const AppUtils = {
 
     //Experience-API-Calls
 
-    ExperienceList: async function() {
+    ExperienceList: async function () {
 
-        return await fetch(API_BASE_URL+'/admin/getAllExp', {
+        return await fetch(API_BASE_URL + '/admin/getAllExp', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -18,65 +26,71 @@ const AppUtils = {
             })
     },
 
-    AddExperience: async function(data) {
+    AddExperience: async function (data) {
+        console.log(data);
         return await fetch(API_BASE_URL + '/admin/insertExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Accept':'*/*'
             },
-            body: data
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            body: await convertFormData(data)
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    return res.data
+                }))
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     },
 
     EditExperience: async function (data) {
+        console.log(data);
         return await fetch(API_BASE_URL + '/admin/updateExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Accept':'*/*'
             },
-            body: data
+            body: await convertFormData(data)
         })
             .then((response) => {
                 setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
+                console.log(response);
+                return response;
             })
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     },
 
-    DeleteExperience: function (data) {
+    DeleteExperience: async function (data) {
         return fetch(API_BASE_URL + '/admin/deleteExp', {
             method: 'POST',
             headers: {
+                'Accept':'*/*',
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: data
+            body: await data
         })
             .then((response) => {
                 setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
+                console.log(response);
+                return response;
             })
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     },
 
     //SubExperience-API-Calls
 
-    SubExperienceList: async function() {
+    SubExperienceList: async function () {
 
-        return await fetch(API_BASE_URL+'/admin/getAllSubExp', {
+        return await fetch(API_BASE_URL + '/admin/getAllSubExp', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -88,7 +102,7 @@ const AppUtils = {
             })
     },
 
-    AddSubExperience: async function(data) {
+    AddSubExperience: async function (data) {
         return await fetch(API_BASE_URL + '/admin/insertSubexp', {
             method: 'POST',
             headers: {
@@ -172,7 +186,7 @@ const AppUtils = {
     //         })
     // },
 
-    UserBlockUnblock: async function(data) {
+    UserBlockUnblock: async function (data) {
         return await fetch(API_BASE_URL + '/admin/blockUnblock', {
             method: 'POST',
             headers: {
@@ -192,9 +206,9 @@ const AppUtils = {
 
     //promoCode-API-Calls
 
-    promoCodeList: async function() {
+    promoCodeList: async function () {
 
-        return await fetch(API_BASE_URL+'/admin/getAllPromocodes', {
+        return await fetch(API_BASE_URL + '/admin/getAllPromocodes', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -206,21 +220,23 @@ const AppUtils = {
             })
     },
 
-    AddpromoCode: async function(data) {
+    AddpromoCode: async function (data) {
+        console.log(data);
         return await fetch(API_BASE_URL + '/admin/insertPromocode', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
-            body: data
+            body: JSON.stringify(data)
         })
             .then((response) => {
                 setTimeout(() => null, 0);
-                console.log(response.json());
+                console.log('AppUtil then--' + response.toString());
                 return response.json();
             })
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log('AppUtil err ' + err)
             })
     },
 
