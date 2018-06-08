@@ -10,23 +10,24 @@ function onAfterDeleteRow(rowKeys) {
 
 function onAfterInsertRow(row) {
     let newRowStr = '';
-
+  
     for (const prop in row) {
-        newRowStr += prop + ': ' + row[prop] + ' \n';
+      newRowStr += prop + ': ' + row[prop] + ' \n';
     }
     alert('The new row is:\n ' + newRowStr);
-}
-
-const options = {
-    afterDeleteRow: onAfterDeleteRow , // A hook for after droping rows.
-    afterInsertRow: onAfterInsertRow
-};
-
+  }
+  
+  const options = {
+    afterInsertRow: onAfterInsertRow   // A hook for after insert rows
+  };
+  
 const selectRowProp = {
     mode: 'checkbox'
 };
 
-
+function imageFormatter(cell, row){
+    return "<img src='"+cell+"'/>" ;
+  }
 
 
 
@@ -60,10 +61,12 @@ class Experiences extends Component {
                             <TableHeaderColumn dataField="sr" dataSort>Sr No.</TableHeaderColumn>
                             <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="front" isKey dataSort>FrontSide</TableHeaderColumn>
+                            
+                            <TableHeaderColumn dataField="frontside" dataFormat={imageFormatter} isKey >FrontSide</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="back"  dataSort>
-                                BackSide</TableHeaderColumn>
+                             <TableHeaderColumn dataField="edit"  dataSort>
+                                Edit</TableHeaderColumn>
+
 
                             <TableHeaderColumn dataField="edit"  dataSort>
                                 Edit</TableHeaderColumn>

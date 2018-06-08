@@ -20,8 +20,8 @@ export default {
     },
     {
       
-      name: 'Sub-Experiences',
-      url:'/sub-Experiences',
+      name: 'Items',
+      url:'/items',
       icon: 'icon-energy',
      
     },

@@ -63,7 +63,7 @@ class Full extends Component {
 
 
 
-                                    <Redirect from="/" to="/login"/>
+                                    <Redirect from="/" to="/dashboard"/>
                                 </Switch>
 
                             </Container>
