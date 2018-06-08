@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 
 
-class Sub extends Component {
+class Items extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-         In Sub page
+         In Items page
       </div>
     )
   }
 }
 
-export default Sub;
+export default Items;

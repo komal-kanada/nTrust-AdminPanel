@@ -1,6 +1,35 @@
 import React, {Component} from 'react';
 import API from '../../utils/AppUtil';
 import {API_BASE_URL} from "../../common/global";
+import {Card, CardHeader, CardBody} from 'reactstrap';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import data from './data';
+
+function onAfterDeleteRow(rowKeys) {
+    alert('The rowkey you drop: ' + rowKeys);
+}
+
+
+  const selectRowProp = {
+    mode: 'checkbox'
+  };
+
+function onAfterInsertRow(row) {
+    let newRowStr = '';
+
+    for (const prop in row) {
+      newRowStr += prop + ': ' + row[prop] + ' \n';
+    }
+    alert('The new row is:\n ' + newRowStr);
+  }
+
+  const options = {
+    afterInsertRow: onAfterInsertRow ,
+   afterDeleteRow: onAfterDeleteRow
+  };
+
+
 
 export default class Experiences extends Component {
     constructor(props) {
@@ -9,6 +38,17 @@ export default class Experiences extends Component {
         this.state = {
             header: '',
         };
+
+        this.table = data.rows;
+        this.options = {
+            sortIndicator: true,
+            hideSizePerPage: true,
+            paginationSize: 3,
+            hidePageListOnlyOnePage: true,
+            clearSearch: true,
+            alwaysShowAllBtns: false,
+            withFirstAndLast: false
+        }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,15 +103,34 @@ export default class Experiences extends Component {
             });
 
         return (
-            <div>
-                <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
-                    <label>
-                        header:
-                        <input type="file" name="header" onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+            <div className="animated">
+                <Card>
+                    <CardHeader>
+                        Experiences
+                    </CardHeader>
+                    <CardBody>
+                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
+
+
+                            <TableHeaderColumn dataField="sr" dataSort isKey>Sr No.</TableHeaderColumn>
+
+                            <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
+
+
+
+                            <TableHeaderColumn dataField="front"  dataSort>FrontSide</TableHeaderColumn>
+
+                            <TableHeaderColumn dataField="back"  dataSort>
+                                BackSide</TableHeaderColumn>
+
+
+                        </BootstrapTable>
+                    </CardBody>
+                </Card>
             </div>
         )
     }
 }
+
+export default Experiences;
+
