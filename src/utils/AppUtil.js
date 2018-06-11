@@ -160,23 +160,23 @@ const AppUtils = {
 
     //User-API-Calls
 
-    // UserList: async function() {
-    //
-    //     return await fetch(API_BASE_URL+'/admin/getAllExp', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/x-www-form-urlencoded'
-    //         },
-    //     })
-    //         .then((response) => {
-    //             setTimeout(() => null, 0);
-    //             return response.json();
-    //         })
-    // },
+    UserList: async function() {
 
-    // ItemsByUser: async function() {
+        return await fetch(API_BASE_URL+'/admin/getAllUsers', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        })
+            .then((response) => {
+                setTimeout(() => null, 0);
+                return response.json();
+            })
+    },
+
+    // ItemsByUser: async function(userid) {
     //
-    //     return await fetch(API_BASE_URL+'/admin/getItemsByUser/:userid', {
+    //     return await fetch(API_BASE_URL+'/admin/getItemsByUser/', {
     //         method: 'GET',
     //         headers: {
     //             'Content-Type': 'application/x-www-form-urlencoded'

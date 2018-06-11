@@ -59,9 +59,6 @@ class Full extends Component {
                                     <Route path="/subExperience" name="Sub-Experience" component={SubExperience}/>
                                     <Route path="/users" name="Users" component={Users}/>
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
-
-
-
                                     <Redirect from="/" to="/experiences"/>
                                 </Switch>
 

@@ -3,9 +3,6 @@ import {Card, CardHeader, CardBody} from 'reactstrap';
 import API from '../../utils/AppUtil';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import {API_BASE_URL} from "../../common/global";
-
-import data from './data';
 
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
@@ -72,10 +69,7 @@ class Users extends Component {
     _getData = () => {
         API.UserList()
         .then((response) => {
-            console.log(">>>>>>>>>>>>",response.Data)
             this.setState({ data: response.Data })
-            console.log(this.state.data[0]._id)
-
         })
         .catch((err) => {
             console.log(err)
@@ -93,9 +87,9 @@ class Users extends Component {
             <div className="animated">
                 <Card>
                     <CardHeader>
-                    Users
+                        Users
                     </CardHeader>
-                        {/* <ButtonGroup className='my-custom-class' sizeClass='btn-group-md'>
+                    {/* <ButtonGroup className='my-custom-class' sizeClass='btn-group-md'>
                            <button type='button'
                             className={ `btn btn-primary` }>
                             Edit
@@ -113,20 +107,17 @@ class Users extends Component {
                                         cellEdit={ cellEditProp }
                                         insertRow>
 
+                            <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="_id" dataSort isKey>Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" dataSort>User Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name"  >Rating </TableHeaderColumn>
+                            <TableHeaderColumn dataField="rating" dataSort>Rating</TableHeaderColumn>
 
+                            <TableHeaderColumn dataField="itemCount" dataSort>Items Count</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="itemCount"  >Items Count</TableHeaderColumn>
-                            <TableHeaderColumn dataField="totalEarnings"  >Lifetime Earnings</TableHeaderColumn>
+                            <TableHeaderColumn dataField="totalEarnings" dataSort>Lifetime Earnings</TableHeaderColumn>
 
-                           <TableHeaderColumn dataField="isBlock"  >Access</TableHeaderColumn>
-
-
-
-
+                            <TableHeaderColumn dataField="isBlock" dataSort>Access</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>
