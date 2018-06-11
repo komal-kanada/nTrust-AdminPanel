@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardBody} from 'reactstrap';
+import API from '../../utils/AppUtil';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import {API_BASE_URL} from "../../common/global";
+
 import data from './data';
 
 function onAfterDeleteRow(rowKeys) {
@@ -10,7 +13,7 @@ function onAfterDeleteRow(rowKeys) {
 
 function onAfterInsertRow(row) {
     let newRowStr = '';
-  
+
     for (const prop in row) {
       newRowStr += prop + ': ' + row[prop] + ' \n';
     }
@@ -19,7 +22,7 @@ function onAfterInsertRow(row) {
 
   const options = {
     afterInsertRow: onAfterInsertRow ,
-   afterDeleteRow: onAfterDeleteRow 
+   afterDeleteRow: onAfterDeleteRow
   };
 
 const selectRowProp = {
@@ -45,8 +48,9 @@ function onToggle() {
 class Users extends Component {
     constructor(props) {
         super(props);
-        
-        this.table = data.rows;
+
+         this.state = {data: ''};
+
         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
@@ -58,6 +62,28 @@ class Users extends Component {
         }
 
     }
+
+
+    componentDidMount() {
+        this._getData();
+    }
+
+
+    _getData = () => {
+        API.UserList()
+        .then((response) => {
+            console.log(">>>>>>>>>>>>",response.Data)
+            this.setState({ data: response.Data })
+            console.log(this.state.data[0]._id)
+
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+    }
+
+
+
     render() {
 
         const options = {
@@ -76,31 +102,32 @@ class Users extends Component {
                             </button>
                         </ButtonGroup> */}
                     <CardBody>
-                   
-                        <BootstrapTable data={this.table}
-                                        version="4" 
+
+                        <BootstrapTable data={this.state.data}
+                                        version="4"
                                         striped hover pagination search options={this.options}
-                                        deleteRow={ true } 
-                                        insertRow={ true }  
+                                        deleteRow={ true }
+                                        insertRow={ true }
+                                        refresh={true}
                                         selectRow={ selectRowProp }
-                                        cellEdit={ cellEditProp } 
+                                        cellEdit={ cellEditProp }
                                         insertRow>
 
 
-                            <TableHeaderColumn dataField="sr" dataSort isKey>Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="_id" dataSort isKey>Sr No.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="rating"  >Rating </TableHeaderColumn>
-
-                            <TableHeaderColumn dataField="items" >Items</TableHeaderColumn>
-
-                            <TableHeaderColumn dataField="lifetime"  >Lifetime Earnings</TableHeaderColumn>
-
-                           <TableHeaderColumn dataField="block"  >Access</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name"  >Rating </TableHeaderColumn>
 
 
-                          
-                            
-                            
+                            <TableHeaderColumn dataField="itemCount"  >Items Count</TableHeaderColumn>
+                            <TableHeaderColumn dataField="totalEarnings"  >Lifetime Earnings</TableHeaderColumn>
+
+                           <TableHeaderColumn dataField="isBlock"  >Access</TableHeaderColumn>
+
+
+
+
+
                         </BootstrapTable>
                     </CardBody>
                 </Card>
