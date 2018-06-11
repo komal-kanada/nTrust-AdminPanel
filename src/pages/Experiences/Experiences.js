@@ -1,41 +1,36 @@
 import React, {Component} from 'react';
-import {Card, CardHeader, CardBody} from 'reactstrap';
+import API from '../../utils/AppUtil';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import data from './data';
 
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
 }
 
-function onAfterInsertRow(row) {
-    let newRowStr = '';
-  
-    for (const prop in row) {
-      newRowStr += prop + ': ' + row[prop] + ' \n';
-    }
-    alert('The new row is:\n ' + newRowStr);
-  }
-  
-  const options = {
-    afterInsertRow: onAfterInsertRow   // A hook for after insert rows
-  };
-  
 const selectRowProp = {
     mode: 'checkbox'
 };
 
-function imageFormatter(cell, row){
-    return "<img src='"+cell+"'/>" ;
-  }
+function onAfterInsertRow(row) {
+    let newRowStr = '';
+    for (const prop in row) {
+      newRowStr += prop + ': ' + row[prop] + ' \n';
+    }
+    alert('The new row is:\n ' + newRowStr);
+}
 
+  const options = {
+    afterInsertRow: onAfterInsertRow ,
+   afterDeleteRow: onAfterDeleteRow
+  };
 
-
-class Experiences extends Component {
+export default class Experiences extends Component {
     constructor(props) {
         super(props);
 
-        this.table = data.rows;
+        this.state = {table: ''};
+
         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
@@ -45,9 +40,70 @@ class Experiences extends Component {
             alwaysShowAllBtns: false,
             withFirstAndLast: false
         }
-
     }
-    render() {
+
+    componentWillMount () {
+        API.ExperienceList()
+            .then((response) => {
+                this.setState({
+                    table: response.Data
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }
+
+    imageFormatter = (cell) => {
+        return "<img height= '100px' src='"+cell+"'/>" ;
+    };
+
+     render() {
+
+
+        // API.ExperienceList()
+        //     .then((response) => {
+        //         console.log(response)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+
+        // let data = {
+        //     "name": "test-admin",
+        //     'header': this.state.header,
+        //     'subheader': this.state.header
+        // };
+        // API.AddExperience(data)
+        //     .then((resp) => {
+        //         console.log(JSON.stringify(resp.Data))
+        //     });
+        // alert('A name was submitted: ' + this.state.header);
+        // event.preventDefault();
+
+        // let data = {
+        //         name: 'aaaaaaaaa',
+        //         expId: '5b1a62eed9b3f80e72db4ad6'
+        //     };
+        // API.EditExperience(data)
+        //     .then((resp) => {
+        //         console.log(resp)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+
+        // let data = {
+        //     expId: '5b1a5cac37de61021e4a2eeb'
+        // };
+        // API.DeleteExperience(data)
+        //     .then((resp) => {
+        //         console.log(resp)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+
         return (
             <div className="animated">
                 <Card>
@@ -55,21 +111,28 @@ class Experiences extends Component {
                         Experiences
                     </CardHeader>
                     <CardBody>
-                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
+                        <BootstrapTable
+                            data={this.state.table}
+                            version="4"
+                            striped
+                            hover
+                            pagination
+                            refresh={true}
+                            search
+                            options={this.options}
+                            deleteRow={ true }
+                            insertRow={ true }
+                            selectRow={ selectRowProp }
+                            serverSide={ true }
+                        >
 
+                            <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="sr" dataSort>Sr No.</TableHeaderColumn>
                             <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
 
-                            
-                            <TableHeaderColumn dataField="frontside" dataFormat={imageFormatter} isKey >FrontSide</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} dataSort>Header</TableHeaderColumn>
 
-                             <TableHeaderColumn dataField="edit"  dataSort>
-                                Edit</TableHeaderColumn>
-
-
-                            <TableHeaderColumn dataField="edit"  dataSort>
-                                Edit</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} dataSort>Sub-Header</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>
@@ -78,5 +141,3 @@ class Experiences extends Component {
         )
     }
 }
-
-export default Experiences;

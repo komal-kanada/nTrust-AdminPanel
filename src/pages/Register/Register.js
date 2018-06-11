@@ -44,7 +44,7 @@ class Register extends Component {
                     </div>
                     <Input type="password" placeholder="Repeat password"/>
                   </InputGroup>
-                    <Link to="/dashboard" >
+                    <Link to="/experiences" >
                     <Button color="success" block>Create Account</Button>
                     </Link>
                 </CardBody>

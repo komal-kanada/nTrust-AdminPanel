@@ -33,7 +33,7 @@ class Login extends Component {
                     </InputGroup>
                     <Row>
                       <Col xs="6">
-                          <Link to="/dashboard" >
+                          <Link to="/experiences" >
                               <Button color="primary" className="px-4">Login</Button>
                           </Link>
                       </Col>

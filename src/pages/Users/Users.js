@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardBody} from 'reactstrap';
+import API from '../../utils/AppUtil';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import data from './data';
 
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
@@ -12,29 +12,42 @@ function onAfterInsertRow(row) {
     let newRowStr = '';
 
     for (const prop in row) {
-        newRowStr += prop + ': ' + row[prop] + ' \n';
+      newRowStr += prop + ': ' + row[prop] + ' \n';
     }
     alert('The new row is:\n ' + newRowStr);
-}
+  }
 
-const options = {
-    afterDeleteRow: onAfterDeleteRow ,
-    afterInsertRow: onAfterInsertRow
-};
+  const options = {
+    afterInsertRow: onAfterInsertRow ,
+   afterDeleteRow: onAfterDeleteRow
+  };
 
 const selectRowProp = {
     mode: 'checkbox'
-};
+  };
+
+const cellEditProp = {
+    mode: 'click',
+    blurToSave: true
+  };
+
+function onToggle() {
+    this.setState({ toggleActive: !this.state.toggleActive });
+  }
 
 
-
-
+  function createCustomInsertButton(openModal){
+    return (
+      <button style={ { color: 'red' } } onClick={ openModal }>Add rows</button>
+    );
+  }
 
 class Users extends Component {
     constructor(props) {
         super(props);
 
-        this.table = data.rows;
+         this.state = {data: ''};
+
         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
@@ -46,27 +59,65 @@ class Users extends Component {
         }
 
     }
+
+
+    componentDidMount() {
+        this._getData();
+    }
+
+
+    _getData = () => {
+        API.UserList()
+        .then((response) => {
+            this.setState({ data: response.Data })
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+    }
+
+
+
     render() {
+
+        const options = {
+            insertBtn: this.createCustomInsertButton
+          };
         return (
             <div className="animated">
                 <Card>
                     <CardHeader>
-                    Users
+                        Users
                     </CardHeader>
+                    {/* <ButtonGroup className='my-custom-class' sizeClass='btn-group-md'>
+                           <button type='button'
+                            className={ `btn btn-primary` }>
+                            Edit
+                            </button>
+                        </ButtonGroup> */}
                     <CardBody>
-                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
 
+                        <BootstrapTable data={this.state.data}
+                                        version="4"
+                                        striped hover pagination search options={this.options}
+                                        deleteRow={ true }
+                                        insertRow={ true }
+                                        refresh={true}
+                                        selectRow={ selectRowProp }
+                                        cellEdit={ cellEditProp }
+                                        insertRow>
 
-                            <TableHeaderColumn dataField="sr" dataSort>Sr No.</TableHeaderColumn>
-                            <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="front" isKey dataSort>FrontSide</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" dataSort>User Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="back"  dataSort>
-                                BackSide</TableHeaderColumn>
+                            <TableHeaderColumn dataField="rating" dataSort>Rating</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="edit"  dataSort>
-                                Edit</TableHeaderColumn>
+                            <TableHeaderColumn dataField="itemCount" dataSort>Items Count</TableHeaderColumn>
+
+                            <TableHeaderColumn dataField="totalEarnings" dataSort>Lifetime Earnings</TableHeaderColumn>
+
+                            <TableHeaderColumn dataField="isBlock" dataSort>Access</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>
@@ -77,3 +128,4 @@ class Users extends Component {
 }
 
 export default Users;
+

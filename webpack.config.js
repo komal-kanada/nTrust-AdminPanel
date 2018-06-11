@@ -42,7 +42,13 @@ console.log('SRC_DIR', SRC_DIR);
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              presets: ['react', 'env']
+                "presets": [
+                    ["env", {
+                        "targets": { node: "6" }, // specify targets here
+                    }],
+                    "stage-0",
+                    "react"
+                ]
             }
           }
         },

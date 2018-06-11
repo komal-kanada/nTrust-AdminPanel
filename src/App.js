@@ -15,7 +15,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Register from './pages/Register/Register.js';
 
 import Experiences from './pages/Experiences/Experiences.js';
-import Items from './pages/Items/Items.js';
+import SubExperience from './pages/SubExperience/SubExperience.js';
 import Users from './pages/Users/Users.js';
 import PromoCode from './pages/PromoCode/PromoCode.js';
 
@@ -52,18 +52,14 @@ class Full extends Component {
                     <div className="app-body">
                         <Sidebar {...this.props}/>
                         <main className="main">
-                            <Breadcrumb />
+                            {/* <Breadcrumb /> */}
                             <Container fluid>
                                 <Switch>
-                                    <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
-                                    <Route path="/items" name="Items" component={Items}/>
+                                    <Route path="/subExperience" name="Sub-Experience" component={SubExperience}/>
                                     <Route path="/users" name="Users" component={Users}/>
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
-
-
-
-                                    <Redirect from="/" to="/dashboard"/>
+                                    <Redirect from="/" to="/experiences"/>
                                 </Switch>
 
                             </Container>
