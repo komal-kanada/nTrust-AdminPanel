@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36052177-2606-42ac-976b-bc7ccbdd4144" name="Default" comment="" />
+    <list default="true" id="36052177-2606-42ac-976b-bc7ccbdd4144" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -68,7 +70,7 @@
       <path value="$PROJECT_DIR$/src/common/Layouts/SidebarMinimizer/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1360" />
     <option name="height" value="688" />
@@ -134,11 +136,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="596000" />
+    <option name="totallyTimeSpent" value="782000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1360" height="688" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1360" height="688" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24943988" />
       <window_info anchor="bottom" id="TODO" order="6" />
