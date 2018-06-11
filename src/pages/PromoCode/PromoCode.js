@@ -4,6 +4,7 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import data from './data';
 
+
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
 }
@@ -51,12 +52,12 @@ class PromoCode extends Component {
                     Items
                     </CardHeader>
                     <CardBody>
-                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
+                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp }  >
 
 
-                            <TableHeaderColumn dataField="sr" isKey>Sr No.</TableHeaderColumn>
+                          <TableHeaderColumn   dataField="sr"  isKey={true}  width="200px"  >Sr No.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
+                          <TableHeaderColumn dataField="promo"   width="100px">PromoCode</TableHeaderColumn>
 
                             
                         </BootstrapTable>

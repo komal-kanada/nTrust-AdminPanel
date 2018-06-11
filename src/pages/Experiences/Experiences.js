@@ -49,7 +49,9 @@ class Experiences extends Component {
     render() {
         return (
             <div className="animated">
+            <div>
                 <Card>
+
                     <CardHeader>
                     Experiences
                     </CardHeader>
@@ -57,19 +59,20 @@ class Experiences extends Component {
                         <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
 
 
-                            <TableHeaderColumn dataField="sr" dataSort isKey>Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="sr"  width='5%' isKey>Sr No.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name"  width='8%'>Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="front"  dataSort>FrontSide</TableHeaderColumn>
+                            <TableHeaderColumn dataField="front"  width='4%' >FrontSide</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="back"  dataSort>
+                            <TableHeaderColumn dataField="back"   width='4%'>
                                 BackSide</TableHeaderColumn>
 
                             
                         </BootstrapTable>
                     </CardBody>
                 </Card>
+                </div>
             </div>
         )
     }
