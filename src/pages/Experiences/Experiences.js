@@ -1,27 +1,23 @@
 import React, {Component} from 'react';
 import API from '../../utils/AppUtil';
-import {API_BASE_URL} from "../../common/global";
-import {Card, CardHeader, CardBody} from 'reactstrap';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import data from './data';
 
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
 }
 
-
-  const selectRowProp = {
+const selectRowProp = {
     mode: 'checkbox'
-  };
+};
 
 function onAfterInsertRow(row) {
     let newRowStr = '';
-
     for (const prop in row) {
       newRowStr += prop + ': ' + row[prop] + ' \n';
     }
-    alert('The new row is:\n ' + newRowStr);
+    console.log('aaaaaa' + newRowStr)
   }
 
   const options = {
@@ -29,17 +25,12 @@ function onAfterInsertRow(row) {
    afterDeleteRow: onAfterDeleteRow
   };
 
-
-
 export default class Experiences extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            header: '',
-        };
+        this.state = {table: ''};
 
-        this.table = data.rows;
         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
@@ -49,23 +40,26 @@ export default class Experiences extends Component {
             alwaysShowAllBtns: false,
             withFirstAndLast: false
         }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        console.log(event);
-        this.setState({header: event.target.files[0]});
+    componentWillMount () {
+        API.ExperienceList()
+            .then((response) => {
+                this.setState({
+                    table: response.Data
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
-    handleSubmit(event) {
+    imageFormatter = (cell) => {
+        return "<img height= '100px' src='"+cell+"'/>" ;
+    };
 
+     render() {
 
-
-    }
-
-    render() {
 
         // API.ExperienceList()
         //     .then((response) => {
@@ -117,20 +111,28 @@ export default class Experiences extends Component {
                         Experiences
                     </CardHeader>
                     <CardBody>
-                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
+                        <BootstrapTable
+                            data={this.state.table}
+                            version="4"
+                            striped
+                            hover
+                            pagination
+                            refresh={true}
+                            search
+                            options={this.options}
+                            deleteRow={ true }
+                            insertRow={ true }
+                            selectRow={ selectRowProp }
+                            serverSide={ true }
+                        >
 
-
-                            <TableHeaderColumn dataField="sr" dataSort isKey>Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey>Id.</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
 
+                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} dataSort>Header</TableHeaderColumn>
 
-
-                            <TableHeaderColumn dataField="front"  dataSort>FrontSide</TableHeaderColumn>
-
-                            <TableHeaderColumn dataField="back"  dataSort>
-                                BackSide</TableHeaderColumn>
-
+                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} dataSort>Sub-Header</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

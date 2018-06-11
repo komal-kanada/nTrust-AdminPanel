@@ -5,7 +5,7 @@ const routes = {
     '/register': 'Register',
     '/': 'Home',
     '/experiences':'Experiences',
-    '/items':'Items',
+    '/subExperience':'SubExperience',
     '/users':'Users',
     '/promoCode':'PromoCode',
 

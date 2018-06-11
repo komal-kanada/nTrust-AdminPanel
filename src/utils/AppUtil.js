@@ -24,6 +24,9 @@ const AppUtils = {
                 setTimeout(() => null, 0);
                 return response.json();
             })
+            .catch((err) => {
+                console.log(err)
+            })
     },
 
     AddExperience: async function (data) {
