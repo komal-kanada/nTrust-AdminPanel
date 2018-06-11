@@ -17,8 +17,8 @@ function onAfterInsertRow(row) {
     for (const prop in row) {
       newRowStr += prop + ': ' + row[prop] + ' \n';
     }
-    console.log('aaaaaa' + newRowStr)
-  }
+    alert('The new row is:\n ' + newRowStr);
+}
 
   const options = {
     afterInsertRow: onAfterInsertRow ,
