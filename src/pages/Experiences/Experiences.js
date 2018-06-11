@@ -4,10 +4,6 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-function onAfterDeleteRow(rowKeys) {
-    alert('The rowkey you drop: ' + rowKeys);
-}
-
 const selectRowProp = {
     mode: 'checkbox'
 };
@@ -17,13 +13,7 @@ function onAfterInsertRow(row) {
     for (const prop in row) {
       newRowStr += prop + ': ' + row[prop] + ' \n';
     }
-    alert('The new row is:\n ' + newRowStr);
 }
-
-  const options = {
-    afterInsertRow: onAfterInsertRow ,
-   afterDeleteRow: onAfterDeleteRow
-  };
 
 export default class Experiences extends Component {
     constructor(props) {
@@ -38,11 +28,20 @@ export default class Experiences extends Component {
             hidePageListOnlyOnePage: true,
             clearSearch: true,
             alwaysShowAllBtns: false,
-            withFirstAndLast: false
+            withFirstAndLast: false,
+            afterInsertRow: onAfterInsertRow,
         }
     }
 
     componentWillMount () {
+        this._getData()
+    }
+
+    imageFormatter = (cell) => {
+        return "<img height= '100px' src='"+cell+"'/>" ;
+    };
+
+    _getData = () => {
         API.ExperienceList()
             .then((response) => {
                 this.setState({
@@ -52,13 +51,30 @@ export default class Experiences extends Component {
             .catch((err) => {
                 console.log(err)
             });
-    }
-
-    imageFormatter = (cell) => {
-        return "<img height= '100px' src='"+cell+"'/>" ;
     };
 
-     render() {
+    _edit = (cell) => {
+        console.log(cell);
+        return <button onClick={() => {alert(cell)}}>Edit</button>
+    };
+
+    _delete = (cell) => {
+        return <button onClick={() => {alert(cell)}}>Delete</button>
+
+        // let data = {
+        //     expId: cell
+        // };
+        //
+        // API.DeleteExperience(data)
+        //     .then((resp) => {
+        //         console.log('del ' + resp)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+    };
+
+    render() {
 
 
         // API.ExperienceList()
@@ -93,16 +109,16 @@ export default class Experiences extends Component {
         //         console.log(err)
         //     });
 
-        // let data = {
-        //     expId: '5b1a5cac37de61021e4a2eeb'
-        // };
-        // API.DeleteExperience(data)
-        //     .then((resp) => {
-        //         console.log(resp)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
+         // let data = {
+         //     expId: '5b1a5cac37de61021e4a2eeb'
+         // };
+         // API.DeleteExperience(data)
+         //     .then((resp) => {
+         //         console.log(resp)
+         //     })
+         //     .catch((err) => {
+         //         console.log(err)
+         //     });
 
         return (
             <div className="animated">
@@ -120,7 +136,6 @@ export default class Experiences extends Component {
                             refresh={true}
                             search
                             options={this.options}
-                            deleteRow={ true }
                             insertRow={ true }
                             selectRow={ selectRowProp }
                             serverSide={ true }
@@ -133,6 +148,10 @@ export default class Experiences extends Component {
                             <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} dataSort>Header</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} dataSort>Sub-Header</TableHeaderColumn>
+
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._edit } dataAlign="center"> Edit </TableHeaderColumn>
+
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._delete } dataAlign="center"> Delete </TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

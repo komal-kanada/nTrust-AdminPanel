@@ -3,11 +3,25 @@ import API from '../../utils/AppUtil';
 import {Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import data from './data';
-
 
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
+
+    rowKeys.map((val) => {
+
+        console.log(val);
+        let data = {
+            promocodeId: val
+        };
+
+        API.DeletepromoCode(data)
+            .then((resp) => {
+                console.log('del ' + resp);
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    })
 }
 
 
@@ -24,37 +38,13 @@ function onAfterInsertRow(row) {
     alert('The new row is:\n ' + newRowStr);
   }
 
-  const options = {
-    afterInsertRow: onAfterInsertRow ,
-   afterDeleteRow: onAfterDeleteRow
-  };
 
 class PromoCode extends Component {
-    render() {
-        const data={
-            'disPrice': '12',
-            'subExp_id': '5b113df77860fb4e57aa8cef',
-            'promocode': 'TESTADMIN'
-        };
 
-        API.AddpromoCode(data)
-            .then((resp) => {
-                console.log('promo' + resp)
-            })
-            .catch((err) => {
-                console.log('error promo' + err)
-            });
-
-        return (
-            <div className="animated fadeIn">
-                Welcome to PromoCode page.
-            </div>
-        )
-    }
     constructor(props) {
         super(props);
 
-        this.table = data.rows;
+        this.state={table: ''};
         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
@@ -62,10 +52,29 @@ class PromoCode extends Component {
             hidePageListOnlyOnePage: true,
             clearSearch: true,
             alwaysShowAllBtns: false,
-            withFirstAndLast: false
+            withFirstAndLast: false,
+            afterInsertRow: onAfterInsertRow,
+            afterDeleteRow: onAfterDeleteRow
         }
 
     }
+
+    _getData  = () => {
+        API.promoCodeList()
+            .then((response) => {
+                this.setState({
+                    table: response.Data
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    };
+
+    componentWillMount () {
+        this._getData();
+    }
+
     render() {
         return (
             <div className="animated">
@@ -74,13 +83,15 @@ class PromoCode extends Component {
                     Items
                     </CardHeader>
                     <CardBody>
-                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp }  >
+                        <BootstrapTable data={this.state.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp }  >
 
+                            <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>
 
-                          <TableHeaderColumn   dataField="sr"  isKey={true}  width="200px"  >Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="promocode" dataSort>Name</TableHeaderColumn>
 
-                          <TableHeaderColumn dataField="promo"   width="100px">PromoCode</TableHeaderColumn>
+                            <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
 
+                            <TableHeaderColumn dataField="subExperience" dataFormat={this.expFormatter}>Experience</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>
@@ -89,5 +100,6 @@ class PromoCode extends Component {
         )
     }
 }
+
 
 export default PromoCode;

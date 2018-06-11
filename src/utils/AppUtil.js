@@ -144,17 +144,21 @@ const AppUtils = {
         return fetch(API_BASE_URL + '/admin/deleteSubExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     },
 
@@ -171,6 +175,9 @@ const AppUtils = {
             .then((response) => {
                 setTimeout(() => null, 0);
                 return response.json();
+            })
+            .catch((err) => {
+                console.log(err)
             })
     },
 
@@ -264,17 +271,21 @@ const AppUtils = {
         return fetch(API_BASE_URL + '/admin/deletePromocode', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     }
 
