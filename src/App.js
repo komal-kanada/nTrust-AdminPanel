@@ -23,23 +23,16 @@ class Full extends Component {
     render() {
 
         var path = window.location.href;
-        var n = path.indexOf("/product");
-        var m = path.indexOf("/appointment");
         var p = path.indexOf("/login");
         var q = path.indexOf("/register");
 
 
-        if( p > -1 || q > -1 || n > -1 || m > -1 ){
+        if( p > -1 || q > -1 ){
             return (
                 <Container fluid>
                     <Switch>
                         <Route path ="/login" name="Login" component={Login}/>
-                        <Route path ="/register" name="Register" component={Register}/>
-                        <Route path="/product" name="Product" component={Product}/>
-
-                        <MuiThemeProvider>
-                            <Route path="/appointment" name="Appointment" component={Appointment}/>
-                        </MuiThemeProvider>
+                        <Route path ="/register" name="Register" component={Register}/>     
                     </Switch>
                 </Container>
             );
@@ -52,9 +45,10 @@ class Full extends Component {
                     <div className="app-body">
                         <Sidebar {...this.props}/>
                         <main className="main">
-                            {/* <Breadcrumb /> */}
+                            <Breadcrumb />
                             <Container fluid>
                                 <Switch>
+                              
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
                                     <Route path="/subExperience" name="Sub-Experience" component={SubExperience}/>
                                     <Route path="/users" name="Users" component={Users}/>

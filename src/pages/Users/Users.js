@@ -61,7 +61,7 @@ class Users extends Component {
         }
 
     }
-
+   
 
     componentDidMount() {
         this._getData();
@@ -77,8 +77,7 @@ class Users extends Component {
             console.log(err)
         });
     }
-
-
+  
 
     render() {
 
@@ -106,7 +105,7 @@ class Users extends Component {
                                         insertRow={ true }
                                         refresh={true}
                                         selectRow={ selectRowProp }
-                                        cellEdit={ cellEditProp }
+                                       // cellEdit={ cellEditProp }
                                         insertRow>
 
                             <TableHeaderColumn dataField="_id" hidden={true}  isKey>Id.</TableHeaderColumn>
@@ -120,7 +119,7 @@ class Users extends Component {
                             <TableHeaderColumn dataField="totalEarnings" >Lifetime Earnings</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="isBlock" >Access</TableHeaderColumn>
-
+                          
                         </BootstrapTable>
                
                     </CardBody>

@@ -125,15 +125,15 @@ export default class Experiences extends Component {
                             refresh={true}
                             search
                             options={this.options}
-                            deleteRow={ true }
+                            deleteRow={ true}
                             insertRow={ true }
                             selectRow={ selectRowProp }
                             serverSide={ true }
                         >
+                            
+                            <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey >Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey>Id.</TableHeaderColumn>
-
-                            <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name">Name</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} 
                             width="150"
