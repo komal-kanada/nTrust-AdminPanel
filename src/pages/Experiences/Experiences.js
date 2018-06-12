@@ -4,6 +4,10 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
+
+
+
+
 function onAfterDeleteRow(rowKeys) {
     alert('The rowkey you drop: ' + rowKeys);
 }
@@ -106,6 +110,7 @@ export default class Experiences extends Component {
 
         return (
             <div className="animated">
+            
                 <Card>
                     <CardHeader>
                         Experiences
@@ -128,11 +133,15 @@ export default class Experiences extends Component {
 
                             <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} dataSort>Header</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} 
+                            width="150"
+                            >Header</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} dataSort>Sub-Header</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} 
+                            width="230"
+                            >Sub-Header</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

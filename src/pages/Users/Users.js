@@ -42,6 +42,8 @@ function onToggle() {
     );
   }
 
+
+
 class Users extends Component {
     constructor(props) {
         super(props);
@@ -107,19 +109,20 @@ class Users extends Component {
                                         cellEdit={ cellEditProp }
                                         insertRow>
 
-                            <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="_id" hidden={true}  isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" dataSort>User Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" >User Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="rating" dataSort>Rating</TableHeaderColumn>
+                            <TableHeaderColumn dataField="rating" >Rating</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="itemCount" dataSort>Items Count</TableHeaderColumn>
+                            <TableHeaderColumn dataField="itemCount" >Items Count</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="totalEarnings" dataSort>Lifetime Earnings</TableHeaderColumn>
+                            <TableHeaderColumn dataField="totalEarnings" >Lifetime Earnings</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="isBlock" dataSort>Access</TableHeaderColumn>
+                            <TableHeaderColumn dataField="isBlock" >Access</TableHeaderColumn>
 
                         </BootstrapTable>
+               
                     </CardBody>
                 </Card>
             </div>

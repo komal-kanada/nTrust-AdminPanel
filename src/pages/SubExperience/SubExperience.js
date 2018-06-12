@@ -1,19 +1,34 @@
 import React, {Component} from 'react';
+import { Card, CardHeader, CardBody } from 'reactstrap';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
+function onAfterDeleteRow(rowKeys) {
+    alert('The rowkey you drop: ' + rowKeys);
+}
 
-class SubExperience extends Component {
-  render() {
-    return (
-      <div className="animated fadeIn">
-         In SubExperience page
-      </div>
-    )
-  }
+const selectRowProp = {
+    mode: 'checkbox'
+};
+
+function onAfterInsertRow(row) {
+    let newRowStr = '';
+    for (const prop in row) {
+      newRowStr += prop + ': ' + row[prop] + ' \n';
+    }
+    alert('The new row is:\n ' + newRowStr);
+}
+
+  const options = {
+    afterInsertRow: onAfterInsertRow ,
+   afterDeleteRow: onAfterDeleteRow
+  };
+
 class SubExperience extends Component {
     constructor(props) {
         super(props);
 
-        this.table = data.rows;
+        this.table = '';
         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
@@ -33,7 +48,11 @@ class SubExperience extends Component {
                     Items
                     </CardHeader>
                     <CardBody>
-                        <BootstrapTable data={this.table} version="4" striped hover pagination search options={this.options} deleteRow={ true }  insertRow={ true }  selectRow={ selectRowProp } >
+                        <BootstrapTable data={this.table}
+                         version="4" 
+                         striped hover pagination search options={this.options} deleteRow={ true }  
+                         insertRow={ true }  
+                         selectRow={ selectRowProp } >
 
 
                             <TableHeaderColumn dataField="sr" isKey>Sr No.</TableHeaderColumn>
@@ -53,7 +72,7 @@ class SubExperience extends Component {
                     </CardBody>
                 </Card>
             </div>
-        )
+        );
     }
 }
 
