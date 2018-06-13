@@ -66,10 +66,10 @@ class SubExperience extends Component {
 
                             <TableHeaderColumn dataField="icon"  >Icon</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="price"  >
+                            <TableHeaderColumn dataField="price">
                             Daily Price</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="deposit"  >
+                            <TableHeaderColumn dataField="deposit">
                             Deposit Amount</TableHeaderColumn>
 
 

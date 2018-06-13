@@ -61,6 +61,10 @@ class Users extends Component {
         }
 
     }
+
+    _editCell = (cell) => {
+        return <button onClick={() => this._edit(cell)}>Edit</button>
+    };
    
 
     componentDidMount() {
@@ -117,9 +121,11 @@ class Users extends Component {
                             <TableHeaderColumn dataField="itemCount" >Items Count</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="totalEarnings" >Lifetime Earnings</TableHeaderColumn>
-
+                        
                             <TableHeaderColumn dataField="isBlock" >Access</TableHeaderColumn>
-                          
+                         
+                            {/* <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
+                           */}
                         </BootstrapTable>
                
                     </CardBody>

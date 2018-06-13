@@ -8,9 +8,9 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
   function onAfterDeleteRow(rowKeys) {
       alert('The rowkey you drop: ' + rowKeys);
   }
-  const selectRowProp = {
-    mode: 'checkbox'
-  };
+  // const selectRowProp = {
+  //   mode: 'checkbox'
+  // };
 
 function onAfterInsertRow(row) {
     let newRowStr = '';
@@ -67,10 +67,11 @@ class PromoCode extends Component {
                         striped hover pagination search options={this.options} deleteRow={ true } 
                         refresh={ true } 
                         insertRow={ true }  
-                        selectRow={ selectRowProp }  >
+                        // selectRow={ selectRowProp } 
+                         >
 
 
-                          <TableHeaderColumn   dataField="sr"  isKey={true}  width="200px" >Sr No.</TableHeaderColumn>
+                          <TableHeaderColumn   dataField="sr"  isKey={true}  width="15px" >Sr No.</TableHeaderColumn>
 
                           <TableHeaderColumn dataField="promo"   width="100px">PromoCode</TableHeaderColumn>
 
