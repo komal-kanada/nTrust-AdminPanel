@@ -6,7 +6,7 @@ const convertFormData = async (data) => {
         formData.append(k, data[k]);
     }
     return formData;
-}
+};
 
 const AppUtils = {
 
@@ -52,19 +52,22 @@ const AppUtils = {
     },
 
     EditExperience: async function (data) {
-        console.log(data);
         return await fetch(API_BASE_URL + '/admin/updateExp', {
             method: 'POST',
             headers: {
                 'Accept':'*/*'
             },
             body: await convertFormData(data)
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response);
-                return response;
-            })
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    console.log(res.data);
+                    return res.data
+                }))
             .catch((err) => {
                 console.log(err)
             })
@@ -77,12 +80,16 @@ const AppUtils = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response );
-                return response;
-            })
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    console.log(res.data);
+                    return res.data
+                }))
             .catch((err) => {
                 console.log(err)
             })
@@ -144,17 +151,21 @@ const AppUtils = {
         return fetch(API_BASE_URL + '/admin/deleteSubExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     },
 
@@ -171,6 +182,9 @@ const AppUtils = {
             .then((response) => {
                 setTimeout(() => null, 0);
                 return response.json();
+            })
+            .catch((err) => {
+                console.log(err)
             })
     },
 
@@ -264,17 +278,21 @@ const AppUtils = {
         return fetch(API_BASE_URL + '/admin/deletePromocode', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     }
 

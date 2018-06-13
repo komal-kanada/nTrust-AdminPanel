@@ -30,7 +30,6 @@ const cellEditProp = {
     mode: 'click',
     blurToSave: true
   };
-
 function onToggle() {
     this.setState({ toggleActive: !this.state.toggleActive });
   }
@@ -42,15 +41,13 @@ function onToggle() {
     );
   }
 
-
-
 class Users extends Component {
     constructor(props) {
         super(props);
 
          this.state = {data: ''};
-
-        this.options = {
+       
+         this.options = {
             sortIndicator: true,
             hideSizePerPage: true,
             paginationSize: 3,
@@ -59,18 +56,19 @@ class Users extends Component {
             alwaysShowAllBtns: false,
             withFirstAndLast: false
         }
+       
+  }
 
-    }
+    
 
-    _editCell = (cell) => {
-        return <button onClick={() => this._edit(cell)}>Edit</button>
-    };
    
-
     componentDidMount() {
         this._getData();
     }
 
+
+
+    
 
     _getData = () => {
         API.UserList()
@@ -84,6 +82,9 @@ class Users extends Component {
   
 
     render() {
+
+		
+	
 
         const options = {
             insertBtn: this.createCustomInsertButton
@@ -105,6 +106,7 @@ class Users extends Component {
                         <BootstrapTable data={this.state.data}
                                         version="4"
                                         striped hover pagination search options={this.options}
+                                        className="experiences-table"
                                         deleteRow={ true }
                                         insertRow={ true }
                                         refresh={true}
@@ -114,18 +116,16 @@ class Users extends Component {
 
                             <TableHeaderColumn dataField="_id" hidden={true}  isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" >User Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name"  >User Name</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="rating" >Rating</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="itemCount" >Items Count</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="totalEarnings" >Lifetime Earnings</TableHeaderColumn>
-                        
+                                                    
                             <TableHeaderColumn dataField="isBlock" >Access</TableHeaderColumn>
-                         
-                            {/* <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
-                           */}
+                            
                         </BootstrapTable>
                
                     </CardBody>

@@ -4,13 +4,30 @@ import {Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
+function onAfterDeleteRow(rowKeys) {
+    alert('The rowkey you drop: ' + rowKeys);
 
-  function onAfterDeleteRow(rowKeys) {
-      alert('The rowkey you drop: ' + rowKeys);
-  }
-  // const selectRowProp = {
-  //   mode: 'checkbox'
-  // };
+    rowKeys.map((val) => {
+
+        console.log(val);
+        let data = {
+            promocodeId: val
+        };
+
+        API.DeletepromoCode(data)
+            .then((resp) => {
+                console.log('del ' + resp);
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    })
+}
+
+
+  const selectRowProp = {
+    mode: 'checkbox'
+  };
 
 function onAfterInsertRow(row) {
     let newRowStr = '';
@@ -21,40 +38,44 @@ function onAfterInsertRow(row) {
     alert('The new row is:\n ' + newRowStr);
   }
 
-  const options = {
-    afterInsertRow: onAfterInsertRow ,
-   afterDeleteRow: onAfterDeleteRow
-  };
 
 class PromoCode extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {table: ''};
-    this.options = {
-        sortIndicator: true,
-        hideSizePerPage: true,
-        paginationSize: 3,
-        hidePageListOnlyOnePage: true,
-        clearSearch: true,
-        alwaysShowAllBtns: false,
-        withFirstAndLast: false
+    constructor(props) {
+        super(props);
+
+        this.state={table: ''};
+        this.options = {
+            sortIndicator: true,
+            hideSizePerPage: true,
+            paginationSize: 3,
+            hidePageListOnlyOnePage: true,
+            clearSearch: true,
+            alwaysShowAllBtns: false,
+            withFirstAndLast: false,
+            afterInsertRow: onAfterInsertRow,
+            afterDeleteRow: onAfterDeleteRow
+        }
+
     }
-  }
 
-  componentWillMount = () => {
-    API.promoCodeList()
-    .then((resp) => {
-      this.setState({
-        table: resp.Data
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-  render() {
-  
+    _getData  = () => {
+        API.promoCodeList()
+            .then((response) => {
+                this.setState({
+                    table: response.Data
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    };
+
+    componentWillMount () {
+        this._getData();
+    }
+
+    render() {
         return (
             <div className="animated">
                 <Card>
@@ -62,26 +83,28 @@ class PromoCode extends Component {
                     Items
                     </CardHeader>
                     <CardBody>
-                        <BootstrapTable data={this.table} 
+                        <BootstrapTable data={this.state.table} 
                         version="4" 
                         striped hover pagination search options={this.options} deleteRow={ true } 
-                        refresh={ true } 
-                        insertRow={ true }  
-                        // selectRow={ selectRowProp } 
-                         >
+                        className="experiences-table"
+                        insertRow={ true } 
+                        selectRow={ selectRowProp }  >
 
+                            <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>
 
-                          <TableHeaderColumn   dataField="sr"  isKey={true}  width="15px" >Sr No.</TableHeaderColumn>
+                            <TableHeaderColumn dataField="promocode" dataSort>Name</TableHeaderColumn>
 
-                          <TableHeaderColumn dataField="promo"   width="100px">PromoCode</TableHeaderColumn>
+                            <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
 
+                            <TableHeaderColumn dataField="subExperience" dataFormat={this.expFormatter}>Experience</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>
                 </Card>
             </div>
         )
-      }
+    }
 }
+
 
 export default PromoCode;
