@@ -31,11 +31,6 @@ const cellEditProp = {
     blurToSave: true
   };
 
-function onToggle() {
-    this.setState({ toggleActive: !this.state.toggleActive });
-  }
-
-
   function createCustomInsertButton(openModal){
     return (
       <button style={ { color: 'red' } } onClick={ openModal }>Add rows</button>
@@ -46,7 +41,10 @@ class Users extends Component {
     constructor(props) {
         super(props);
 
-         this.state = {data: ''};
+         this.state = {
+             data: '',
+             toggle: ''
+         };
 
         this.options = {
             sortIndicator: true,
@@ -55,7 +53,7 @@ class Users extends Component {
             hidePageListOnlyOnePage: true,
             clearSearch: true,
             alwaysShowAllBtns: false,
-            withFirstAndLast: false
+            withFirstAndLast: false,
         }
 
     }
@@ -74,38 +72,57 @@ class Users extends Component {
         .catch((err) => {
             console.log(err)
         });
-    }
+    };
 
+    _blockUnblock = (cell, key) => {
+        console.log(cell);
+        return <button onClick={() => this._toggle(cell, key._id)}> {cell} </button>
+    };
 
+    _toggle = (isBlock, id) => {
+        // console.log(id);
+        // API.UserList()
+        //     .then((response) => {
+        //         response.Data.map((val) => {
+        //             if(val._id === id){
+        //
+        //             }
+        //         })
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+        // if(this.state.toggle === 'Block') {
+        //     this.setState({
+        //         toggle: 'Un-Block'
+        //     })
+        // }
+        // else if(this.state.toggle === 'Un-Block') {
+        //     this.setState({
+        //         toggle: 'Block'
+        //     })
+        // }
+    };
 
     render() {
 
-        const options = {
-            insertBtn: this.createCustomInsertButton
-          };
         return (
             <div className="animated">
                 <Card>
                     <CardHeader>
                         Users
                     </CardHeader>
-                    {/* <ButtonGroup className='my-custom-class' sizeClass='btn-group-md'>
-                           <button type='button'
-                            className={ `btn btn-primary` }>
-                            Edit
-                            </button>
-                        </ButtonGroup> */}
                     <CardBody>
 
                         <BootstrapTable data={this.state.data}
                                         version="4"
-                                        striped hover pagination search options={this.options}
-                                        deleteRow={ true }
-                                        insertRow={ true }
+                                        striped
+                                        hover
+                                        pagination
+                                        options={this.options}
                                         refresh={true}
                                         selectRow={ selectRowProp }
-                                        cellEdit={ cellEditProp }
-                                        insertRow>
+                        >
 
                             <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
 
@@ -117,7 +134,7 @@ class Users extends Component {
 
                             <TableHeaderColumn dataField="totalEarnings" dataSort>Lifetime Earnings</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="isBlock" dataSort>Access</TableHeaderColumn>
+                            <TableHeaderColumn dataField="isBlock" dataFormat={ this._blockUnblock } dataAlign="center" dataSort>Access</TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

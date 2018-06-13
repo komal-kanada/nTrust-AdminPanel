@@ -3,45 +3,36 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import API from "../../utils/AppUtil";
+import ReactModal from 'react-modal';
 
 
-function onAfterDeleteRow(rowKeys) {
-    alert('The rowkey you drop: ' + rowKeys);
-
-    rowKeys.map((val) => {
-
-        let data = {
-            subExpId: val
-        };
-
-        API.DeleteSubExperience(data)
-            .then((resp) => {
-                console.log('del ' + resp)
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-    })
-}
+const style = {
+    content: {
+        borderRadius: '4px',
+        bottom: 'auto',
+        left: '25%',
+        position: 'fixed',
+        right: '25%',
+        top: '12%', // start from center
+    }
+};
 
 const selectRowProp = {
     mode: 'checkbox'
 };
 
-function onAfterInsertRow(row) {
-    let newRowStr = '';
-    for (const prop in row) {
-        newRowStr += prop + ': ' + row[prop] + ' \n';
-    }
-    alert('The new row is:\n ' + newRowStr);
-}
-
-class SubExperience extends Component {
+class Items extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            table: ''
+            table: '',
+            modalEditOpen: false,
+            name: '',
+            expHeader:'',
+            expSubHeader: '',
+            _id: '',
+            modalType: ''
         };
 
         this.options = {
@@ -52,8 +43,6 @@ class SubExperience extends Component {
             clearSearch: true,
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
-            afterInsertRow: onAfterInsertRow,
-            afterDeleteRow: onAfterDeleteRow
         }
 
     }
@@ -81,6 +70,30 @@ class SubExperience extends Component {
     render() {
         return (
             <div className="animated">
+                <ReactModal
+                    isOpen={this.state.modalEditOpen}
+                    style={style}
+                    ariaHideApp={false}
+                >
+                    <form onSubmit={this._submit} encType='multipart/form-data'>
+                        <label>
+                            <h5>Name:</h5>
+                            <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
+                        </label>
+                        <label>
+                            <h5>Icon:</h5>
+                            <input type="file" name="icon" onChange={this.handleChangeIcon}/>
+                        </label>
+                        <label>
+                            <h5>Sub-Header:</h5>
+                            <input type="file" name="expSubHeader" onChange={this.handleChangeSubHeader}/>
+                        </label>
+                        <div style={{paddingTop: 20, paddingLeft: 270}}>
+                            <button onClick={this._cancel}> Cancel </button>
+                            <input type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                </ReactModal>
                 <Card>
                     <CardHeader>
                     Sub-Experience
@@ -92,10 +105,7 @@ class SubExperience extends Component {
                             striped
                             hover
                             pagination
-                            search
                             options={this.options}
-                            deleteRow={ true }
-                            insertRow={ true }
                             selectRow={ selectRowProp }
                             refresh = { true }
                         >
@@ -118,4 +128,4 @@ class SubExperience extends Component {
     }
 }
 
-export default SubExperience;
+export default Items;

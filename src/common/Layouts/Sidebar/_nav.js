@@ -6,8 +6,8 @@ export default {
       icon: 'icon-calculator',
     },
     {
-      name: 'Sub-Experience',
-      url:'/subExperience',
+      name: 'Items',
+      url:'/items',
       icon: 'icon-energy',
     },
     {

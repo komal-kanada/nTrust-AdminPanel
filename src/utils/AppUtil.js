@@ -3,9 +3,7 @@ import {API_BASE_URL} from '../common/global';
 const convertFormData = async (data) => {
     var formData = new FormData();
     for (var k in data) {
-        console.log(k);
-        console.log(data[k]);
-        formData.append(k, data[k]);
+        await formData.append(k, data[k]);
     }
     return formData;
 };
@@ -60,8 +58,7 @@ const AppUtils = {
                 'Accept':'*/*',
             },
             body: await convertFormData(data)
-        }).then((response) => {
-            setTimeout(() => null, 0);
+        }).then(response =>
             response.json()
                 .then(data => ({
                     data: data,
@@ -70,7 +67,7 @@ const AppUtils = {
                 .then(res => {
                     console.log(res.data);
                     return res.data
-                })})
+                }))
             .catch((err) => {
                 console.log(err)
             })
