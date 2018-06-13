@@ -6,7 +6,7 @@ const convertFormData = async (data) => {
         formData.append(k, data[k]);
     }
     return formData;
-}
+};
 
 const AppUtils = {
 
@@ -52,19 +52,22 @@ const AppUtils = {
     },
 
     EditExperience: async function (data) {
-        console.log(data);
         return await fetch(API_BASE_URL + '/admin/updateExp', {
             method: 'POST',
             headers: {
                 'Accept':'*/*'
             },
             body: await convertFormData(data)
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response);
-                return response;
-            })
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    console.log(res.data);
+                    return res.data
+                }))
             .catch((err) => {
                 console.log(err)
             })
@@ -77,12 +80,16 @@ const AppUtils = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response );
-                return response;
-            })
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    console.log(res.data);
+                    return res.data
+                }))
             .catch((err) => {
                 console.log(err)
             })
