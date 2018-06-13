@@ -24,9 +24,7 @@ function onAfterDeleteRow(rowKeys) {
     })
 }
 
-const selectRowProp = {
-    mode: 'checkbox'
-};
+
 
 function onAfterInsertRow(row) {
     let newRowStr = '';
@@ -97,7 +95,6 @@ class SubExperience extends Component {
                             pagination
                             search
                             options={this.options}
-                            selectRow={ selectRowProp }
                             refresh = { true }
                         >
 

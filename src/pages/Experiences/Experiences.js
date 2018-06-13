@@ -5,9 +5,7 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import ReactModal from 'react-modal';
 
-const selectRowProp = {
-    mode: 'checkbox'
-};
+
 
 const style = {
     content: {
@@ -294,7 +292,6 @@ export default class Experiences extends Component {
                             pagination
                             refresh={true}
                             options={this.options}
-                            selectRow={ selectRowProp }
                             serverSide={ true }
                         >
 
@@ -304,11 +301,11 @@ export default class Experiences extends Component {
 
                             <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} >Header</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} >Sub-Header</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter }  >Sub-Header</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center" width="130"> Edit </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center"> Delete </TableHeaderColumn>
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center" width="130"> Delete </TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

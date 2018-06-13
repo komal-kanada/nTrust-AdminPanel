@@ -24,11 +24,6 @@ function onAfterDeleteRow(rowKeys) {
     })
 }
 
-
-  const selectRowProp = {
-    mode: 'checkbox'
-  };
-
 function onAfterInsertRow(row) {
     let newRowStr = '';
 
@@ -85,14 +80,14 @@ class PromoCode extends Component {
                     <CardBody>
                         <BootstrapTable data={this.state.table} 
                         version="4" 
-                        striped hover pagination search options={this.options} deleteRow={ true } 
+                        striped hover pagination search options={this.options} 
                         className="experiences-table"
                         insertRow={ true } 
-                        selectRow={ selectRowProp }  >
+                        >
 
                             <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="promocode" dataSort>Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="promocode" >Name</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
 
