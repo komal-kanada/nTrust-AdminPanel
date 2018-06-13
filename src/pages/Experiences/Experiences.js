@@ -57,6 +57,7 @@ export default class Experiences extends Component {
         this.handleChangeHeader = this.handleChangeHeader.bind(this);
         this.handleChangeSubHeader = this.handleChangeSubHeader.bind(this);
         this._submit = this._submit.bind(this);
+        this._cancel = this._cancel.bind(this);
     }
 
     componentWillMount () {
@@ -209,6 +210,16 @@ export default class Experiences extends Component {
         });
     };
 
+    _cancel = () => {
+        this.setState({
+            modalEditOpen: false,
+            modalType: '',
+            name: '',
+            expHeader:'',
+            expSubHeader: ''
+        })
+    };
+
     render() {
 
         // API.ExperienceList()
@@ -273,7 +284,8 @@ export default class Experiences extends Component {
                             <input type="file" name="expSubHeader" onChange={this.handleChangeSubHeader}/>
                         </label>
                         <div style={{paddingTop: 20, paddingLeft: 270}}>
-                        <input type="submit" value="Submit"/>
+                            <button onClick={this._cancel}> Cancel </button>
+                            <input type="submit" value="Submit"/>
                         </div>
                     </form>
                 </ReactModal>
