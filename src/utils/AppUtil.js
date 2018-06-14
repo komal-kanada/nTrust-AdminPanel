@@ -206,14 +206,13 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/blockUnblock', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
-            body: data
+            body: JSON.stringify(data)
         })
             .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
+                return response;
             })
             .catch((err) => {
                 console.log(err)

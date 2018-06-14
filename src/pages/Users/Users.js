@@ -3,39 +3,7 @@ import {Card, CardHeader, CardBody} from 'reactstrap';
 import API from '../../utils/AppUtil';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-
-function onAfterDeleteRow(rowKeys) {
-    alert('The rowkey you drop: ' + rowKeys);
-}
-
-function onAfterInsertRow(row) {
-    let newRowStr = '';
-
-    for (const prop in row) {
-      newRowStr += prop + ': ' + row[prop] + ' \n';
-    }
-    alert('The new row is:\n ' + newRowStr);
-  }
-
-  const options = {
-    afterInsertRow: onAfterInsertRow ,
-   afterDeleteRow: onAfterDeleteRow
-  };
-
-const selectRowProp = {
-    mode: 'checkbox'
-  };
-
-const cellEditProp = {
-    mode: 'click',
-    blurToSave: true
-  };
-
-  function createCustomInsertButton(openModal){
-    return (
-      <button style={ { color: 'red' } } onClick={ openModal }>Add rows</button>
-    );
-  }
+import { Link } from 'react-router-dom';
 
 class Users extends Component {
     constructor(props) {
@@ -72,33 +40,62 @@ class Users extends Component {
     };
 
     _blockUnblock = (cell, key) => {
-        console.log(cell);
-        return <button onClick={() => this._toggle(cell, key._id)}> {cell} </button>
+        return <button onClick={() => this._toggle(cell, key._id)}> {cell ? 'Un-Block' : 'Block'} </button>
     };
 
     _toggle = (isBlock, id) => {
-        // console.log(id);
-        // API.UserList()
-        //     .then((response) => {
-        //         response.Data.map((val) => {
-        //             if(val._id === id){
-        //
-        //             }
-        //         })
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
-        // if(this.state.toggle === 'Block') {
-        //     this.setState({
-        //         toggle: 'Un-Block'
-        //     })
-        // }
-        // else if(this.state.toggle === 'Un-Block') {
-        //     this.setState({
-        //         toggle: 'Block'
-        //     })
-        // }
+        API.UserList()
+            .then((response) => {
+                response.Data.map((val) => {
+                    if(val._id === id){
+                        if(isBlock === false) {
+                            API.UserBlockUnblock({
+                                'command': 'block',
+                                'userId': id
+                            })
+                                .then((response) => {
+                                    this._getData();
+                                })
+                                .catch((err) => {
+                                    console.log(err)
+                                })
+                        }
+                        else {
+                            API.UserBlockUnblock({
+                                'command': 'unblock',
+                                'userId': id
+                            })
+                                .then((response) => {
+                                    this._getData();
+                                })
+                                .catch((err) => {
+                                    console.log(err)
+                                })
+                        }
+                    }
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+        if(this.state.toggle === 'Block') {
+            this.setState({
+                toggle: 'Un-Block'
+            })
+        }
+        else if(this.state.toggle === 'Un-Block') {
+            this.setState({
+                toggle: 'Block'
+            })
+        }
+    };
+
+    _items = (cell, key) => {
+        console.log(key);
+        console.log(cell);
+        return (
+            <Link to={`/itemList/:${key._id}`}>{cell}</Link>
+        )
     };
 
     render() {
@@ -120,7 +117,6 @@ class Users extends Component {
                                         options={this.options}
                                         className="experiences-table"
                                         refresh={true}
-                                        selectRow={ selectRowProp }
                         >
 
                             <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
@@ -129,7 +125,7 @@ class Users extends Component {
 
                             <TableHeaderColumn dataField="rating" dataSort>Rating</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="itemCount" dataSort>Items Count</TableHeaderColumn>
+                            <TableHeaderColumn dataField="ItemCount" dataFormat={ this._items } dataSort>Item Count</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="totalEarnings" dataSort>Lifetime Earnings</TableHeaderColumn>
 

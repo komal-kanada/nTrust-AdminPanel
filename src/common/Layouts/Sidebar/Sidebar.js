@@ -66,7 +66,7 @@ class Sidebar extends Component {
     // nav list divider
     const divider = (divider, key) => {
       const classes = classNames( 'divider', divider.class);
-      return (<li key={key} className={ classes }></li>);
+      return (<li key={key} className={ classes }/>);
     };
 
     // nav item with nav link

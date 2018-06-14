@@ -12,7 +12,6 @@ export default class Experiences extends Component {
 
         this.state = {
             table: '',
-            modalEditOpen: false,
         };
 
         this.options = {
@@ -48,8 +47,8 @@ export default class Experiences extends Component {
 
     _editCell = (cell) => {
         return (
-            <Link to={`experienceForm/${cell}`}>
-                <button>Edit</button>
+            <Link to={`experienceForm/edit/${cell}`}>
+                <button className="btn-bck">Edit</button>
             </Link>
         )
     };
@@ -79,55 +78,7 @@ export default class Experiences extends Component {
             });
     };
 
-    _addExp = () =>{
-        this.setState({
-            modalEditOpen: true,
-            modalType: 'add'
-        });
-    };
-
     render() {
-
-        // API.ExperienceList()
-        //     .then((response) => {
-        //         console.log(response)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
-        //
-        // let data = {
-        //     "name": "test-admin",
-        //     'header': this.state.header,
-        //     'subheader': this.state.header
-        // };
-        // API.AddExperience(data)
-        //     .then((resp) => {
-        //         console.log(JSON.stringify(resp.Data))
-        //     });
-        //
-        // let data = {
-        //         name: 'aaaaaaaaa',
-        //         expId: '5b1a62eed9b3f80e72db4ad6'
-        //     };
-        // API.EditExperience(data)
-        //     .then((resp) => {
-        //         console.log(resp)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
-        //
-        // let data = {
-        //     expId: '5b1a5cac37de61021e4a2eeb'
-        // };
-        // API.DeleteExperience(data)
-        //     .then((resp) => {
-        //         console.log(resp)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
 
         return (
             <div className="animated">
@@ -136,10 +87,9 @@ export default class Experiences extends Component {
                         Experiences
                     </CardHeader>
                     <CardBody>
-                        <Link to={`experienceForm`}>
-                            <button onClick={this._addExp}>Add</button>
+                        <Link to={`experienceForm/add`}>
+                            <button className="btn-bck">Add</button>
                         </Link>
-                        <button className="btn-bck" onClick={this._addExp}>Add</button>
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"

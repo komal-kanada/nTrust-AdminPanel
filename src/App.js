@@ -6,15 +6,12 @@ import Sidebar from './common/Layouts/Sidebar/';
 import Aside from './common/Layouts/Aside/';
 import Footer from './common/Layouts/Footer/';
 import Login from './pages/Login/Login.js';
-import Product from './pages/ManageProduct/ProductDetails.js';
-import Appointment from './pages/Appointment/Appointment';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Register from './pages/Register/Register.js';
 import ExperienceForm from './pages/Experiences/ExperienceForm.js';
 import Experiences from './pages/Experiences/Experiences.js';
 import Items from './pages/Items/Items.js';
-import ItemsForm from './pages/Items/ItemsForm.js';
 import Users from './pages/Users/Users.js';
+import ItemList from './pages/Users/ItemList.js';
 import PromoCode from './pages/PromoCode/PromoCode.js';
 import PromoCodeForm from './pages/PromoCode/PromoCodeForm.js';
 
@@ -47,13 +44,13 @@ class Full extends Component {
                             <Container fluid>
                                 <Switch>
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
-                                    <Route path='/experienceForm' name='Experience Form' component={ExperienceForm}/>
-                                    <Route path='/experienceForm/:_id' name='Experience Form' component={ExperienceForm}/>
+                                    <Route path='/experienceForm/edit/:_id' name='ExperienceFormEdit' component={ExperienceForm}/>
+                                    <Route path='/experienceForm/add' name='ExperienceFormAdd' component={ExperienceForm}/>
                                     <Route path="/items" name="Items" component={Items}/>
-                                    <Route path='/itemsForm/:_id' name='Items Form' component={ItemsForm}/>
+                                    <Route path='/itemList/:_id' name='ItemList' component={ItemList}/>
                                     <Route path="/users" name="Users" component={Users}/>
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
-                                    <Route path='/promoCodeForm/:_id' name='Promo Code Form' component={PromoCodeForm}/>
+                                    <Route path='/promoCodeForm/:_id' name='PromoCodeForm' component={PromoCodeForm}/>
                                     <Redirect from="/" to="/login"/>
                                 </Switch>
 

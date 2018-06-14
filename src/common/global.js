@@ -4,3 +4,5 @@
 export const API_BASE_URL = "http://192.168.1.177:3000/api/v1";
 //heroku
 // export const API_BASE_URL = "http://ntrust.herokuapp.com/api/v1";
+//localhost
+// export const API_BASE_URL = "http://localhost:3000/api/v1";
