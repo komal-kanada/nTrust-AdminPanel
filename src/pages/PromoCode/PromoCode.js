@@ -82,7 +82,6 @@ class PromoCode extends Component {
                         version="4" 
                         striped hover pagination search options={this.options} 
                         className="experiences-table"
-                        insertRow={ true } 
                         >
 
                             <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>

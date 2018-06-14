@@ -34,8 +34,6 @@ function onAfterInsertRow(row) {
     alert('The new row is:\n ' + newRowStr);
 }
 
-
-
 class SubExperience extends Component {
     constructor(props) {
         super(props);
