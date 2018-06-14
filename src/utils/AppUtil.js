@@ -188,19 +188,22 @@ const AppUtils = {
             })
     },
 
-    // ItemsByUser: async function(userid) {
-    //
-    //     return await fetch(API_BASE_URL+'/admin/getItemsByUser/', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/x-www-form-urlencoded'
-    //         },
-    //     })
-    //         .then((response) => {
-    //             setTimeout(() => null, 0);
-    //             return response.json();
-    //         })
-    // },
+    ItemsByUser: async function(userId) {
+        userId = userId.substring(1);
+        return await fetch(API_BASE_URL+`/admin/getItemsByUser/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        })
+            .then((response) => {
+                console.log(response);
+                return response.json();
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
 
     UserBlockUnblock: async function (data) {
         return await fetch(API_BASE_URL + '/admin/blockUnblock', {
