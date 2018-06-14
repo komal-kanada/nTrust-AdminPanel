@@ -91,8 +91,6 @@ class Users extends Component {
     };
 
     _items = (cell, key) => {
-        console.log(key);
-        console.log(cell);
         return (
             <Link to={`/itemList/:${key._id}`}>{cell}</Link>
         )
