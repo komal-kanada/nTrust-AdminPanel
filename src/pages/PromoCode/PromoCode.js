@@ -75,7 +75,7 @@ class PromoCode extends Component {
     };
 
     _editCell = (cell) => {
-        return <button onClick={() => this._edit(cell)}>Edit</button>
+        return <button className="btn-bck" onClick={() => this._edit(cell)}>Edit</button>
     };
 
     _edit = (id) => {
@@ -83,7 +83,7 @@ class PromoCode extends Component {
     };
 
     _deleteCell = (cell) => {
-        return <button onClick={() => this._delete(cell)}>Delete</button>
+        return <button className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
     };
 
     _delete = (id) => {
@@ -167,7 +167,7 @@ class PromoCode extends Component {
                 </ReactModal>
                 <Card>
                     <CardHeader>
-                    Items
+                    PromoCode
                     </CardHeader>
                     <CardBody>
                         <button className="btn-bck" onClick={this._addExp}>Add</button>

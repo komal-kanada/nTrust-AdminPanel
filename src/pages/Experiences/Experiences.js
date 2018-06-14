@@ -49,7 +49,7 @@ export default class Experiences extends Component {
     _editCell = (cell) => {
         return (
             <Link to={`experienceForm/edit/${cell}`}>
-                <button>Edit</button>
+                <button className="btn-bck" >Edit</button>
             </Link>
         )
     };
