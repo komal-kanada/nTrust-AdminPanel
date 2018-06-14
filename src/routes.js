@@ -10,6 +10,8 @@ const routes = {
     '/promoCode':'PromoCode',
     '/experienceForm': 'ExperienceForm',
     '/itemsForm': 'ItemsForm',
-    '/promoCodeForm': 'PromoCodeForm'
+    '/promoCodeForm': 'PromoCodeForm',
+    '/itemList': 'ItemList'
 };
+
 export default routes;

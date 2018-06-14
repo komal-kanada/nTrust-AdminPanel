@@ -49,7 +49,7 @@ export default class Experiences extends Component {
     _editCell = (cell) => {
         return (
             <Link to={`experienceForm/edit/${cell}`}>
-                <button className="btn-bck" >Edit</button>
+                <button className="btn-bck">Edit</button>
             </Link>
         )
     };
@@ -138,8 +138,7 @@ export default class Experiences extends Component {
                     <CardBody>
                         <Link to={`experienceForm/add`}>
                             <button className="btn-bck" onClick={this._addExp}>Add</button>
-                        </Link>
-                        
+                        </Link>   
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"

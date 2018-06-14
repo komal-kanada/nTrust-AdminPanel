@@ -1,5 +1,7 @@
+import React, { Component } from 'react';
+import API from "../../utils/AppUtil";
+import { withRouter } from 'react-router-dom';
 
-import React, {Component} from 'react';
 import {
   Row,
   Col,
@@ -13,16 +15,15 @@ import {
   FormGroup,
   Label,
   Input,
-  
+
 } from 'reactstrap';
-import API from "../../utils/AppUtil";
 
 class ExperienceForm extends Component {
- 
-   
+
+
     constructor(props) {
                  super(props);
-        
+
                  this.state = {
                      name: '',
                      expHeader:'',
@@ -30,13 +31,13 @@ class ExperienceForm extends Component {
                      _id: '',
                      modalType: ''
                  };
-        
+
                  this.handleChangeName = this.handleChangeName.bind(this);
                  this.handleChangeHeader = this.handleChangeHeader.bind(this);
                  this.handleChangeSubHeader = this.handleChangeSubHeader.bind(this);
                  this._submit = this._submit.bind(this);
              };
-        
+
         componentWillMount () {
                  const { _id } = this.props.match.params;
                  if(_id !== '' && _id !== undefined && _id !== null) {
@@ -64,8 +65,8 @@ class ExperienceForm extends Component {
        });
                  }
              }
-             _submit = () => {
-                 console.log('submit');
+             _submit = (e) => {
+                 e.preventDefault();
                  if(this.state.modalType === 'edit') {
                      console.log(this.state.expHeader);
                      let data = {
@@ -85,7 +86,8 @@ class ExperienceForm extends Component {
                                  expHeader:'',
                                  expSubHeader: ''
                             })
-                        })
+                             this.props.history.push({ pathname: `/experiences`});
+                         })
                         .catch((err) => {
                             console.log(err)
                         });
@@ -107,6 +109,7 @@ class ExperienceForm extends Component {
                                     expHeader:'',
                                     expSubHeader: ''
                                 })
+                                this.props.history.push({ pathname: `/experiences`});
                             })
                             .catch((err) => {
                                 console.log(err)
@@ -117,19 +120,19 @@ class ExperienceForm extends Component {
                     }
                 }
             };
-        
+
             handleChangeName(event){
                 this.setState({name: event.target.value});
                 console.log(this.state)
             };
-        
+
             handleChangeHeader(event){
                 this.setState({expHeader: event.target.files[0]});
                 setTimeout(() => {
                     console.log(this.state)
                 }, 10);
             }
-        
+
             handleChangeSubHeader(event){
                 this.setState({expSubHeader: event.target.files[0]});
                 setTimeout(() => {
@@ -137,14 +140,14 @@ class ExperienceForm extends Component {
                 }, 10);
             }
 
- 
+
   render() {
     return (
       <div className="animated fadeIn">
-        
+
         <Row>
           <Col xs="12" md="6">
-            <Card> 
+            <Card>
               <CardBody>
               <form onSubmit={this._submit} encType='multipart/form-data'>
                  <div className="form">
@@ -154,7 +157,7 @@ class ExperienceForm extends Component {
                     </Col>
                     <Col xs="12" md="9">
                     <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
-                     
+
                     </Col>
                   </FormGroup>
              <FormGroup row>
@@ -173,25 +176,26 @@ class ExperienceForm extends Component {
                       <Input type="file" name="expSubHeader" onChange={this.handleChangeSubHeader} />
                     </Col>
             </FormGroup>
-                
-             
-             
-                
+
+
+
+
              </div>
                {/* <div style={{paddingTop: 20, paddingLeft: 270 ,Position:'center'}}> */}
                <input className="btn-bck" type="submit" value="Submit"/>
                  {/* </div> */}
                 </form>
               </CardBody>
-              
-            
-              
-            </Card>   
-          </Col> 
+
+
+
+            </Card>
+          </Col>
         </Row>
       </div>
     )
   }
 }
 
-export default ExperienceForm;
+
+export default withRouter(ExperienceForm);

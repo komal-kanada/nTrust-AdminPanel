@@ -3,22 +3,11 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import API from "../../utils/AppUtil";
-import ReactModal from 'react-modal';
-
-const style = {
-    content: {
-        borderRadius: '4px',
-        bottom: 'auto',
-        left: '25%',
-        position: 'fixed',
-        right: '25%',
-        top: '12%', // start from center
-    }
-};
-
+import { Link } from 'react-router-dom';
 
 
 class Items extends Component {
+
     constructor(props) {
         super(props);
 
@@ -40,7 +29,6 @@ class Items extends Component {
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
         }
-
     }
 
     componentWillMount () {
@@ -63,14 +51,29 @@ class Items extends Component {
         return cell.name
     };
 
+    _editCell = (cell) => {
+        return (
+            <Link to={`experienceForm/edit/${cell}`}>
+                <button className="btn-bck">Edit</button>
+            </Link>
+        )
+    };
+
+    _deleteCell = (cell) => {
+        return <button  className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
+    };
+
     render() {
         return (
             <div className="animated">
                 <Card>
                     <CardHeader>
-                    Sub-Experience
-                    </CardHeader>
+                         Items
+                    </CardHeader>                
                     <CardBody>
+                    <Link to={`experienceForm/add`}>
+                    <button className="btn-bck">Add</button>
+                    </Link>
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"
@@ -91,6 +94,10 @@ class Items extends Component {
                             <TableHeaderColumn dataField="expId" dataFormat={this.expFormatter}>Experience</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="deposit">Deposit Amount</TableHeaderColumn>
+
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center" width="130"> Edit </TableHeaderColumn>
+
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center" width="130"> Delete </TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

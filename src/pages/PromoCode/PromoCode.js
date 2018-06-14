@@ -179,7 +179,6 @@ class PromoCode extends Component {
                             hover
                             pagination
                             options={this.options}
-                          
                         >
 
                             <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>
