@@ -5,9 +5,11 @@ const routes = {
     '/register': 'Register',
     '/': 'Home',
     '/experiences':'Experiences',
-    '/subExperience':'SubExperience',
+    '/items':'Items',
     '/users':'Users',
     '/promoCode':'PromoCode',
-
+    '/experienceForm': 'ExperienceForm',
+    '/itemsForm': 'ItemsForm',
+    '/promoCodeForm': 'PromoCodeForm'
 };
 export default routes;

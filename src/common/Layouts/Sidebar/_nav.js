@@ -7,7 +7,7 @@ export default {
     },
     {
       name: 'Items',
-      url:'/Items',
+      url:'/items',
       icon: 'icon-energy',
     },
     {

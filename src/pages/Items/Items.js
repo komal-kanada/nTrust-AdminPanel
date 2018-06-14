@@ -3,43 +3,32 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import API from "../../utils/AppUtil";
+import ReactModal from 'react-modal';
 
-
-function onAfterDeleteRow(rowKeys) {
-    alert('The rowkey you drop: ' + rowKeys);
-
-    rowKeys.map((val) => {
-
-        let data = {
-            subExpId: val
-        };
-
-        API.DeleteSubExperience(data)
-            .then((resp) => {
-                console.log('del ' + resp)
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-    })
-}
-
-
-
-function onAfterInsertRow(row) {
-    let newRowStr = '';
-    for (const prop in row) {
-        newRowStr += prop + ': ' + row[prop] + ' \n';
+const style = {
+    content: {
+        borderRadius: '4px',
+        bottom: 'auto',
+        left: '25%',
+        position: 'fixed',
+        right: '25%',
+        top: '12%', // start from center
     }
-    alert('The new row is:\n ' + newRowStr);
-}
+};
 
-class SubExperience extends Component {
+
+
+class Items extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            table: ''
+            table: '',
+            name: '',
+            expHeader:'',
+            expSubHeader: '',
+            _id: '',
+            modalType: ''
         };
 
         this.options = {
@@ -50,8 +39,6 @@ class SubExperience extends Component {
             clearSearch: true,
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
-            afterInsertRow: onAfterInsertRow,
-            afterDeleteRow: onAfterDeleteRow
         }
 
     }
@@ -91,7 +78,6 @@ class SubExperience extends Component {
                             striped
                             hover
                             pagination
-                            search
                             options={this.options}
                             refresh = { true }
                         >
@@ -106,8 +92,6 @@ class SubExperience extends Component {
 
                             <TableHeaderColumn dataField="deposit">Deposit Amount</TableHeaderColumn>
 
-                           
-
                         </BootstrapTable>
                     </CardBody>
                 </Card>
@@ -116,8 +100,4 @@ class SubExperience extends Component {
     }
 }
 
-export default SubExperience;
-
-
-
-
+export default Items;

@@ -3,7 +3,7 @@ import {API_BASE_URL} from '../common/global';
 const convertFormData = async (data) => {
     var formData = new FormData();
     for (var k in data) {
-        formData.append(k, data[k]);
+        await formData.append(k, data[k]);
     }
     return formData;
 };
@@ -55,7 +55,7 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/updateExp', {
             method: 'POST',
             headers: {
-                'Accept':'*/*'
+                'Accept':'*/*',
             },
             body: await convertFormData(data)
         }).then(response =>
