@@ -59,7 +59,6 @@
   
   }
   
-
   @media (max-width:1024px) {
     .appointment{
       margin-top:20px;
@@ -68,6 +67,12 @@
 
   }
 
+ .btn-bck{  background: linear-gradient(150deg,#2CE78E,#2DC9A7,#32A6CC,#328FE1);
+  padding:5px 10px;border-radius:6px;color: white;font-weight: bold;
+}
+.experiences-table{margin:10px 0 0 0;}
+.experiences-table table tr td{vertical-align: middle;}
+.experiences-table table tr th{background-color:#29363d;color:white;}
 
 
 

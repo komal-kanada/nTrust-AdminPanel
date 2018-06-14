@@ -5,7 +5,6 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import API from "../../utils/AppUtil";
 import ReactModal from 'react-modal';
 
-
 const style = {
     content: {
         borderRadius: '4px',
@@ -15,10 +14,6 @@ const style = {
         right: '25%',
         top: '12%', // start from center
     }
-};
-
-const selectRowProp = {
-    mode: 'checkbox'
 };
 
 class Items extends Component {
@@ -101,6 +96,7 @@ class Items extends Component {
                     <CardBody>
                         <BootstrapTable
                             data={this.state.table}
+                            className="experiences-table"
                             version="4"
                             striped
                             hover

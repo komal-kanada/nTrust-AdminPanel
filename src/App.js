@@ -22,23 +22,16 @@ class Full extends Component {
     render() {
 
         var path = window.location.href;
-        var n = path.indexOf("/product");
-        var m = path.indexOf("/appointment");
         var p = path.indexOf("/login");
         var q = path.indexOf("/register");
 
 
-        if( p > -1 || q > -1 || n > -1 || m > -1 ){
+        if( p > -1 || q > -1 ){
             return (
                 <Container fluid>
                     <Switch>
                         <Route path ="/login" name="Login" component={Login}/>
                         <Route path ="/register" name="Register" component={Register}/>
-                        <Route path="/product" name="Product" component={Product}/>
-
-                        <MuiThemeProvider>
-                            <Route path="/appointment" name="Appointment" component={Appointment}/>
-                        </MuiThemeProvider>
                     </Switch>
                 </Container>
             );

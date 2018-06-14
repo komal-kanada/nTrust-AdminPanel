@@ -5,10 +5,6 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Link } from 'react-router-dom';
 
-const selectRowProp = {
-    mode: 'checkbox'
-};
-
 export default class Experiences extends Component {
 
     constructor(props) {
@@ -59,7 +55,7 @@ export default class Experiences extends Component {
     };
 
     _deleteCell = (cell) => {
-        return <button onClick={() => this._delete(cell)}>Delete</button>
+        return <button  className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
     };
 
     _delete = (id) => {
@@ -143,29 +139,30 @@ export default class Experiences extends Component {
                         <Link to={`experienceForm`}>
                             <button onClick={this._addExp}>Add</button>
                         </Link>
+                        <button className="btn-bck" onClick={this._addExp}>Add</button>
                         <BootstrapTable
                             data={this.state.table}
+                            className="experiences-table"
                             version="4"
                             striped
                             hover
                             pagination
                             refresh={true}
                             options={this.options}
-                            selectRow={ selectRowProp }
                             serverSide={ true }
                         >
 
                             <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" dataSort>Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} dataSort>Header</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} >Header</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter} dataSort>Sub-Header</TableHeaderColumn>
+                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter }  >Sub-Header</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center" width="130"> Edit </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center"> Delete </TableHeaderColumn>
+                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center" width="130"> Delete </TableHeaderColumn>
 
                         </BootstrapTable>
                     </CardBody>

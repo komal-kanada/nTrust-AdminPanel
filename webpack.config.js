@@ -27,7 +27,7 @@ console.log('SRC_DIR', SRC_DIR);
     devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
       contentBase: BUILD_DIR,
-      port: 3000,
+      port: 8000,
       compress: true,
       hot: true,
       open: true,

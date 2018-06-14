@@ -55,14 +55,11 @@ class Users extends Component {
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
         }
-
     }
-
 
     componentDidMount() {
         this._getData();
     }
-
 
     _getData = () => {
         API.UserList()
@@ -112,6 +109,7 @@ class Users extends Component {
                     <CardHeader>
                         Users
                     </CardHeader>
+
                     <CardBody>
 
                         <BootstrapTable data={this.state.data}
@@ -120,6 +118,7 @@ class Users extends Component {
                                         hover
                                         pagination
                                         options={this.options}
+                                        className="experiences-table"
                                         refresh={true}
                                         selectRow={ selectRowProp }
                         >
