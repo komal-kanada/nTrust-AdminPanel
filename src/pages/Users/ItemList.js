@@ -76,11 +76,12 @@ class ItemList extends Component {
                             <TableHeaderColumn dataField="experiences">Experience</TableHeaderColumn>
 
                         </BootstrapTable>
+                        <Link to='/users'>
+                        <button align="center" className="btn-bck" >OK</button>
+                    </Link>
                     </CardBody>
 
-                    <Link to='/users'>
-                        <button>OK</button>
-                    </Link>
+                   
                 </Card>
             </div>
         );
