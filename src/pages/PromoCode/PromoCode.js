@@ -158,6 +158,8 @@ class PromoCode extends Component {
                             <h5>Sub-Experience:</h5>
                             <input type="file" name="subExperience" onChange={this.handleChangeSubHeader}/>
                         </label>
+
+                        
                         <div style={{paddingTop: 20, paddingLeft: 270}}>
                             <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
                             &nbsp;&nbsp;&nbsp;
@@ -173,6 +175,7 @@ class PromoCode extends Component {
                         <button className="btn-bck" onClick={this._addExp}>Add</button>
                         <BootstrapTable
                             data={this.state.table}
+                            striped hover pagination search options={this.options}
                             className="experiences-table"
                             version="4"
                             striped

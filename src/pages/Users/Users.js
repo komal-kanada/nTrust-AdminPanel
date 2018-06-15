@@ -109,7 +109,6 @@ class Users extends Component {
 
                         <BootstrapTable data={this.state.data}
                                         version="4"
-
                                         striped hover pagination search options={this.options}
                                         className="experiences-table"
                                         refresh={true}

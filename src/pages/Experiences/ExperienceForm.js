@@ -18,6 +18,10 @@ import {
 
 } from 'reactstrap';
 
+
+
+
+
 class ExperienceForm extends Component {
 
 
@@ -36,6 +40,7 @@ class ExperienceForm extends Component {
                  this.handleChangeHeader = this.handleChangeHeader.bind(this);
                  this.handleChangeSubHeader = this.handleChangeSubHeader.bind(this);
                  this._submit = this._submit.bind(this);
+                 this._cancel = this._cancel.bind(this);
              };
 
         componentWillMount () {
@@ -141,6 +146,25 @@ class ExperienceForm extends Component {
             }
 
 
+    _cancel = () => {
+        this.setState({
+            modalEditOpen: false,
+            modalType: '',
+            name: '',
+            expHeader:'',
+            expSubHeader: ''
+        })
+    };
+    _submit = () => {
+        if(this.state.modalType === 'edit') {
+
+        }
+        else if(this.state.modalType === 'add') {
+
+        }
+    };
+
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -151,48 +175,43 @@ class ExperienceForm extends Component {
               <CardBody>
               <form onSubmit={this._submit} encType='multipart/form-data'>
                  <div className="form">
-             <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input"><h5>Name:</h5></Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                    <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
+                     <FormGroup row>
+                        <Col md="3">
+                        <Label htmlFor="text-input"><h5>Name:</h5></Label>
+                        </Col>
+                        <Col xs="12" md="9">
+                        <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
 
-                    </Col>
-                  </FormGroup>
-             <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="file-input"><h5>Header:</h5></Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input type="file" name="expHeader" onChange={this.handleChangeHeader}/>
-                    </Col>
-            </FormGroup>
-            <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="file-multiple-input"><h5>Sub-Header:</h5></Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input type="file" name="expSubHeader" onChange={this.handleChangeSubHeader} />
-                    </Col>
-            </FormGroup>
-
-
-
-
-             </div>
-               {/* <div style={{paddingTop: 20, paddingLeft: 270 ,Position:'center'}}> */}
-               <input className="btn-bck" type="submit" value="Submit"/>
-                 {/* </div> */}
-                </form>
-              </CardBody>
-
-
-
+                        </Col>
+                     </FormGroup>
+                     <FormGroup row>
+                        <Col md="3">
+                        <Label htmlFor="file-input"><h5>Header:</h5></Label>
+                        </Col>
+                        <Col xs="12" md="9">
+                        <Input type="file" name="expHeader" onChange={this.handleChangeHeader}/>
+                        </Col>
+                     </FormGroup>
+                     <FormGroup row>
+                        <Col md="3">
+                        <Label htmlFor="file-multiple-input"><h5>Sub-Header:</h5></Label>
+                        </Col>
+                        <Col xs="12" md="9">
+                        <Input type="file" name="expSubHeader" onChange={this.handleChangeSubHeader} />
+                        </Col>
+                     </FormGroup>
+                 </div>
+                       <div style={{paddingTop: 20, paddingLeft: 270}}>
+                            <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
+                            &nbsp;&nbsp;&nbsp;
+                            <input  className="btn-bck" type="submit" value="Submit"/>
+                        </div>
+                 </form>
+                 </CardBody>
             </Card>
-          </Col>
+            </Col>
         </Row>
-      </div>
+    </div>
     )
   }
 }

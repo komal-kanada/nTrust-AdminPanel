@@ -76,6 +76,7 @@ class Items extends Component {
                     </Link>
                         <BootstrapTable
                             data={this.state.table}
+                            striped hover pagination search options={this.options}
                             className="experiences-table"
                             version="4"
                             striped
