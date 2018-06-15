@@ -27,13 +27,11 @@ class ItemList extends Component {
 
     componentWillMount () {
         const { _id } = this.props.match.params;
-        console.log(_id);
         API.ItemsByUser(_id)
             .then((response) => {
                 this.setState({
                     table: response.Data
                 });
-                console.log(response)
             })
             .catch((err) => {
                 console.log(err)

@@ -66,9 +66,8 @@ class Experiences extends Component {
 
         API.DeleteExperience(data)
             .then((resp) => {
-                console.log('del ' + resp.Data.length);
                 if(resp.Data.length === 0){
-                    alert('Cannot delete this user.')
+                    alert('Cannot delete this Experience.')
                 }
                 else{
                     this._getData();

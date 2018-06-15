@@ -97,7 +97,7 @@ const AppUtils = {
 
     //SubExperience-API-Calls
 
-    SubExperienceList: async function () {
+    ItemList: async function () {
 
         return await fetch(API_BASE_URL + '/admin/getAllSubExp', {
             method: 'GET',
@@ -111,7 +111,7 @@ const AppUtils = {
             })
     },
 
-    AddSubExperience: async function (data) {
+    AddItem: async function (data) {
         return await fetch(API_BASE_URL + '/admin/insertSubexp', {
             method: 'POST',
             headers: {
@@ -133,7 +133,7 @@ const AppUtils = {
             })
     },
 
-    EditSubExperience: async function (data) {
+    EditItem: async function (data) {
         return await fetch(API_BASE_URL + '/admin/updateSubExp', {
             method: 'POST',
             headers: {
@@ -155,7 +155,7 @@ const AppUtils = {
             })
     },
 
-    DeleteSubExperience: function (data) {
+    DeleteItem: function (data) {
         return fetch(API_BASE_URL + '/admin/deleteSubExp', {
             method: 'POST',
             headers: {
