@@ -27,6 +27,7 @@ class ItemList extends Component {
 
     componentWillMount () {
         const { _id } = this.props.match.params;
+        console.log(_id);
         API.ItemsByUser(_id)
             .then((response) => {
                 this.setState({
@@ -44,7 +45,7 @@ class ItemList extends Component {
             <div className="animated">
                 <Card>
                     <CardHeader>
-                        Item List
+                        Product List
                     </CardHeader>
                     <CardBody>
                         <BootstrapTable

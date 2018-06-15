@@ -62,7 +62,29 @@ class Items extends Component {
     };
 
     _delete = (id) => {
+        let data = {
+            subExpId: id
+        };
 
+        API.DeleteSubExperience(data)
+            .then((resp) => {
+                if(resp.Error === true) {
+                    if(resp.Message === "Contain Items can't be deleted.") {
+                        alert("This Item contains products, It can't be deleted")
+                    }
+                    else{
+                        alert(resp.Message)
+                    }
+                }
+                else {
+                    alert('The Item is deleted.');
+                    this._getData()
+                }
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     };
 
     render() {
@@ -98,7 +120,7 @@ class Items extends Component {
 
                             <TableHeaderColumn dataField="expId" dataFormat={this.expFormatter}>Experience</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="deposit">Deposit Amount</TableHeaderColumn>
+                            <TableHeaderColumn dataField="value">Item Value</TableHeaderColumn>
 
                             <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center" width="130"> Edit </TableHeaderColumn>
 
