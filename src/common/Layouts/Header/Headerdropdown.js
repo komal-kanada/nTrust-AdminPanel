@@ -8,6 +8,7 @@ import {
   Dropdown,
   Progress,
 } from 'reactstrap';
+import { withRouter } from 'react-router';
 
 const propTypes = {
   notif: PropTypes.bool,
@@ -38,6 +39,7 @@ class HeaderDropdown extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+
 
   dropNotif() {
     const itemsCount = 5;
@@ -79,7 +81,14 @@ class HeaderDropdown extends Component {
       </Dropdown>
     );
   }
-
+  logout()
+  {
+    //localStorage.removeItem("saveUser");
+    localStorage.clear();
+    this.props.history.push("/login");
+    //alert("saveUser"+localStorage.getItem("saveUser"))
+    
+  }
   dropAccnt() {
     return (
      
@@ -88,21 +97,10 @@ class HeaderDropdown extends Component {
           <img src={'img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
         </DropdownToggle>
      
-      {/* <DropdownMenu right>
-      //     <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
-      //     <DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>
-      //     <DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>
-      //     <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>
-      //     <DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>
-      //     <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-      //     <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
-      //     <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-      //     <DropdownItem><i className="fa fa-usd"></i> Payments<Badge color="secondary">42</Badge></DropdownItem>
-      //     <DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>
-      //     <DropdownItem divider/>
-      //     <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
-      //     <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
-      //   </DropdownMenu> */}
+      <DropdownMenu right>
+        
+         <DropdownItem onClick={this.logout.bind(this)} ><i className="fa fa-lock" ></i> Logout</DropdownItem>
+         </DropdownMenu>
        </Dropdown>
     );
   }
@@ -151,7 +149,8 @@ class HeaderDropdown extends Component {
     return (
       <Dropdown nav className="d-md-down-none" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle nav>
-          <i className="icon-envelope-letter"></i><Badge pill color="info">{itemsCount}</Badge>
+        
+        <i className="icon-envelope-letter"></i><Badge pill color="purple">{itemsCount}</Badge>
         </DropdownToggle>
         <DropdownMenu right className="dropdown-menu-lg">
           <DropdownItem header tag="div"><strong>You have {itemsCount} messages</strong></DropdownItem>
@@ -243,4 +242,4 @@ class HeaderDropdown extends Component {
 HeaderDropdown.propTypes = propTypes;
 HeaderDropdown.defaultProps = defaultProps;
 
-export default HeaderDropdown;
+export default withRouter(HeaderDropdown);

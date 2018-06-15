@@ -5,3 +5,7 @@ yarn.lock
 package-lock.json
 .idea/vcs.xml
 .idea/workspace.xml
+.idea/admin_ntrust.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml

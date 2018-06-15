@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from "../../utils/AppUtil";
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   Row,
@@ -144,13 +145,13 @@ class ExperienceForm extends Component {
 
     _cancel = () => {
         this.setState({
-            modalEditOpen: false,
             modalType: '',
             name: '',
             expHeader:'',
             expSubHeader: ''
         })
     };
+
     _submit = () => {
         if(this.state.modalType === 'edit') {
 
@@ -198,8 +199,9 @@ class ExperienceForm extends Component {
                      </FormGroup>
                  </div>
                        <div style={{paddingTop: 20, paddingLeft: 270}}>
-                      
+                      <Link to='/experiences'>
                        <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
+                      </Link>
                           &nbsp;&nbsp;&nbsp;
                             <input  className="btn-bck" type="submit" value="Submit"/>
                         </div>

@@ -5,6 +5,7 @@ import Header from './common/Layouts/Header/';
 import Sidebar from './common/Layouts/Sidebar/';
 import Aside from './common/Layouts/Aside/';
 import Footer from './common/Layouts/Footer/';
+import Dashboard from './pages/Dashboard/Dashboard.js';
 import Login from './pages/Login/Login.js';
 import Register from './pages/Register/Register.js';
 import ExperienceForm from './pages/Experiences/ExperienceForm.js';
@@ -44,8 +45,12 @@ class Full extends Component {
                         <main className="main">
                             <Container fluid>
                                 <Switch>
+                                <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
+
                                     <Route path='/experienceForm/edit/:_id' name='ExperienceFormEdit' component={ExperienceForm}/>
+
                                     <Route path='/experienceForm/add' name='ExperienceFormAdd' component={ExperienceForm}/>
 
                                     <Route path="/items" name="Items" component={Items}/>
@@ -58,7 +63,7 @@ class Full extends Component {
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
                                     <Route path='/promoCodeForm/:_id' name='PromoCodeForm' component={PromoCodeForm}/>
 
-                                    <Redirect from="/" to="/login"/>
+                                    <Redirect from="/" to="/dashboard"/>
                                 </Switch>
 
                             </Container>
