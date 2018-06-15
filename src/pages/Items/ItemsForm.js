@@ -170,4 +170,4 @@ class ItemsForm extends Component {
     }
 }
 
-export default ItemsForm
+export default ItemsForm;

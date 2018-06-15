@@ -43,11 +43,9 @@ class ItemList extends Component {
         return(
             <div className="animated">
                 <Card>
-
                     <CardHeader>
                         Item List
                     </CardHeader>
-
                     <CardBody>
                         <BootstrapTable
                             data={this.state.table}
@@ -78,12 +76,11 @@ class ItemList extends Component {
                             <TableHeaderColumn dataField="experiences">Experience</TableHeaderColumn>
 
                         </BootstrapTable>
-
                         <Link to='/users'>
-                            <button>OK</button>
-                        </Link>
-
+                        <button align="center" className="btn-bck" >OK</button>
+                    </Link>
                     </CardBody>
+
 
                 </Card>
             </div>

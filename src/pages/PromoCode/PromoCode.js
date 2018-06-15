@@ -75,7 +75,7 @@ class PromoCode extends Component {
     };
 
     _editCell = (cell) => {
-        return <button onClick={() => this._edit(cell)}>Edit</button>
+        return <button className="btn-bck" onClick={() => this._edit(cell)}>Edit</button>
     };
 
     _edit = (id) => {
@@ -83,7 +83,7 @@ class PromoCode extends Component {
     };
 
     _deleteCell = (cell) => {
-        return <button onClick={() => this._delete(cell)}>Delete</button>
+        return <button className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
     };
 
     _delete = (id) => {
@@ -148,39 +148,42 @@ class PromoCode extends Component {
                             <h5>Name:</h5>
                             <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
                         </label>
+                        <div>
                         <label>
                             <h5>Discount Price:</h5>
                             <input type="file" name="disPrice" onChange={this.handleChangeHeader}/>
                         </label>
+                    </div>
                         <label>
                             <h5>Sub-Experience:</h5>
                             <input type="file" name="subExperience" onChange={this.handleChangeSubHeader}/>
                         </label>
                         <div style={{paddingTop: 20, paddingLeft: 270}}>
-                            <button onClick={this._cancel}> Cancel </button>
-                            <input type="submit" value="Submit"/>
+                            <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
+                            &nbsp;&nbsp;&nbsp;
+                            <input  className="btn-bck" type="submit" value="Submit"/>
                         </div>
                     </form>
                 </ReactModal>
                 <Card>
                     <CardHeader>
-                        Promo-Code
+                    PromoCode
                     </CardHeader>
                     <CardBody>
-                        <button onClick={this._addExp}>Add</button>
+                        <button className="btn-bck" onClick={this._addExp}>Add</button>
                         <BootstrapTable
                             data={this.state.table}
+                            className="experiences-table"
                             version="4"
                             striped
                             hover
                             pagination
                             options={this.options}
-                            selectRow={ selectRowProp }
                         >
 
                             <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="promocode" dataSort>Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="promocode" >Name</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
 

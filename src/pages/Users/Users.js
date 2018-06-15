@@ -28,10 +28,10 @@ class Users extends Component {
     componentDidMount() {
         this._getData();
     }
-
     _getData = () => {
         API.UserList()
         .then((response) => {
+            console.log(response.Data);
             this.setState({ data: response.Data })
         })
         .catch((err) => {
@@ -40,7 +40,7 @@ class Users extends Component {
     };
 
     _blockUnblock = (cell, key) => {
-        return <button onClick={() => this._toggle(cell, key._id)}> {cell ? 'Un-Block' : 'Block'} </button>
+        return <button className="btn-bck"  onClick={() => this._toggle(cell, key._id) }> {cell ? 'Un-Block' : 'Block'} </button>
     };
 
     _toggle = (isBlock, id) => {
@@ -109,27 +109,26 @@ class Users extends Component {
 
                         <BootstrapTable data={this.state.data}
                                         version="4"
-                                        striped
-                                        hover
-                                        pagination
-                                        options={this.options}
+
+                                        striped hover pagination search options={this.options}
                                         className="experiences-table"
                                         refresh={true}
-                        >
+                                      >
 
                             <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" dataSort>User Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField="name" >User Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="rating" dataSort>Rating</TableHeaderColumn>
+                            <TableHeaderColumn dataField="rating" >Rating</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="ItemCount" dataFormat={ this._items } dataSort>Item Count</TableHeaderColumn>
+                            <TableHeaderColumn dataField="ItemCount" dataFormat={ this._items } >Item Count</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="totalEarnings" dataSort>Lifetime Earnings</TableHeaderColumn>
+                            <TableHeaderColumn dataField="totalEarnings" >Lifetime Earnings</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="isBlock" dataFormat={ this._blockUnblock } dataAlign="center" dataSort>Access</TableHeaderColumn>
+                            <TableHeaderColumn dataField="isBlock" dataFormat={ this._blockUnblock } dataAlign="center" >Access</TableHeaderColumn>
 
                         </BootstrapTable>
+               
                     </CardBody>
                 </Card>
             </div>
