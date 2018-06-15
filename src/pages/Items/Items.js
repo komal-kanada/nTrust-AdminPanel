@@ -12,12 +12,6 @@ class Items extends Component {
 
         this.state = {
             table: '',
-            modalEditOpen: false,
-            name: '',
-            expHeader:'',
-            expSubHeader: '',
-            _id: '',
-            modalType: ''
         };
 
         this.options = {
@@ -32,6 +26,14 @@ class Items extends Component {
     }
 
     componentWillMount () {
+        this._getData();
+    };
+
+    imageFormatter = (cell) => {
+        return "<img height= '100px' src='"+cell+"'/>" ;
+    };
+
+    _getData = () => {
         API.SubExperienceList()
             .then((response) => {
                 this.setState({
@@ -41,26 +43,26 @@ class Items extends Component {
             .catch((err) => {
                 console.log(err)
             });
-    }
+    };
 
-    imageFormatter = (cell) => {
-        return "<img height= '100px' src='"+cell+"'/>" ;
+    _editCell = (cell) => {
+        return (
+            <Link to={`itemsForm/edit/${cell}`}>
+                <button className="btn-bck">Edit</button>
+            </Link>
+        )
     };
 
     expFormatter = (cell) => {
         return cell.name
     };
 
-    _editCell = (cell) => {
-        return (
-            <Link to={`experienceForm/edit/${cell}`}>
-                <button className="btn-bck">Edit</button>
-            </Link>
-        )
-    };
-
     _deleteCell = (cell) => {
         return <button  className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
+    };
+
+    _delete = (id) => {
+
     };
 
     render() {
@@ -68,12 +70,15 @@ class Items extends Component {
             <div className="animated">
                 <Card>
                     <CardHeader>
-                    Sub-Experience
+                        Items
                     </CardHeader>
-                    <Link to={`experienceForm/add`}>
-                        <button className="btn-bck">Add</button>
-                    </Link>
+
                     <CardBody>
+
+                        <Link to={`itemsForm/add`}>
+                            <button className="btn-bck">Add</button>
+                        </Link>
+
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"

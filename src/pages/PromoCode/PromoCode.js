@@ -164,7 +164,7 @@ class PromoCode extends Component {
                 </ReactModal>
                 <Card>
                     <CardHeader>
-                    Items
+                        Promo-Code
                     </CardHeader>
                     <CardBody>
                         <button onClick={this._addExp}>Add</button>

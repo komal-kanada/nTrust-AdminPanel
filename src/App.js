@@ -14,6 +14,7 @@ import Users from './pages/Users/Users.js';
 import ItemList from './pages/Users/ItemList.js';
 import PromoCode from './pages/PromoCode/PromoCode.js';
 import PromoCodeForm from './pages/PromoCode/PromoCodeForm.js';
+import ItemsForm from "./pages/Items/ItemsForm";
 
 class Full extends Component {
     render() {
@@ -46,11 +47,17 @@ class Full extends Component {
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
                                     <Route path='/experienceForm/edit/:_id' name='ExperienceFormEdit' component={ExperienceForm}/>
                                     <Route path='/experienceForm/add' name='ExperienceFormAdd' component={ExperienceForm}/>
+
                                     <Route path="/items" name="Items" component={Items}/>
-                                    <Route path='/itemList/:_id' name='ItemList' component={ItemList}/>
+                                    <Route path='/itemsForm/edit/:_id' name='ItemListEdit' component={ItemsForm}/>
+                                    <Route path='/itemsForm/add' name='ItemListAdd' component={ItemsForm}/>
+
                                     <Route path="/users" name="Users" component={Users}/>
+                                    <Route path='/itemList' name='ItemListAdd' component={ItemList}/>
+
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
                                     <Route path='/promoCodeForm/:_id' name='PromoCodeForm' component={PromoCodeForm}/>
+
                                     <Redirect from="/" to="/login"/>
                                 </Switch>
 
