@@ -13,7 +13,7 @@ import {
     FormGroup,
     Label,
     Input,
-  
+
   } from 'reactstrap';
 
 class ItemsForm extends Component {
@@ -26,19 +26,22 @@ class ItemsForm extends Component {
             icon: '',
             expId: '',
             experiences: [{_id: 'aa', name: 'aa'}],
-            modalType: ''
+            modalType: '',
+            itemValue: '',
+            updateImage: false
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeIcon = this.handleChangeIcon.bind(this);
         this.handleChangeExpId = this.handleChangeExpId.bind(this);
-       
+        this.handleChangeItemValue = this.handleChangeItemValue.bind(this);
+        this._submit = this._submit.bind(this);
     }
 
     componentWillMount(){
         this._getExperience();
+        console.log('edit');
         const { _id } = this.props.match.params;
-        console.log(_id);
         if(_id !== '' && _id !== undefined && _id !== null) {
             API.SubExperienceList()
                 .then((response) => {
@@ -48,9 +51,10 @@ class ItemsForm extends Component {
                                 name: value.name,
                                 _id: value._id,
                                 icon: value.icon,
-                                expId: value.expId,
+                                expId: value.expId._id,
                                 modalType: 'edit'
                             });
+                            console.log(this.state);
                         }
                     })
                 })
@@ -67,13 +71,13 @@ class ItemsForm extends Component {
     }
 
     _getExperience = () => {
-        console.log('aaa');
         API.ExperienceList()
             .then((response) => {
-                console.log(response);
                 this.setState({
-                    experiences: response.Data
-                })
+                    experiences: response.Data,
+                    expId: response.Data[0]._id
+                });
+                console.log(this.state.expId)
             })
             .catch((err) => {
                 console.log(err)
@@ -84,17 +88,16 @@ class ItemsForm extends Component {
     _submit = (e) => {
         e.preventDefault();
         if(this.state.modalType === 'edit') {
-            console.log(this.state);
+            console.log('edit');
             let data = {
-                name: this.state.name,
-                expId: this.state.expId,
-                icon: this.state.icon,
-                subExpId: this.state._id
-            };
-            console.log('data ' + JSON.stringify(data));
+                    name: this.state.name,
+                    expId: this.state.expId,
+                    icon: this.state.icon,
+                    subExpId: this.state._id
+                };
             API.EditSubExperience(data)
                 .then((resp) => {
-                    console.log(resp);
+                    console.log('resp' + resp);
                     this.setState({
                         modalType: '',
                         _id: '',
@@ -146,7 +149,11 @@ class ItemsForm extends Component {
     };
 
     handleChangeIcon(event){
-        this.setState({icon: event.target.files[0]});
+        console.log(this.state.updateImage);
+        this.setState({
+            icon: event.target.files[0],
+        });
+        console.log(this.state.updateImage);
         setTimeout(() => {
             console.log(this.state)
         }, 10);
@@ -155,6 +162,11 @@ class ItemsForm extends Component {
     handleChangeExpId(event){
         this.setState({expId: event.target.value});
     };
+
+    handleChangeItemValue(event){
+        this.setState({itemValue: event.target.itemValue});
+
+    }
 
     render(){
         return (
@@ -165,12 +177,12 @@ class ItemsForm extends Component {
                     <Label  htmlFor="text-input"> <h5>Name:</h5></Label>
                 </Col>
                 <Col xs="12" md="9">
-                    <Label>  <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
+                    <Label>  <input type="text" value={this.state.name} onChange={this.handleChangeName} required="true"/>
                     </Label>
                 </Col>
               </FormGroup>
               <FormGroup row>
-                    <Col md="3">  
+                    <Col md="3">
                         <Label><h5>Icon:</h5></Label>
                     </Col>
                     <Col xs="12" md="9">
@@ -179,7 +191,7 @@ class ItemsForm extends Component {
                     </Col>
               </FormGroup>
               <FormGroup row>
-                    <Col md="3">  
+                    <Col md="3">
                         <Label><h5>Experience:</h5></Label>
                     </Col>
                     <Col xs="12" md="9">

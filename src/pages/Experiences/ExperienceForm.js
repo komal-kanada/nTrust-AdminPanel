@@ -173,10 +173,10 @@ class ExperienceForm extends Component {
                  <div className="form">
                      <FormGroup row>
                         <Col md="3">
-                        <Label htmlFor="text-input"><h5>Name:</h5></Label>
+                        <Label htmlFor="text-input" required="true"><h5>Name:</h5></Label>
                         </Col>
                         <Col xs="12" md="9">
-                        <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
+                        <input type="text" value={this.state.name} onChange={this.handleChangeName} required="true"/>
 
                         </Col>
                      </FormGroup>

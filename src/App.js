@@ -53,7 +53,7 @@ class Full extends Component {
                                     <Route path='/itemsForm/add' name='ItemListAdd' component={ItemsForm}/>
 
                                     <Route path="/users" name="Users" component={Users}/>
-                                    <Route path='/itemList' name='ItemListAdd' component={ItemList}/>
+                                    <Route path='/itemList/:_id' name='ItemList' component={ItemList}/>
 
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
                                     <Route path='/promoCodeForm/:_id' name='PromoCodeForm' component={PromoCodeForm}/>

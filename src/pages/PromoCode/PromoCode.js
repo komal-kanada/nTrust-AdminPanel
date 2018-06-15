@@ -146,7 +146,7 @@ class PromoCode extends Component {
                     <form onSubmit={this._submit}>
                         <label>
                             <h5>Name:</h5>
-                            <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
+                            <input type="text" value={this.state.name} onChange={this.handleChangeName} required="true"/>
                         </label>
                         <div>
                         <label>
