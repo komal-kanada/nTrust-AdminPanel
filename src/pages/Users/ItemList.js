@@ -81,7 +81,7 @@ class ItemList extends Component {
                     </Link>
                     </CardBody>
 
-                   
+
                 </Card>
             </div>
         );

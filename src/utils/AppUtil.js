@@ -115,15 +115,19 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/insertSubexp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Accept':'*/*',
             },
-            body: data
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            body: await convertFormData(data)
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    console.log(res.data);
+                    return res.data
+                }))
             .catch((err) => {
                 console.log(err)
             })
@@ -133,17 +137,21 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/updateSubExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Accept':'*/*',
             },
-            body: data
-        })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                console.log(response.json());
-                return response.json();
-            })
+            body: await convertFormData(data)
+        }).then(response =>
+            response.json()
+                .then(data => ({
+                    data: data,
+                    status: response.status
+                }))
+                .then(res => {
+                    console.log(res.data);
+                    return res.data
+                }))
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log(err)
             })
     },
 
