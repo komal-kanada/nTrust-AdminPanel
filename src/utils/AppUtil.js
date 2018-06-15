@@ -232,7 +232,7 @@ const AppUtils = {
 
     //promoCode-API-Calls
 
-    promoCodeList: async function () {
+    PromoCodeList: async function () {
 
         return await fetch(API_BASE_URL + '/admin/getAllPromocodes', {
             method: 'GET',
@@ -246,7 +246,7 @@ const AppUtils = {
             })
     },
 
-    AddpromoCode: async function (data) {
+    AddPromoCode: async function (data) {
         console.log(data);
         return await fetch(API_BASE_URL + '/admin/insertPromocode', {
             method: 'POST',
@@ -258,7 +258,6 @@ const AppUtils = {
         })
             .then((response) => {
                 setTimeout(() => null, 0);
-                console.log('AppUtil then--' + response.toString());
                 return response.json();
             })
             .catch((err) => {
@@ -266,25 +265,25 @@ const AppUtils = {
             })
     },
 
-    EditpromoCode: async function (data) {
+    EditPromoCode: async function (data) {
         return await fetch(API_BASE_URL + '/admin/updatePromocode', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
-            body: data
+            body: JSON.stringify(data)
         })
             .then((response) => {
                 setTimeout(() => null, 0);
-                console.log(response.json());
                 return response.json();
             })
             .catch((err) => {
-                console.log('apputil' + err)
+                console.log('AppUtil err ' + err)
             })
     },
 
-    DeletepromoCode: function (data) {
+    DeletePromoCode: function (data) {
         return fetch(API_BASE_URL + '/admin/deletePromocode', {
             method: 'POST',
             headers: {

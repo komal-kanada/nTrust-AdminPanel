@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import API from "../../utils/AppUtil";
 import { withRouter } from 'react-router-dom';
-
 import {
-  Row,
-  Col,
-  Button,
-  Card,
-  CardHeader,
-  CardFooter,
-  CardBody,
-  Collapse,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-
+    Row,
+    Col,
+    Button,
+    Card,
+    CardHeader,
+    CardFooter,
+    CardBody,
+    Collapse,
+    Form,
+    FormGroup,
+    Label,
+    Input,
 } from 'reactstrap';
 
 class ExperienceForm extends Component {
-
 
     constructor(props) {
                  super(props);

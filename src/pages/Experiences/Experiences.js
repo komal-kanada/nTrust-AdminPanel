@@ -5,14 +5,13 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Link } from 'react-router-dom';
 
-export default class Experiences extends Component {
+class Experiences extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             table: '',
-            modalEditOpen: false,
         };
 
         this.options = {
@@ -55,7 +54,7 @@ export default class Experiences extends Component {
     };
 
     _deleteCell = (cell) => {
-        return <button  className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
+        return <button className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
     };
 
     _delete = (id) => {
@@ -87,47 +86,6 @@ export default class Experiences extends Component {
     };
 
     render() {
-
-        // API.ExperienceList()
-        //     .then((response) => {
-        //         console.log(response)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
-        //
-        // let data = {
-        //     "name": "test-admin",
-        //     'header': this.state.header,
-        //     'subheader': this.state.header
-        // };
-        // API.AddExperience(data)
-        //     .then((resp) => {
-        //         console.log(JSON.stringify(resp.Data))
-        //     });
-        //
-        // let data = {
-        //         name: 'aaaaaaaaa',
-        //         expId: '5b1a62eed9b3f80e72db4ad6'
-        //     };
-        // API.EditExperience(data)
-        //     .then((resp) => {
-        //         console.log(resp)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
-        //
-        // let data = {
-        //     expId: '5b1a5cac37de61021e4a2eeb'
-        // };
-        // API.DeleteExperience(data)
-        //     .then((resp) => {
-        //         console.log(resp)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
 
         return (
             <div className="animated">
@@ -169,5 +127,6 @@ export default class Experiences extends Component {
             </div>
         )
     }
-
 }
+
+export default Experiences
