@@ -18,10 +18,6 @@ import {
 
 } from 'reactstrap';
 
-
-
-
-
 class ExperienceForm extends Component {
 
 
@@ -202,8 +198,9 @@ class ExperienceForm extends Component {
                      </FormGroup>
                  </div>
                        <div style={{paddingTop: 20, paddingLeft: 270}}>
-                            <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
-                            &nbsp;&nbsp;&nbsp;
+                      
+                       <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
+                          &nbsp;&nbsp;&nbsp;
                             <input  className="btn-bck" type="submit" value="Submit"/>
                         </div>
                  </form>

@@ -1,5 +1,20 @@
 import React, { Component } from 'react'
 import API from "../../utils/AppUtil";
+import {
+    Row,
+    Col,
+    Button,
+    Card,
+    CardHeader,
+    CardFooter,
+    CardBody,
+    Collapse,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+  
+  } from 'reactstrap';
 
 class ItemsForm extends Component {
 
@@ -17,7 +32,7 @@ class ItemsForm extends Component {
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeIcon = this.handleChangeIcon.bind(this);
         this.handleChangeExpId = this.handleChangeExpId.bind(this);
-        // this._submit = this._submit.bind(this);
+       
     }
 
     componentWillMount(){
@@ -144,27 +159,45 @@ class ItemsForm extends Component {
     render(){
         return (
             <form onSubmit={this._submit} encType='multipart/form-data'>
-                <label>
-                    <h5>Name:</h5>
-                    <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
-                </label>
-                <label>
-                    <h5>Icon:</h5>
-                    <input type="file" name="icon" onChange={this.handleChangeIcon}/>
-                </label>
-                <label>
-                    <h5>Experience:</h5>
-                    <select name="expId" value={this.state.expId} onChange={this.handleChangeExpId}>
-                        {
-                            this.state.experiences.map((val) => {
-                                return <option value={val._id}>{val.name}</option>
-                            })
-                        }
-                    </select>
-                </label>
+              <div className="form_Items">
+              <FormGroup row>
+                <Col md="3">
+                    <Label  htmlFor="text-input"> <h5>Name:</h5></Label>
+                </Col>
+                <Col xs="12" md="9">
+                    <Label>  <input type="text" value={this.state.name} onChange={this.handleChangeName}/>
+                    </Label>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                    <Col md="3">  
+                        <Label><h5>Icon:</h5></Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                            <Label>  <input type="file" name="icon" onChange={this.handleChangeIcon}/>
+                            </Label>
+                    </Col>
+              </FormGroup>
+              <FormGroup row>
+                    <Col md="3">  
+                        <Label><h5>Experience:</h5></Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                    <Label>
+                        <select  name="expId" value={this.state.expId} onChange={this.handleChangeExpId}>
+                            {
+                                this.state.experiences.map((val) => {
+                                    return <option value={val._id}>{val.name}</option>
+                                })
+                            }
+                        </select>
+                    </Label>
+                    </Col>
+             </FormGroup>
                 <div style={{paddingTop: 20, paddingLeft: 270}}>
-                    <input type="submit" value="Submit"/>
+                    <input  className="btn-bck" type="submit" value="Submit"/>
                 </div>
+            </div>
             </form>
         );
     }
