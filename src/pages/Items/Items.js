@@ -6,7 +6,6 @@ import API from "../../utils/AppUtil";
 import { Link } from 'react-router-dom';
 
 class Items extends Component {
-
     constructor(props) {
         super(props);
 
@@ -34,7 +33,7 @@ class Items extends Component {
     };
 
     _getData = () => {
-        API.SubExperienceList()
+        API.ItemList()
             .then((response) => {
                 this.setState({
                     table: response.Data
@@ -66,7 +65,7 @@ class Items extends Component {
             subExpId: id
         };
 
-        API.DeleteSubExperience(data)
+        API.DeleteItem(data)
             .then((resp) => {
                 if(resp.Error === true) {
                     if(resp.Message === "Contain Items can't be deleted.") {

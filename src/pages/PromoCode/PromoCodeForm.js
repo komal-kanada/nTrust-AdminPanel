@@ -36,7 +36,6 @@ class PromoCodeForm extends Component {
                                 subExpId: value.subExp_id._id,
                                 modalType: 'edit'
                             });
-                            console.log(this.state);
                         }
                     })
                 })
@@ -45,7 +44,6 @@ class PromoCodeForm extends Component {
                 });
         }
         else {
-            console.log('add');
             this.setState({
                 modalType: 'add'
             });
@@ -53,13 +51,12 @@ class PromoCodeForm extends Component {
     }
 
     _getSubExperience = () => {
-        API.SubExperienceList()
+        API.ItemList()
             .then((response) => {
                 this.setState({
                     subExperience: response.Data,
                     subExpId: response.Data[0]._id
                 });
-                console.log(this.state)
             })
             .catch((err) => {
                 console.log(err)
@@ -69,14 +66,12 @@ class PromoCodeForm extends Component {
     _submit = (e) => {
         e.preventDefault();
         if(this.state.modalType === 'edit') {
-            console.log(this.state.subExpId);
             let data = {
                 disPrice: this.state.disPrice,
                 subExp_id: this.state.subExpId,
                 promocode: this.state.promoCode,
                 promocodeId: this.state._id
             };
-            console.log(data);
             API.EditPromoCode(data)
                 .then((resp) => {
                     this.setState({
@@ -93,7 +88,6 @@ class PromoCodeForm extends Component {
                 });
         }
         else if(this.state.modalType === 'add') {
-            console.log('add');
             if(this.state.disPrice !== '' && this.state.subExpId !== '' && this.state.promoCode !== ''){
                 let data = {
                     disPrice: this.state.disPrice,
@@ -102,7 +96,6 @@ class PromoCodeForm extends Component {
                 };
                 API.AddPromoCode(data)
                     .then((resp) => {
-                        console.log(JSON.stringify(resp.Data));
                         this.setState({
                             promoCode: '',
                             disPrice:'',
@@ -121,7 +114,6 @@ class PromoCodeForm extends Component {
             }
         }
         else{
-            console.log('aaa')
         }
     };
 
@@ -134,7 +126,6 @@ class PromoCodeForm extends Component {
     };
 
     handleChangeSubExpId(event){
-        console.log(event.target.value);
         this.setState({subExpId: event.target.value});
     };
 

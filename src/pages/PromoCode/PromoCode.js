@@ -34,7 +34,6 @@ class PromoCode extends Component {
                 this.setState({
                     table: response.Data
                 });
-                console.log(response.Data)
             })
             .catch((err) => {
                 console.log(err)
@@ -111,7 +110,7 @@ class PromoCode extends Component {
 
                             <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="subExp_id" dataFormat={this.expFormatter} >Sub-Experience</TableHeaderColumn>
+                            <TableHeaderColumn dataField="subExp_id" dataFormat={this.expFormatter} >Items</TableHeaderColumn>
 
                             <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
 

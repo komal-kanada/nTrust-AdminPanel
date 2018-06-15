@@ -28,10 +28,10 @@ class Users extends Component {
     componentDidMount() {
         this._getData();
     }
+
     _getData = () => {
         API.UserList()
         .then((response) => {
-            console.log(response.Data);
             this.setState({ data: response.Data })
         })
         .catch((err) => {
@@ -97,7 +97,6 @@ class Users extends Component {
     };
 
     render() {
-
         return (
             <div className="animated">
                 <Card>
