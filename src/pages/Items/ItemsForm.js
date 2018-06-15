@@ -28,7 +28,6 @@ class ItemsForm extends Component {
             experiences: [{_id: 'aa', name: 'aa'}],
             modalType: '',
             itemValue: '',
-            updateImage: false
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -40,7 +39,6 @@ class ItemsForm extends Component {
 
     componentWillMount(){
         this._getExperience();
-        console.log('edit');
         const { _id } = this.props.match.params;
         if(_id !== '' && _id !== undefined && _id !== null) {
             API.SubExperienceList()

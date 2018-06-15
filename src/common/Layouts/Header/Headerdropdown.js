@@ -98,7 +98,6 @@ class HeaderDropdown extends Component {
         </DropdownToggle>
      
       <DropdownMenu right>
-        
          <DropdownItem onClick={this.logout.bind(this)} ><i className="fa fa-lock" ></i> Logout</DropdownItem>
          </DropdownMenu>
        </Dropdown>

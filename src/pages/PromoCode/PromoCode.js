@@ -3,29 +3,7 @@ import API from '../../utils/AppUtil';
 import {Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import ReactModal from 'react-modal';
-
-const selectRowProp = {
-    mode: 'checkbox'
-};
-
-const style = {
-    content: {
-        borderRadius: '4px',
-        bottom: 'auto',
-        left: '25%',
-        position: 'fixed',
-        right: '25%',
-        top: '12%', // start from center
-    }
-};
-
-function onAfterInsertRow(row) {
-    let newRowStr = '';
-    for (const prop in row) {
-        newRowStr += prop + ': ' + row[prop] + ' \n';
-    }
-}
+import { Link } from 'react-router-dom';
 
 class PromoCode extends Component {
 
@@ -34,12 +12,6 @@ class PromoCode extends Component {
 
         this.state={
             table: '',
-            modalEditOpen: false,
-            promocode: '',
-            disPrice:'',
-            subExperience: '',
-            _id: '',
-            modalType: ''
         };
 
         this.options = {
@@ -49,13 +21,7 @@ class PromoCode extends Component {
             hidePageListOnlyOnePage: true,
             clearSearch: true,
             alwaysShowAllBtns: false,
-            withFirstAndLast: false,
-            afterInsertRow: onAfterInsertRow,
         };
-
-        this._submit = this._submit.bind(this);
-        this._cancel = this._cancel.bind(this);
-
     }
 
     componentWillMount () {
@@ -63,11 +29,12 @@ class PromoCode extends Component {
     }
 
     _getData  = () => {
-        API.promoCodeList()
+        API.PromoCodeList()
             .then((response) => {
                 this.setState({
                     table: response.Data
                 });
+                console.log(response.Data)
             })
             .catch((err) => {
                 console.log(err)
@@ -75,11 +42,11 @@ class PromoCode extends Component {
     };
 
     _editCell = (cell) => {
-        return <button className="btn-bck" onClick={() => this._edit(cell)}>Edit</button>
-    };
-
-    _edit = (id) => {
-
+        return (
+            <Link to={`promoCodeForm/edit/${cell}`}>
+                <button className="btn-bck">Edit</button>
+            </Link>
+        )
     };
 
     _deleteCell = (cell) => {
@@ -87,92 +54,47 @@ class PromoCode extends Component {
     };
 
     _delete = (id) => {
+        let data = {
+            promocodeId: id
+        };
 
+        API.DeletePromoCode(data)
+            .then((resp) => {
+                if(resp.Error === true) {
+                    alert(resp.Message)
+                }
+                else {
+                    alert('The Promo Code is deleted.');
+                    this._getData()
+                }
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     };
-
-    _submit = () => {
-        if(this.state.modalType === 'edit') {
-
-        }
-        else if(this.state.modalType === 'add') {
-
-        }
-    };
-
-    handleChangeName(event){
-        this.setState({name: event.target.value});
-        console.log(this.state)
-    };
-
-    handleChangeHeader(event){
-        this.setState({expHeader: event.target.files[0]});
-        console.log(this.state)
-    }
-
-    handleChangeSubHeader(event){
-        console.log(event.target.files);
-        this.setState({expSubHeader: event.target.files[0]});
-        setTimeout(() => {
-            console.log(this.state)
-        }, 10);
-    }
 
     _addExp = () =>{
         this.setState({
-            modalEditOpen: true,
             modalType: 'add'
         });
     };
 
-    _cancel = () => {
-        this.setState({
-            modalEditOpen: false,
-            modalType: '',
-            name: '',
-            expHeader:'',
-            expSubHeader: ''
-        })
+    expFormatter = (cell) => {
+        return cell.name
     };
-
 
     render() {
         return (
             <div className="animated">
-                <ReactModal
-                    isOpen={this.state.modalEditOpen}
-                    style={style}
-                    ariaHideApp={false}
-                >
-                    <form onSubmit={this._submit}>
-                        <label>
-                            <h5>Name:</h5>
-                            <input type="text" value={this.state.name} onChange={this.handleChangeName} required="true"/>
-                        </label>
-                        <div>
-                        <label>
-                            <h5>Discount Price:</h5>
-                            <input type="file" name="disPrice" onChange={this.handleChangeHeader}/>
-                        </label>
-                    </div>
-                        <label>
-                            <h5>Sub-Experience:</h5>
-                            <input type="file" name="subExperience" onChange={this.handleChangeSubHeader}/>
-                        </label>
-
-                        
-                        <div style={{paddingTop: 20, paddingLeft: 270}}>
-                            <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
-                            &nbsp;&nbsp;&nbsp;
-                            <input  className="btn-bck" type="submit" value="Submit"/>
-                        </div>
-                    </form>
-                </ReactModal>
                 <Card>
                     <CardHeader>
-                    PromoCode
+                        PromoCode
                     </CardHeader>
                     <CardBody>
-                        <button className="btn-bck" onClick={this._addExp}>Add</button>
+                        <Link to={`promoCodeForm/add`}>
+                            <button className="btn-bck" onClick={this._addExp}>Add</button>
+                        </Link>
                         <BootstrapTable
                             data={this.state.table}
                             striped hover pagination search options={this.options}
@@ -190,7 +112,7 @@ class PromoCode extends Component {
 
                             <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="subExperience" dataFormat={this.expFormatter}>Sub-Experience</TableHeaderColumn>
+                            <TableHeaderColumn dataField="subExp_id" dataFormat={this.expFormatter} >Sub-Experience</TableHeaderColumn>
 
                             <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
 

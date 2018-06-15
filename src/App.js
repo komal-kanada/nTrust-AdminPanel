@@ -54,14 +54,15 @@ class Full extends Component {
                                     <Route path='/experienceForm/add' name='ExperienceFormAdd' component={ExperienceForm}/>
 
                                     <Route path="/items" name="Items" component={Items}/>
-                                    <Route path='/itemsForm/edit/:_id' name='ItemListEdit' component={ItemsForm}/>
-                                    <Route path='/itemsForm/add' name='ItemListAdd' component={ItemsForm}/>
+                                    <Route path='/itemsForm/edit/:_id' name='ItemsFormEdit' component={ItemsForm}/>
+                                    <Route path='/itemsForm/add' name='ItemsFormAdd' component={ItemsForm}/>
 
                                     <Route path="/users" name="Users" component={Users}/>
                                     <Route path='/itemList/:_id' name='ItemList' component={ItemList}/>
 
                                     <Route path="/promoCode" name="PromoCode" component={PromoCode}/>
-                                    <Route path='/promoCodeForm/:_id' name='PromoCodeForm' component={PromoCodeForm}/>
+                                    <Route path='/promoCodeForm/edit/:_id' name='PromoCodeFormEdit' component={PromoCodeForm}/>
+                                    <Route path='/promoCodeForm/add' name='PromoCodeFormAdd' component={PromoCodeForm}/>
 
                                     <Redirect from="/" to="/dashboard"/>
                                 </Switch>
