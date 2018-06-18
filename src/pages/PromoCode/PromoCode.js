@@ -56,7 +56,7 @@ class PromoCode extends Component {
         let data = {
             promocodeId: id
         };
-
+        
         API.DeletePromoCode(data)
             .then((resp) => {
                 if(resp.Error === true) {

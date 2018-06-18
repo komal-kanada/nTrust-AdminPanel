@@ -117,7 +117,7 @@
 
 .react-bs-container-body {
   /*height: 154px;*/
-  overflow: auto;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -318,6 +318,7 @@
 /*error tip style*/
 .animated {
   animation-fill-mode: both;
+  margin-top:5%;
 }
 
 .animated.bounceIn,
@@ -412,7 +413,11 @@ th.react-bs-table-expand-cell > div {
 .bounceOut {
   animation-name: bounceOut;
 }
+.dashboard-img img{max-width:100%; width:100%;}
 
 
 
+
+
+  
   

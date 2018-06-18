@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
 import API from "../../utils/AppUtil";
 import {
+    Row,
     Col,
+    Button,
+    Card,
+    CardHeader,
+    CardFooter,
+    CardBody,
+    Collapse,
+    Form,
     FormGroup,
     Label,
-} from 'reactstrap';
+    Input,
+
+  } from 'reactstrap';
 
 class PromoCodeForm extends Component {
 
@@ -54,6 +64,8 @@ class PromoCodeForm extends Component {
             });
         }
     }
+
+     
 
     _getSubExperience = () => {
         API.ItemList()
@@ -136,7 +148,11 @@ class PromoCodeForm extends Component {
 
     render(){
         return (
-
+            <div className="animated fadeIn">
+            <Row>
+            <Col xs="12" md="6">
+              <Card>
+                <CardBody>
             <form onSubmit={this._submit} encType='multipart/form-data'>
              <div className="form_promo">
              <FormGroup row>
@@ -157,7 +173,7 @@ class PromoCodeForm extends Component {
             </Col>
             <Col xs="12" md="9">
                 <Label>
-                    <input type="text" name="disPrice" value={this.state.disPrice} onChange={this.handleChangeDisPrice}/>
+                    <input type="text" name="disPrice" value={this.state.disPrice} onChange={this.handleChangeDisPrice}  />
                 </Label>
             </Col>
             </FormGroup>
@@ -175,11 +191,16 @@ class PromoCodeForm extends Component {
                     </select>
              </Col>
             </FormGroup>
-                 <div>
-                    <input type="submit" value="Submit"/>
+            <div style={{paddingTop: 20, paddingLeft: 195}}>
+                    <input  className="btn-bck" type="submit" value="Submit"/>
                 </div>
              </div>
             </form>
+            </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        </div>
         );
     }
 }

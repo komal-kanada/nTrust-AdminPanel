@@ -297,7 +297,7 @@
       <workItem from="1529056290565" duration="627000" />
       <workItem from="1529058555757" duration="307000" />
       <workItem from="1529068910996" duration="1195000" />
-      <workItem from="1529298965557" duration="1255000" />
+      <workItem from="1529298965557" duration="1481000" />
     </task>
     <task id="LOCAL-00001" summary="deletion of data.js">
       <created>1528709656571</created>
@@ -345,11 +345,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10813000" />
+    <option name="totallyTimeSpent" value="11039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1360" height="768" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24869305" />
       <window_info anchor="bottom" id="TODO" order="6" />

@@ -177,7 +177,7 @@ class ExperienceForm extends Component {
 
 
              </div>
-                  <div style={{paddingTop: 20, paddingLeft: 270}}>
+                  <div style={{paddingTop: 20, paddingLeft: 195}}>
                       <Link to='/experiences'>
                           <button  className="btn-bck" onClick={this._cancel}> Cancel </button>
                       </Link>

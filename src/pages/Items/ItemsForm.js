@@ -154,6 +154,11 @@ class ItemsForm extends Component {
     };
     render(){
         return (
+            <div className="animated fadeIn">
+            <Row>
+            <Col xs="12" md="6">
+              <Card>
+                <CardBody>
             <form onSubmit={this._submit} encType='multipart/form-data'>
               <div className="form_Items">
               <FormGroup row>
@@ -190,11 +195,16 @@ class ItemsForm extends Component {
                     </Label>
                     </Col>
              </FormGroup>
-                <div style={{paddingTop: 20, paddingLeft: 270}}>
-                    <input  className="btn-bck" type="submit" value="Submit"/>
-                </div>
+                    <div style={{paddingTop: 20, paddingLeft: 195}}>
+                            <input  className="btn-bck" type="submit" value="Submit"/>
+                        </div>
               </div>
             </form>
+            </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        </div>
         );
     }
 }
