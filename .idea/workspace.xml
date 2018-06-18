@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="36052177-2606-42ac-976b-bc7ccbdd4144" name="Default" comment="Changed modal to Page.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/AppUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AppUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Items/ItemsForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Items/ItemsForm.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,7 +44,8 @@
       <file leaf-file-name="ItemsForm.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/Items/ItemsForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2146">
+            <state relative-caret-position="188">
+              <caret line="153" column="6" selection-start-line="153" selection-start-column="6" selection-end-line="153" selection-end-column="6" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -147,6 +146,7 @@
       <find>subExperience</find>
       <find>subExperienceForm</find>
       <find>.idea</find>
+      <find>handleChangeName</find>
     </findStrings>
     <replaceStrings>
       <replace>ExperienceForm</replace>
@@ -178,6 +178,7 @@
         <option value="$PROJECT_DIR$/src/common/global.js" />
         <option value="$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js" />
         <option value="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" />
+        <option value="$PROJECT_DIR$/src/pages/Items/ItemsForm.js" />
       </list>
     </option>
   </component>
@@ -296,7 +297,7 @@
       <workItem from="1529056290565" duration="627000" />
       <workItem from="1529058555757" duration="307000" />
       <workItem from="1529068910996" duration="1195000" />
-      <workItem from="1529298965557" duration="436000" />
+      <workItem from="1529298965557" duration="1255000" />
     </task>
     <task id="LOCAL-00001" summary="deletion of data.js">
       <created>1528709656571</created>
@@ -344,21 +345,22 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9994000" />
+    <option name="totallyTimeSpent" value="10813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1360" height="768" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24485295" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24869305" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3282123" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.33910534" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.24581006" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33044732" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -694,7 +696,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Items/ItemsForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2146">
+        <state relative-caret-position="188">
+          <caret line="153" column="6" selection-start-line="153" selection-start-column="6" selection-end-line="153" selection-end-column="6" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>

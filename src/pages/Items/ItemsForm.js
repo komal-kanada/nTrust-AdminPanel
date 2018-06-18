@@ -32,7 +32,7 @@ class ItemsForm extends Component {
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeIcon = this.handleChangeIcon.bind(this);
         this.handleChangeExpId = this.handleChangeExpId.bind(this);
-        this.handleChangeItemValue = this.handleChangeItemValue.bind(this);
+        this.handleChangeValue = this.handleChangeValue.bind(this);
         this._submit = this._submit.bind(this);
     }
 
@@ -78,7 +78,6 @@ class ItemsForm extends Component {
             })
     };
 
-
     _submit = (e) => {
         e.preventDefault();
         if(this.state.modalType === 'edit') {
@@ -86,7 +85,8 @@ class ItemsForm extends Component {
                     name: this.state.name,
                     expId: this.state.expId,
                     icon: this.state.icon,
-                    subExpId: this.state._id
+                    subExpId: this.state._id,
+                    value: this.state.value
                 };
             API.EditItem(data)
                 .then((resp) => {
@@ -96,6 +96,7 @@ class ItemsForm extends Component {
                         name: '',
                         icon: '',
                         expId: '',
+                        value: ''
                     });
                     this.props.history.push({ pathname: `/items`});
                 })
@@ -108,7 +109,8 @@ class ItemsForm extends Component {
                 let data = {
                     name: this.state.name,
                     icon: this.state.icon,
-                    expId: this.state.expId
+                    expId: this.state.expId,
+                    value: this.state.value
                 };
                 API.AddItem(data)
                     .then((resp) => {
@@ -118,6 +120,7 @@ class ItemsForm extends Component {
                             name: '',
                             icon: '',
                             expId: '',
+                            value: ''
                         });
                         this.props.history.push({ pathname: `/items`});
                     })
@@ -146,11 +149,9 @@ class ItemsForm extends Component {
         this.setState({expId: event.target.value});
     };
 
-    handleChangeItemValue(event){
-        this.setState({itemValue: event.target.itemValue});
-
-    }
-
+    handleChangeValue(event) {
+        this.setState({value: event.target.value});
+    };
     render(){
         return (
             <form onSubmit={this._submit} encType='multipart/form-data'>
@@ -192,7 +193,7 @@ class ItemsForm extends Component {
                 <div style={{paddingTop: 20, paddingLeft: 270}}>
                     <input  className="btn-bck" type="submit" value="Submit"/>
                 </div>
-            </div>
+              </div>
             </form>
         );
     }
