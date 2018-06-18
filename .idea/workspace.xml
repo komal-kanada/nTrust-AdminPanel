@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="36052177-2606-42ac-976b-bc7ccbdd4144" name="Default" comment="Changed modal to Page.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Experiences/Experiences.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experiences/Experiences.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Items/Items.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Items/Items.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Items/ItemsForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Items/ItemsForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PromoCode/PromoCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PromoCode/PromoCode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Users/ItemList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Users/ItemList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Users/Users.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Users/Users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/AppUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/AppUtil.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,7 +22,7 @@
       <file leaf-file-name="Experiences.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/Experiences/Experiences.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1455">
+            <state relative-caret-position="1440">
               <caret line="101" column="7" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -39,10 +34,21 @@
       <file leaf-file-name="ExperienceForm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="20" selection-start-column="7" selection-end-line="5" selection-end-column="8" />
+            <state relative-caret-position="3">
+              <caret line="137" column="6" selection-start-line="137" selection-start-column="6" selection-end-line="137" selection-end-column="6" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemsForm.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/Items/ItemsForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2146">
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PromoCodeForm.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PromoCodeForm.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="267">
-              <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+              <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -147,6 +153,7 @@
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/public</dir>
+      <dir>$PROJECT_DIR$/node_modules</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -169,8 +176,8 @@
         <option value="$PROJECT_DIR$/src/pages/Experiences/Experiences.js" />
         <option value="$PROJECT_DIR$/src/pages/Users/Users.js" />
         <option value="$PROJECT_DIR$/src/common/global.js" />
-        <option value="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" />
         <option value="$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js" />
+        <option value="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" />
       </list>
     </option>
   </component>
@@ -211,6 +218,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,13 +242,19 @@
               <item name="admin_ntrust" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Items" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin_ntrust" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin_ntrust" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="PromoCode" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -282,6 +296,7 @@
       <workItem from="1529056290565" duration="627000" />
       <workItem from="1529058555757" duration="307000" />
       <workItem from="1529068910996" duration="1195000" />
+      <workItem from="1529298965557" duration="436000" />
     </task>
     <task id="LOCAL-00001" summary="deletion of data.js">
       <created>1528709656571</created>
@@ -329,7 +344,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9558000" />
+    <option name="totallyTimeSpent" value="9994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1360" height="768" extended-state="0" />
@@ -338,9 +353,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3282123" />
-      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.24581006" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -352,7 +368,6 @@
       <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49930555" weight="0.32900944" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,13 +393,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/common/globals.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="15" selection-start-column="15" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -612,7 +620,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Experiences/Experiences.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1455">
+        <state relative-caret-position="1440">
           <caret line="101" column="7" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -664,20 +672,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="20" selection-start-column="7" selection-end-line="5" selection-end-column="8" />
+        <state relative-caret-position="3">
+          <caret line="137" column="6" selection-start-line="137" selection-start-column="6" selection-end-line="137" selection-end-column="6" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js">
+    <entry file="file://$PROJECT_DIR$/src/pages/Items/ItemsForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="19" column="25" lean-forward="true" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="-2146">
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>

@@ -295,7 +295,7 @@ const AppUtils = {
                 response.json()
                     .then(data => ({
                         data: data,
-                        status: response.status
+                        status: response.status 
                     }))
                     .then(res => {
                         return res.data

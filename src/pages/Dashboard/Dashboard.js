@@ -4,8 +4,8 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="animated fadeIn" >
-        Welcome to the Admin Panel.
+      <div className="animated fadeIn">
+       <center> Welcome to the Admin Panel.</center>
       </div>
     )
   }

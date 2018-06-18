@@ -64,6 +64,7 @@ class ExperienceForm extends Component {
      _submit = (e) => {
          e.preventDefault();
          if(this.state.modalType === 'edit') {
+             console.log('edit');
              let data = {
                  name: this.state.name,
                  header: this.state.expHeader,
@@ -135,16 +136,6 @@ class ExperienceForm extends Component {
             expSubHeader: ''
         })
     };
-
-    _submit = () => {
-        if(this.state.modalType === 'edit') {
-
-        }
-        else if(this.state.modalType === 'add') {
-
-        }
-    };
-
 
   render() {
     return (
