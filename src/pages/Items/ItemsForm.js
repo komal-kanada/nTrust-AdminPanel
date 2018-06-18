@@ -11,13 +11,13 @@ class ItemsForm extends Component {
             expId: '',
             experiences: [{_id: 'aa', name: 'aa'}],
             modalType: '',
-            itemValue: '',
+            value: '',
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeIcon = this.handleChangeIcon.bind(this);
         this.handleChangeExpId = this.handleChangeExpId.bind(this);
-        this.handleChangeItemValue = this.handleChangeItemValue.bind(this);
+        this.handleChangeValue = this.handleChangeValue.bind(this);
         this._submit = this._submit.bind(this);
     }
 
@@ -70,7 +70,8 @@ class ItemsForm extends Component {
                     name: this.state.name,
                     expId: this.state.expId,
                     icon: this.state.icon,
-                    subExpId: this.state._id
+                    subExpId: this.state._id,
+                    value: this.state.value
                 };
             API.EditItem(data)
                 .then((resp) => {
@@ -80,6 +81,7 @@ class ItemsForm extends Component {
                         name: '',
                         icon: '',
                         expId: '',
+                        value: ''
                     });
                     this.props.history.push({ pathname: `/items`});
                 })
@@ -92,7 +94,8 @@ class ItemsForm extends Component {
                 let data = {
                     name: this.state.name,
                     icon: this.state.icon,
-                    expId: this.state.expId
+                    expId: this.state.expId,
+                    value: this.state.value
                 };
                 API.AddItem(data)
                     .then((resp) => {
@@ -102,6 +105,7 @@ class ItemsForm extends Component {
                             name: '',
                             icon: '',
                             expId: '',
+                            value: ''
                         });
                         this.props.history.push({ pathname: `/items`});
                     })
@@ -130,8 +134,8 @@ class ItemsForm extends Component {
         this.setState({expId: event.target.value});
     };
 
-    handleChangeItemValue(event){
-        this.setState({itemValue: event.target.itemValue});
+    handleChangeValue(event){
+        this.setState({value: event.target.value});
 
     }
 
@@ -148,7 +152,7 @@ class ItemsForm extends Component {
                 </label>
                 <label>
                     <h5>Item Value:</h5>
-                    <input type="text" name="itemValue" value={this.state.itemValue} onChange={this.handleChangeItemValue}/>
+                    <input type="text" name="value" value={this.state.value} onChange={this.handleChangeValue}/>
                 </label>
                 <label>
                     <h5>Experience:</h5>
