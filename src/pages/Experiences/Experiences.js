@@ -4,6 +4,7 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Link } from 'react-router-dom';
+import {CircularProcess } from  'material-ui';
 
 class Experiences extends Component {
 
@@ -12,7 +13,7 @@ class Experiences extends Component {
 
         this.state = {
             table: '',
-        };
+        };      
 
         this.options = {
             sortIndicator: true,
@@ -33,8 +34,7 @@ class Experiences extends Component {
 
     imageFormatter = (cell) => {
         return "<img height= '100px' src='"+cell+"'/>" ;
-    };
-
+    };  
     _getData = () => {
         API.ExperienceList()
             .then((response) => {
@@ -46,7 +46,6 @@ class Experiences extends Component {
                 console.log(err)
             });
     };
-
     _editCell = (cell) => {
         return (
             <Link to={`experienceForm/edit/${cell}`}>
@@ -54,16 +53,13 @@ class Experiences extends Component {
             </Link>
         )
     };
-
     _deleteCell = (cell) => {
         return <button className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
     };
-
     _delete = (id) => {
         let data = {
             expId: id
         };
-
         API.DeleteExperience(data)
             .then((resp) => {
                 if(resp.Data.length === 0){
@@ -78,15 +74,13 @@ class Experiences extends Component {
                 console.log(err)
             });
     };
-
     _addExp = () =>{
         this.setState({
             modalEditOpen: true,
             modalType: 'add'
         });
     };
-   
-
+ 
     render() {
 
         return (

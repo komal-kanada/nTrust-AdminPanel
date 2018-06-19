@@ -45,13 +45,14 @@ class Full extends Component {
                         <main className="main">
                             <Container fluid>
                                 <Switch>
+                              
                                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
 
                                     <Route path='/experienceForm/edit/:_id' name='ExperienceFormEdit' component={ExperienceForm}/>
 
                                     <Route path='/experienceForm/add' name='ExperienceFormAdd' component={ExperienceForm}/>
+                                   
 
                                     <Route path="/items" name="Items" component={Items}/>
                                     <Route path='/itemsForm/edit/:_id' name='ItemsFormEdit' component={ItemsForm}/>
@@ -66,6 +67,7 @@ class Full extends Component {
                                     <Route path='/promoCodeForm/edit/:_id' name='PromoCodeFormEdit' component={PromoCodeForm}/>
                                     
                                     <Route path='/promoCodeForm/add' name='PromoCodeFormAdd' component={PromoCodeForm}/>
+                                    
 
                                     <Redirect from="/" to="/dashboard"/>
                                 </Switch>
