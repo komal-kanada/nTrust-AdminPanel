@@ -46,7 +46,7 @@ class HeaderDropdown extends Component {
     return (
       <Dropdown nav className="d-md-down-none" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle nav>
-          <i className="icon-bell"></i><Badge pill color="danger">{itemsCount}</Badge>
+          {/* <i className="icon-bell"></i><Badge pill color="danger">{itemsCount}</Badge> */}
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem header tag="div" className="text-center"><strong>You have {itemsCount} notifications</strong></DropdownItem>

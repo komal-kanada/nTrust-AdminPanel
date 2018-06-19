@@ -9,19 +9,33 @@ class Dashboard extends Component {
   <div className="animated fadeIn dashboard-img">
   <div className="col-md-12">
   <div className="row">  
-     <div className="col-md-6"> 
-        <img src="img/onwheels.png" /> 
+     <div className="col-md-4"> 
+        <img src="img/image/events.png" /> 
       </div> 
-      <div className="col-md-6"> 
-        <img src="img/outdoors.png" /> 
+      <div className="col-md-4"> 
+        <img src="img/image/gaming.png" /> 
       </div> 
-      <div className="col-md-6"> 
-        <img src="img/inthewater.png" /> 
+      <div className="col-md-4"> 
+        <img src="img/image/inthewater.png" /> 
       </div> 
-      <div className="col-md-6"> 
-        <img src="img/home_projects.png" /> 
+      <div className="col-md-4"> 
+        <img src="img/image/onwheels.png" /> 
       </div> 
-       
+      <div className="col-md-4"> 
+        <img src="img/image/outdoors.png" /> 
+      </div> 
+      <div className="col-md-4"> 
+        <img src="img/image/parenting.png" /> 
+      </div>
+      <div className="col-md-4"> 
+        <img src="img/image/projects.png" /> 
+      </div> 
+      <div className="col-md-4"> 
+        <img src="img/image/thelens.png" /> 
+      </div>
+      <div className="col-md-4"> 
+        <img src="img/image/time.png" /> 
+      </div>
 
 </div> 
 </div> 

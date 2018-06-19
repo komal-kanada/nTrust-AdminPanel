@@ -3,6 +3,6 @@
 //mihir
 // export const API_BASE_URL = "http://192.168.1.177:3000/api/v1";
 //heroku
-// export const API_BASE_URL = "http://ntrust.herokuapp.com/api/v1";
+export const API_BASE_URL = "http://ntrust.herokuapp.com/api/v1";
 //radha
-export const API_BASE_URL = "http://192.168.1.16:3000/api/v1";
+// export const API_BASE_URL = "http://192.168.1.16:3000/api/v1";
