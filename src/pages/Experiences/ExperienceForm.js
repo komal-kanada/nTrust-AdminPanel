@@ -11,7 +11,8 @@ import {
     Label,
     Input,
 } from 'reactstrap';
-// import {CircularProgress} from 'material-ui';
+import {CircularProgress} from 'material-ui';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ExperienceForm extends Component {
 
@@ -24,6 +25,9 @@ class ExperienceForm extends Component {
             expSubHeader: '',
             _id: '',
             modalType: '',
+            loading : false,
+            loading1: false
+
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -56,7 +60,8 @@ class ExperienceForm extends Component {
         }
         else {
             this.setState({
-                modalType: 'add'
+                modalType: 'add',
+               
             });
         }
     }
@@ -78,7 +83,8 @@ class ExperienceForm extends Component {
                         _id: '',
                         name: '',
                         expHeader: '',
-                        expSubHeader: ''
+                        expSubHeader: '',
+                       
                     });
                     this.props.history.push({pathname: `/experiences`});
                 })
@@ -99,7 +105,9 @@ class ExperienceForm extends Component {
                             modalType: '',
                             name: '',
                             expHeader: '',
-                            expSubHeader: ''
+                            expSubHeader: '',
+                            loading : false,
+                            loading1 : false,
                         });
                         this.props.history.push({pathname: `/experiences`});
                     })
@@ -113,6 +121,8 @@ class ExperienceForm extends Component {
         }
     };
 
+    
+
 
     handleChangeName(event) {
         this.setState({name: event.target.value});
@@ -120,11 +130,11 @@ class ExperienceForm extends Component {
 
     handleChangeHeader(event) {
         this.setState({loading: true, expHeader: event.target.files[0]});
-        setTimeout(() => null, 10);
+        setTimeout(() =>null , 10); 
     }
-
+   
     handleChangeSubHeader(event) {
-        this.setState({loading: true, expSubHeader: event.target.files[0]});
+        this.setState({loading1: true, expSubHeader: event.target.files[0]});
         setTimeout(() => null, 10);
     }
 
@@ -139,6 +149,7 @@ class ExperienceForm extends Component {
     };
 
     render() {
+        const {loading,loading1 }= this.state
         return (
             <div className="animated fadeIn">
 
@@ -154,40 +165,39 @@ class ExperienceForm extends Component {
                                                 </Col>
                                                 <Col xs="12" md="9">
                                                     <input type="text" value={this.state.name}
-                                                        onChange={this.handleChangeName}/>
-
+                                                        onChange={this.handleChangeName}
+                                                       />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-
+                                    
                                                 <Col md="3">
                                                     <Label htmlFor="file-input"><h5>Header:</h5></Label>
+
                                                 </Col>
                                                 <Col xs="12" md="9">
                                                     <Input type="file" name="expHeader" onChange={this.handleChangeHeader}/>
                                                 </Col>
-
+ 
                                                 <Col md="3">
                                                     <Label htmlFor="file-multiple-input"><h5>Sub-Header:</h5></Label>
                                                 </Col>
-                                                <Col xs="12" md="9">
-                                                    <Input type="file" name="expSubHeader"
+
+                                                <Col xs="12" md="6">
+                                                    <Input type="file" name="expSubHeader" 
                                                         onChange={this.handleChangeSubHeader}/>
                                                 </Col>
-
-                                                }
-
                                             </FormGroup>
 
 
                                         </div>
-                                        <div style={{paddingTop: 20, paddingLeft: 195}}>
-                                            <Link to='/experiences'>
-                                                <button className="btn-bck" onClick={this._cancel}> Cancel</button>
-                                            </Link>
-                                            &nbsp;&nbsp;&nbsp;
-                                            <input className="btn-bck" type="submit" value="Submit"/>
-                                        </div>
+                                            <div style={{paddingTop: 20, paddingLeft: 195}}>
+                                                <Link to='/experiences'>
+                                                    <button className="btn-bck" onClick={this._cancel}> Cancel</button>
+                                                </Link>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <input className="btn-bck" type="submit" value="Submit"/>
+                                            </div>
                                     </form>
                             </CardBody>
                         </Card>

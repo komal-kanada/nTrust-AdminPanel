@@ -1,8 +1,8 @@
 // const routes = {
 
 const routes = {
-    '/dashboard': 'Dashboard',
     '/login': 'Login',
+    '/dashboard': 'Dashboard',
     '/register': 'Register',
     '/': 'Home',
     '/experiences':'Experiences',

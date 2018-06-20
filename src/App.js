@@ -16,6 +16,7 @@ import ItemList from './pages/Users/ItemList.js';
 import PromoCode from './pages/PromoCode/PromoCode.js';
 import PromoCodeForm from './pages/PromoCode/PromoCodeForm.js';
 import ItemsForm from "./pages/Items/ItemsForm";
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Full extends Component {
     render() {
@@ -31,6 +32,8 @@ class Full extends Component {
                     <Switch>
                         <Route path ="/login" name="Login" component={Login}/>
                         <Route path ="/register" name="Register" component={Register}/>
+                      
+                      
                     </Switch>
                 </Container>
             );
@@ -47,12 +50,15 @@ class Full extends Component {
                                 <Switch>
                               
                                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+                          
+                                {/* <MuiThemeProvider > */}
                                     <Route path="/experiences" name="Experiences" component={Experiences}/>
-
+                                
                                     <Route path='/experienceForm/edit/:_id' name='ExperienceFormEdit' component={ExperienceForm}/>
 
                                     <Route path='/experienceForm/add' name='ExperienceFormAdd' component={ExperienceForm}/>
-                                   
+                                    {/* </MuiThemeProvider>    */}
+                                  
 
                                     <Route path="/items" name="Items" component={Items}/>
                                     <Route path='/itemsForm/edit/:_id' name='ItemsFormEdit' component={ItemsForm}/>
