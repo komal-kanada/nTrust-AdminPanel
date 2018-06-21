@@ -1,51 +1,57 @@
-import {API_BASE_URL} from '../common/global';
+import {API_BASE_URL, token} from '../common/global';
 
 const convertFormData = async (data) => {
-    var formData = new FormData();
-    for (var k in data) {
+    let formData = new FormData();
+    for (let k in data) {
         await formData.append(k, data[k]);
     }
     return formData;
 };
 
-const AppUtils = {
+const API = {
 
     //Experience-API-Calls
 
     ExperienceList: async function () {
-
         return await fetch(API_BASE_URL + '/admin/getAllExp', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': await token()
             },
         })
-            .then((response) => {
-                setTimeout(() => null, 0);
-                return response.json();
-            })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
                 console.log(err)
             })
     },
 
     AddExperience: async function (data) {
-        console.log(data);
         return await fetch(API_BASE_URL + '/admin/insertExp', {
             method: 'POST',
             headers: {
-                'Accept':'*/*'
+                'Accept': '*/*',
+                'Authorization': await token()
             },
             body: await convertFormData(data)
-        }).then(response =>
-            response.json()
-                .then(data => ({
-                    data: data,
-                    status: response.status
-                }))
-                .then(res => {
-                    return res.data
-                }))
+        })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
                 console.log(err)
             })
@@ -55,41 +61,43 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/updateExp', {
             method: 'POST',
             headers: {
-                'Accept':'*/*',
+                'Accept': '*/*',
+                'Authorization': await token()
             },
             body: await convertFormData(data)
-        }).then(response =>
-            response.json()
-                .then(data => ({
-                    data: data,
-                    status: response.status
-                }))
-                .then(res => {
-                    console.log(res.data);
-                    return res.data
-                }))
+        })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
                 console.log(err)
             })
     },
 
     DeleteExperience: async function (data) {
-        return fetch(API_BASE_URL + '/admin/deleteExp', {
+        return await fetch(API_BASE_URL + '/admin/deleteExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': await token()
             },
             body: JSON.stringify(data)
-        }).then(response =>
-            response.json()
-                .then(data => ({
-                    data: data,
-                    status: response.status
-                }))
-                .then(res => {
-                    console.log(res.data);
-                    return res.data
-                }))
+        })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
                 console.log(err)
             })
@@ -98,16 +106,18 @@ const AppUtils = {
     //SubExperience-API-Calls
 
     ItemList: async function () {
-
         return await fetch(API_BASE_URL + '/admin/getAllSubExp', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': await token()
             },
         })
             .then((response) => {
-                setTimeout(() => null, 0);
                 return response.json();
+            })
+            .catch((err) => {
+                console.log(err)
             })
     },
 
@@ -115,19 +125,20 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/insertSubexp', {
             method: 'POST',
             headers: {
-                'Accept':'*/*',
+                'Accept': '*/*',
+                'Authorization': await token()
             },
             body: await convertFormData(data)
-        }).then(response =>
-            response.json()
-                .then(data => ({
-                    data: data,
-                    status: response.status
-                }))
-                .then(res => {
-                    console.log(res.data);
-                    return res.data
-                }))
+        })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
                 console.log(err)
             })
@@ -137,29 +148,31 @@ const AppUtils = {
         return await fetch(API_BASE_URL + '/admin/updateSubExp', {
             method: 'POST',
             headers: {
-                'Accept':'*/*',
+                'Accept': '*/*',
+                'Authorization': await token()
             },
             body: await convertFormData(data)
-        }).then(response =>
-            response.json()
-                .then(data => ({
-                    data: data,
-                    status: response.status
-                }))
-                .then(res => {
-                    console.log(res.data);
-                    return res.data
-                }))
+        })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    }))
             .catch((err) => {
                 console.log(err)
             })
     },
 
-    DeleteItem: function (data) {
-        return fetch(API_BASE_URL + '/admin/deleteSubExp', {
+    DeleteItem: async function (data) {
+        return await fetch(API_BASE_URL + '/admin/deleteSubExp', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': await token()
             },
             body: JSON.stringify(data)
         })
@@ -179,16 +192,15 @@ const AppUtils = {
 
     //User-API-Calls
 
-    UserList: async function() {
-
-        return await fetch(API_BASE_URL+'/admin/getAllUsers', {
+    UserList: async function () {
+        return await fetch(API_BASE_URL + '/admin/getAllUsers', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': await token()
             },
         })
             .then((response) => {
-                setTimeout(() => null, 0);
                 return response.json();
             })
             .catch((err) => {
@@ -196,16 +208,16 @@ const AppUtils = {
             })
     },
 
-    ItemsByUser: async function(userId) {
+    ItemsByUser: async function (userId) {
         userId = userId.substring(1);
-        return await fetch(API_BASE_URL+`/admin/getItemsByUser/${userId}`, {
+        return await fetch(API_BASE_URL + `/admin/getItemsByUser/${userId}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': await token()
             },
         })
             .then((response) => {
-                console.log(response);
                 return response.json();
             })
             .catch((err) => {
@@ -219,6 +231,7 @@ const AppUtils = {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': await token()
             },
             body: JSON.stringify(data)
         })
@@ -233,31 +246,32 @@ const AppUtils = {
     //promoCode-API-Calls
 
     PromoCodeList: async function () {
-
         return await fetch(API_BASE_URL + '/admin/getAllPromocodes', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': await token()
             },
         })
             .then((response) => {
-                setTimeout(() => null, 0);
                 return response.json();
+            })
+            .catch((err) => {
+                console.log(err)
             })
     },
 
     AddPromoCode: async function (data) {
-        console.log(data);
         return await fetch(API_BASE_URL + '/admin/insertPromocode', {
             method: 'POST',
-            headers:{
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': await token()
             },
             body: JSON.stringify(data)
         })
             .then((response) => {
-                setTimeout(() => null, 0);
                 return response.json();
             })
             .catch((err) => {
@@ -268,26 +282,28 @@ const AppUtils = {
     EditPromoCode: async function (data) {
         return await fetch(API_BASE_URL + '/admin/updatePromocode', {
             method: 'POST',
-            headers:{
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': await token()
             },
             body: JSON.stringify(data)
         })
             .then((response) => {
-                setTimeout(() => null, 0);
                 return response.json();
             })
             .catch((err) => {
-                console.log('AppUtil err ' + err)
+                console.log(err)
             })
     },
 
-    DeletePromoCode: function (data) {
-        return fetch(API_BASE_URL + '/admin/deletePromocode', {
+    DeletePromoCode: async function (data) {
+        return await fetch(API_BASE_URL + '/admin/deletePromocode', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': await token()
             },
             body: JSON.stringify(data)
         })
@@ -295,7 +311,7 @@ const AppUtils = {
                 response.json()
                     .then(data => ({
                         data: data,
-                        status: response.status 
+                        status: response.status
                     }))
                     .then(res => {
                         return res.data
@@ -303,8 +319,51 @@ const AppUtils = {
             .catch((err) => {
                 console.log(err)
             })
-    }
+    },
 
+    //Login
+
+    Login: async function (data) {
+        return await fetch(API_BASE_URL + '/admin/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response =>
+                response.json()
+                    .then(data => ({
+                        data: data,
+                        status: response.status
+                    }))
+                    .then(res => {
+                        return res.data
+                    })
+            )
+            .catch((err) => {
+                console.log(err)
+            })
+    },
+
+    //LogOut
+
+    Logout: async function () {
+        return await fetch(API_BASE_URL + '/admin/logout', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
 };
 
-module.exports = AppUtils;
+export default API

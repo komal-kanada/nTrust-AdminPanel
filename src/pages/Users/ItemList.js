@@ -70,7 +70,7 @@ class ItemList extends Component {
 
                             <TableHeaderColumn dataField="price">Price</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="priceType">Proce Type</TableHeaderColumn>
+                            <TableHeaderColumn dataField="priceType">Price Type</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="experiences">Experience</TableHeaderColumn>
 

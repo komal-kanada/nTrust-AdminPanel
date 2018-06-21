@@ -3,14 +3,14 @@ import API from '../../utils/AppUtil';
 import {Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {AsyncStorage} from "AsyncStorage";
 
 class PromoCode extends Component {
-
     constructor(props) {
         super(props);
 
-        this.state={
+        this.state = {
             table: '',
         };
 
@@ -24,11 +24,16 @@ class PromoCode extends Component {
         };
     }
 
-    componentWillMount () {
-        this._getData();
-    }
+    componentWillMount = async () => {
+        if (await AsyncStorage.getItem('Login') === undefined || JSON.parse(await AsyncStorage.getItem('Login')).token === '') {
+            this.props.history.push({pathname: `/login`});
+        }
+        else {
+            this._getData();
+        }
+    };
 
-    _getData  = () => {
+    _getData = () => {
         API.PromoCodeList()
             .then((response) => {
                 this.setState({
@@ -40,47 +45,27 @@ class PromoCode extends Component {
             });
     };
 
-    _editCell = (cell) => {
-        return (
-            <Link to={`promoCodeForm/edit/${cell}`}>
-                <button className="btn-bck">Edit</button>
-            </Link>
-        )
-    };
-
-    _deleteCell = (cell) => {
-        return <button className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
-    };
-
     _delete = (id) => {
         let data = {
             promocodeId: id
         };
-        
+
         API.DeletePromoCode(data)
             .then((resp) => {
-                if(resp.Error === true) {
+                if (resp.Error === true) {
                     alert(resp.Message)
                 }
                 else {
-                    alert('The Promo Code is deleted.');
-                    this._getData()
+                    this._getData();
+                    setTimeout(() => {
+                        alert('Promo Code deleted')
+                    }, 300);
                 }
 
             })
             .catch((err) => {
                 console.log(err)
             });
-    };
-
-    _addExp = () =>{
-        this.setState({
-            modalType: 'add'
-        });
-    };
-
-    expFormatter = (cell) => {
-        return cell.name
     };
 
     render() {
@@ -90,13 +75,14 @@ class PromoCode extends Component {
                     <CardHeader>
                         PromoCode
                     </CardHeader>
+
                     <CardBody>
                         <Link to={`promoCodeForm/add`}>
-                            <button className="btn-bck" onClick={this._addExp}>Add</button>
+                            <button className="btn-bck">Add</button>
                         </Link>
+
                         <BootstrapTable
                             data={this.state.table}
-                            striped hover pagination search options={this.options}
                             className="experiences-table"
                             version="4"
                             striped
@@ -104,19 +90,65 @@ class PromoCode extends Component {
                             pagination
                             options={this.options}
                         >
+                            <TableHeaderColumn
+                                dataField="_id"
+                                isKey
+                                hidden={true}
+                            >
+                                Id.
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="_id" isKey hidden={true}>Id.</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="promocode"
+                            >
+                                Name
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="promocode" >Name</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="disPrice"
+                            >
+                                Discount Price
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="disPrice">Discount Price</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="subExp_id"
+                                dataFormat={(cell) => {
+                                    return cell.name
+                                }}
+                            >
+                                Items
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="subExp_id" dataFormat={this.expFormatter} >Items</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField='_id'
+                                dataFormat={(cell) => {
+                                    return (
+                                        <Link to={`promoCodeForm/edit/${cell}`}>
+                                            <button className="btn-bck">Edit</button>
+                                        </Link>
+                                    )
+                                }}
+                                dataAlign="center"
+                            >
+                                Edit
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center"> Edit </TableHeaderColumn>
-
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center"> Delete </TableHeaderColumn>
-
+                            <TableHeaderColumn
+                                dataField='_id'
+                                dataFormat={(cell) => {
+                                    return <button
+                                        className="btn-bck"
+                                        onClick={() => {
+                                            return window.confirm('Are you sure?') ? this._delete(cell) : '';
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                }}
+                                dataAlign="center"
+                            >
+                                Delete
+                            </TableHeaderColumn>
                         </BootstrapTable>
                     </CardBody>
                 </Card>
@@ -124,6 +156,5 @@ class PromoCode extends Component {
         )
     }
 }
-
 
 export default PromoCode;

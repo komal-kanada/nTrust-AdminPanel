@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
 import API from '../../utils/AppUtil';
-import { Card, CardHeader, CardBody } from 'reactstrap';
+import {Card, CardHeader, CardBody} from 'reactstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Link } from 'react-router-dom';
-import {CircularProcess } from  'material-ui';
+import {Link} from 'react-router-dom';
+import {AsyncStorage} from "AsyncStorage";
 
 class Experiences extends Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             table: '',
-        };      
+        };
 
         this.options = {
             sortIndicator: true,
@@ -24,17 +23,19 @@ class Experiences extends Component {
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
         };
-
-        
     }
 
-    componentWillMount () {
-        this._getData()
-    }
 
-    imageFormatter = (cell) => {
-        return "<img height= '100px' src='"+cell+"'/>" ;
-    };  
+    componentWillMount = async () => {
+        if (await AsyncStorage.getItem('Login') === undefined || JSON.parse(await AsyncStorage.getItem('Login')).token === '') {
+            this.props.history.push({pathname: `/login`});
+        }
+        else {
+            this._getData();
+        }
+    };
+
+
     _getData = () => {
         API.ExperienceList()
             .then((response) => {
@@ -46,43 +47,29 @@ class Experiences extends Component {
                 console.log(err)
             });
     };
-    _editCell = (cell) => {
-        return (
-            <Link to={`experienceForm/edit/${cell}`}>
-                <button className="btn-bck">Edit</button>
-            </Link>
-        )
-    };
-    _deleteCell = (cell) => {
-        return <button className="btn-bck" onClick={() => this._delete(cell)}>Delete</button>
-    };
+
     _delete = (id) => {
         let data = {
             expId: id
         };
         API.DeleteExperience(data)
             .then((resp) => {
-                if(resp.Data.length === 0){
-                    alert('Cannot delete this Experience.')
+                if (resp.Message === "Contain SubExp can't be deleted.") {
+                    alert("This Experience contains Items, it can't be deleted.")
                 }
-                else{
+                else {
                     this._getData();
-                    alert('User deleted')
+                    setTimeout(() => {
+                        alert('User deleted')
+                    }, 50);
                 }
             })
             .catch((err) => {
                 console.log(err)
             });
     };
-    _addExp = () =>{
-        this.setState({
-            modalEditOpen: true,
-            modalType: 'add'
-        });
-    };
- 
-    render() {
 
+    render() {
         return (
             <div className="animated">
                 <Card>
@@ -92,10 +79,10 @@ class Experiences extends Component {
                     <CardBody>
                         <Link to={`experienceForm/add`}>
                             <button className="btn-bck" onClick={this._addExp}>Add</button>
-                        </Link>   
+                        </Link>
+
                         <BootstrapTable
                             data={this.state.table}
-                            striped hover pagination search options={this.options}
                             className="experiences-table"
                             version="4"
                             striped
@@ -103,21 +90,67 @@ class Experiences extends Component {
                             pagination
                             refresh={true}
                             options={this.options}
-                            serverSide={ true }
+                            serverSide={true}
                         >
+                            <TableHeaderColumn
+                                dataField="_id"
+                                hidden={true}
+                                isKey
+                            >
+                                Id.
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="_id" dataSort hidden={true} isKey>Id.</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="name"
+                            >
+                                Name
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="expHeader"
+                                dataFormat={(cell) => {
+                                    return "<img height= '100px' src='" + cell + "'/>";
+                                }}
+                            >
+                                Header
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expHeader" dataFormat={this.imageFormatter} >Header</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="expSubHeader"
+                                dataFormat={(cell) => {
+                                    return "<img height= '100px' src='" + cell + "'/>";
+                                }}
+                            >
+                                Sub-Header
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="expSubHeader" dataFormat={this.imageFormatter }  >Sub-Header</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField='_id'
+                                dataFormat={(cell) => {
+                                    return (
+                                        <Link to={`experienceForm/edit/${cell}`}>
+                                            <button className="btn-bck">Edit</button>
+                                        </Link>
+                                    )
+                                }}
+                                dataAlign="center"
+                                width="130"
+                            >
+                                Edit
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._editCell } dataAlign="center" width="130"> Edit </TableHeaderColumn>
-
-                            <TableHeaderColumn dataField='_id' dataFormat={ this._deleteCell } dataAlign="center" width="130"> Delete </TableHeaderColumn>
-
+                            <TableHeaderColumn
+                                dataField='_id'
+                                dataFormat={(cell) => {
+                                    return <button className="btn-bck" onClick={() => {
+                                        return window.confirm('Are you sure?') ? this._delete(cell) : '';
+                                    }}>Delete</button>
+                                }}
+                                dataAlign="center"
+                                width="130"
+                            >
+                                Delete
+                            </TableHeaderColumn>
                         </BootstrapTable>
                     </CardBody>
                 </Card>

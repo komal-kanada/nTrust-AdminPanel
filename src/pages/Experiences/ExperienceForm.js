@@ -2,20 +2,9 @@ import React, {Component} from 'react';
 import API from "../../utils/AppUtil";
 import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import {
-    Row,
-    Col,
-    Card,
-    CardBody,
-    FormGroup,
-    Label,
-    Input,
-} from 'reactstrap';
-import {CircularProgress} from 'material-ui';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {Row, Col, Card, CardBody, FormGroup, Label, Input} from 'reactstrap';
 
 class ExperienceForm extends Component {
-
     constructor(props) {
         super(props);
 
@@ -25,9 +14,11 @@ class ExperienceForm extends Component {
             expSubHeader: '',
             _id: '',
             modalType: '',
-            loading : false,
-            loading1: false
-
+            validateName: '',
+            validateExpHeader: '',
+            validateSubExpHeader: '',
+            disableSubmit: true,
+            disableCancel: false
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -49,7 +40,8 @@ class ExperienceForm extends Component {
                                 _id: value._id,
                                 expHeader: value.expHeader,
                                 expSubHeader: value.expSubHeader,
-                                modalType: 'edit'
+                                modalType: 'edit',
+                                disableSubmit: false
                             });
                         }
                     })
@@ -60,16 +52,18 @@ class ExperienceForm extends Component {
         }
         else {
             this.setState({
-                modalType: 'add',
-               
+                modalType: 'add'
             });
         }
     }
 
     _submit = (e) => {
         e.preventDefault();
+        this.setState({
+            disableSubmit: true,
+            disableCancel: true
+        });
         if (this.state.modalType === 'edit') {
-            console.log('edit');
             let data = {
                 name: this.state.name,
                 header: this.state.expHeader,
@@ -77,14 +71,13 @@ class ExperienceForm extends Component {
                 expId: this.state._id
             };
             API.EditExperience(data)
-                .then((resp) => {
+                .then(() => {
                     this.setState({
                         modalType: '',
                         _id: '',
                         name: '',
                         expHeader: '',
-                        expSubHeader: '',
-                       
+                        expSubHeader: ''
                     });
                     this.props.history.push({pathname: `/experiences`});
                 })
@@ -93,21 +86,24 @@ class ExperienceForm extends Component {
                 });
         }
         else if (this.state.modalType === 'add') {
-            if (this.state.name !== '' && this.state.name.trim() !== '' && this.state.expHeader !== '' && this.state.expSubHeader !== '') {
+            if (
+                this.state.name !== '' &&
+                this.state.name.trim() !== '' &&
+                this.state.expHeader !== '' &&
+                this.state.expSubHeader !== ''
+            ) {
                 let data = {
                     "name": this.state.name,
                     'header': this.state.expHeader,
                     'subheader': this.state.expSubHeader
                 };
                 API.AddExperience(data)
-                    .then((resp) => {
+                    .then(() => {
                         this.setState({
                             modalType: '',
                             name: '',
                             expHeader: '',
-                            expSubHeader: '',
-                            loading : false,
-                            loading1 : false,
+                            expSubHeader: ''
                         });
                         this.props.history.push({pathname: `/experiences`});
                     })
@@ -121,23 +117,68 @@ class ExperienceForm extends Component {
         }
     };
 
-    
-
-
     handleChangeName(event) {
-        this.setState({name: event.target.value});
+        const check = /^\s*$/;
+        if (!check.test(event.target.value)) {
+            this.setState({
+                name: event.target.value,
+                validateName: ''
+            });
+            if (this.state.name !== '' &&
+                this.state.name.trim() !== '' &&
+                this.state.expHeader !== '' &&
+                this.state.expSubHeader !== ''
+            ) {
+                this.setState({
+                    disableSubmit: false
+                })
+            }
+        }
+        else if (this.state.name.length === 1) {
+            this.setState({
+                name: event.target.value,
+                validateName: ''
+            });
+        }
+        else {
+            this.setState({
+                validateName: 'Enter values'
+            })
+        }
     };
 
     handleChangeHeader(event) {
-        this.setState({loading: true, expHeader: event.target.files[0]});
-        setTimeout(() =>null , 10); 
-    }
-   
-    handleChangeSubHeader(event) {
-        this.setState({loading1: true, expSubHeader: event.target.files[0]});
-        setTimeout(() => null, 10);
+        this.setState({
+            expHeader: event.target.files[0],
+            validateExpHeader: ''
+        });
+        setTimeout(() => {
+            if (
+                this.state.name !== '' &&
+                this.state.name.trim() !== '' &&
+                this.state.expHeader !== '' &&
+                this.state.expSubHeader !== ''
+            ) {
+                this.setState({
+                    disableSubmit: false
+                })
+            }
+        }, 10);
     }
 
+    handleChangeSubHeader(event) {
+        this.setState({
+            expSubHeader: event.target.files[0],
+            validateExpSubHeader: ''
+        });
+        setTimeout(() => {
+            if (this.state.name !== '' && this.state.name.trim() !== '' && this.state.expHeader !== '' && this.state.expSubHeader !== '') {
+                this.setState({
+                    disableSubmit: false
+                })
+            }
+        }, 10);
+    }
 
     _cancel = () => {
         this.setState({
@@ -149,56 +190,91 @@ class ExperienceForm extends Component {
     };
 
     render() {
-        const {loading,loading1 }= this.state
         return (
             <div className="animated fadeIn">
-
                 <Row>
                     <Col xs="12" md="6">
                         <Card>
                             <CardBody>
-                                    <form onSubmit={this._submit} encType='multipart/form-data'>
-                                        <div className="form">
-                                            <FormGroup row>
-                                                <Col md="3">
-                                                    <Label htmlFor="text-input"><h5>Name:</h5></Label>
-                                                </Col>
-                                                <Col xs="12" md="9">
-                                                    <input type="text" value={this.state.name}
-                                                        onChange={this.handleChangeName}
-                                                       />
-                                                </Col>
-                                            </FormGroup>
-                                            <FormGroup row>
-                                    
-                                                <Col md="3">
-                                                    <Label htmlFor="file-input"><h5>Header:</h5></Label>
+                                <form onSubmit={this._submit} encType='multipart/form-data'>
+                                    <div className="form">
+                                        <FormGroup row>
+                                            <Col md="3">
+                                                <Label htmlFor="text-input">
+                                                    <h5>Name:</h5>
+                                                </Label>
+                                            </Col>
 
-                                                </Col>
-                                                <Col xs="12" md="9">
-                                                    <Input type="file" name="expHeader" onChange={this.handleChangeHeader}/>
-                                                </Col>
- 
-                                                <Col md="3">
-                                                    <Label htmlFor="file-multiple-input"><h5>Sub-Header:</h5></Label>
-                                                </Col>
+                                            <Col xs="12" md="9">
+                                                <input
+                                                    type="text"
+                                                    value={this.state.name}
+                                                    onChange={this.handleChangeName}
+                                                />
 
-                                                <Col xs="12" md="6">
-                                                    <Input type="file" name="expSubHeader" 
-                                                        onChange={this.handleChangeSubHeader}/>
-                                                </Col>
-                                            </FormGroup>
+                                                <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>
+                                                    {this.state.validateName}
+                                                </div>
+                                            </Col>
+                                        </FormGroup>
 
+                                        <FormGroup row>
+                                            <Col md="3">
+                                                <Label htmlFor="file-input">
+                                                    <h5>Header:</h5>
+                                                </Label>
+                                            </Col>
 
-                                        </div>
-                                            <div style={{paddingTop: 20, paddingLeft: 195}}>
-                                                <Link to='/experiences'>
-                                                    <button className="btn-bck" onClick={this._cancel}> Cancel</button>
-                                                </Link>
-                                                &nbsp;&nbsp;&nbsp;
-                                                <input className="btn-bck" type="submit" value="Submit"/>
-                                            </div>
-                                    </form>
+                                            <Col xs="12" md="9">
+                                                <Input type="file" name="expHeader" onChange={this.handleChangeHeader}/>
+
+                                                <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>
+                                                    {this.state.validateExpHeader}
+                                                </div>
+                                            </Col>
+                                        </FormGroup>
+
+                                        <FormGroup row>
+                                            <Col md="3">
+                                                <Label htmlFor="file-multiple-input">
+                                                    <h5>Sub-Header:</h5>
+                                                </Label>
+                                            </Col>
+
+                                            <Col xs="12" md="9">
+                                                <Input
+                                                    type="file"
+                                                    name="expSubHeader"
+                                                    onChange={this.handleChangeSubHeader}
+                                                />
+
+                                                <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>
+                                                    {this.state.validateSubExpHeader}
+                                                </div>
+                                            </Col>
+                                        </FormGroup>
+                                    </div>
+
+                                    <div style={{paddingTop: 20, paddingLeft: 270}}>
+                                        <Link to='/experiences'>
+                                            <button
+                                                className="btn-bck"
+                                                onClick={this._cancel}
+                                                disabled={this.state.disableCancel}
+                                            > Cancel
+                                            </button>
+                                        </Link>
+
+                                        &nbsp;&nbsp;&nbsp;
+
+                                        <input
+                                            className="btn-bck"
+                                            type="submit"
+                                            value="Submit"
+                                            disabled={this.state.disableSubmit}
+                                        />
+                                    </div>
+                                </form>
                             </CardBody>
                         </Card>
                     </Col>

@@ -3,16 +3,18 @@ import {Card, CardHeader, CardBody} from 'reactstrap';
 import API from '../../utils/AppUtil';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import Rating from 'react-rating';
+import {AsyncStorage} from "AsyncStorage";
 
 class Users extends Component {
     constructor(props) {
         super(props);
 
-         this.state = {
-             data: '',
-             toggle: ''
-         };
+        this.state = {
+            data: '',
+            toggle: ''
+        };
 
         this.options = {
             sortIndicator: true,
@@ -25,35 +27,36 @@ class Users extends Component {
         }
     }
 
-    componentDidMount() {
-        this._getData();
-    }
+    componentWillMount = async () => {
+        if (await AsyncStorage.getItem('Login') === undefined || JSON.parse(await AsyncStorage.getItem('Login')).token === '') {
+            this.props.history.push({pathname: `/login`});
+        }
+        else {
+            this._getData();
+        }
+    };
 
     _getData = () => {
         API.UserList()
-        .then((response) => {
-            this.setState({ data: response.Data })
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-    };
-
-    _blockUnblock = (cell, key) => {
-        return <button className="btn-bck"  onClick={() => this._toggle(cell, key._id) }> {cell ? 'Un-Block' : 'Block'} </button>
+            .then((response) => {
+                this.setState({data: response.Data})
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     };
 
     _toggle = (isBlock, id) => {
         API.UserList()
             .then((response) => {
                 response.Data.map((val) => {
-                    if(val._id === id){
-                        if(isBlock === false) {
+                    if (val._id === id) {
+                        if (isBlock === false) {
                             API.UserBlockUnblock({
                                 'command': 'block',
                                 'userId': id
                             })
-                                .then((response) => {
+                                .then(() => {
                                     this._getData();
                                 })
                                 .catch((err) => {
@@ -65,7 +68,7 @@ class Users extends Component {
                                 'command': 'unblock',
                                 'userId': id
                             })
-                                .then((response) => {
+                                .then(() => {
                                     this._getData();
                                 })
                                 .catch((err) => {
@@ -78,25 +81,20 @@ class Users extends Component {
             .catch((err) => {
                 console.log(err)
             });
-        if(this.state.toggle === 'Block') {
+        if (this.state.toggle === 'Block') {
             this.setState({
                 toggle: 'Un-Block'
             })
         }
-        else if(this.state.toggle === 'Un-Block') {
+        else if (this.state.toggle === 'Un-Block') {
             this.setState({
                 toggle: 'Block'
             })
         }
     };
 
-    _items = (cell, key) => {
-        return (
-            <Link to={`/itemList/:${key._id}`}>{cell}</Link>
-        )
-    };
-
     render() {
+
         return (
             <div className="animated">
                 <Card>
@@ -105,28 +103,79 @@ class Users extends Component {
                     </CardHeader>
 
                     <CardBody>
+                        <BootstrapTable
+                            data={this.state.data}
+                            version="4"
+                            striped
+                            hover
+                            pagination
+                            search
+                            options={this.options}
+                            className="experiences-table"
+                            refresh={true}
+                        >
+                            <TableHeaderColumn
+                                dataField="_id"
+                                hidden={true}
+                                isKey
+                            >
+                                Id.
+                            </TableHeaderColumn>
 
-                        <BootstrapTable data={this.state.data}
-                                        version="4"
-                                        striped hover pagination search options={this.options}
-                                        className="experiences-table"
-                                        refresh={true}
-                                      >
+                            <TableHeaderColumn
+                                dataField="name"
+                            >
+                                User Name
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="_id" hidden={true} dataSort isKey>Id.</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="rating"
+                                dataFormat={(cell) => {
+                                    return (
+                                        <Rating
+                                            placeholderRating={cell}
+                                            readonly={true}
+                                            emptySymbol={<img src="img/star-empty.png" height={20}/>}
+                                            placeholderSymbol={<img src="img/star-full.png" height={20}/>}
+                                        />
+                                    )
+                                }}
+                            >
+                                Rating
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="name" >User Name</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="ItemCount"
+                                dataFormat={(cell, key) => {
+                                    return (
+                                        <Link to={`/itemList/:${key._id}`}>{cell}</Link>
+                                    )
+                                }}
+                            >
+                                Product Count
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="rating" >Rating</TableHeaderColumn>
+                            <TableHeaderColumn
+                                dataField="totalEarnings"
+                            >
+                                Lifetime Earnings
+                            </TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="ItemCount" dataFormat={ this._items } >Item Count</TableHeaderColumn>
-
-                            <TableHeaderColumn dataField="totalEarnings" >Lifetime Earnings</TableHeaderColumn>
-
-                            <TableHeaderColumn dataField="isBlock" dataFormat={ this._blockUnblock } dataAlign="center" >Access</TableHeaderColumn>
-
+                            <TableHeaderColumn
+                                dataField="isBlock"
+                                dataFormat={(cell, key) => {
+                                    return <button
+                                        className="btn-bck"
+                                        onClick={() => this._toggle(cell, key._id)}
+                                    >
+                                        {cell ? 'Un-Block' : 'Block'}
+                                    </button>
+                                }}
+                                dataAlign="center"
+                            >
+                                Access
+                            </TableHeaderColumn>
                         </BootstrapTable>
-               
                     </CardBody>
                 </Card>
             </div>
@@ -135,4 +184,3 @@ class Users extends Component {
 }
 
 export default Users;
-

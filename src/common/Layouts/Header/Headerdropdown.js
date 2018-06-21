@@ -9,6 +9,8 @@ import {
   Progress,
 } from 'reactstrap';
 import { withRouter } from 'react-router';
+import {AsyncStorage} from 'AsyncStorage';
+import API from '../../../utils/AppUtil';
 
 const propTypes = {
   notif: PropTypes.bool,
@@ -55,14 +57,19 @@ class HeaderDropdown extends Component {
       </Dropdown>
     );
   }
-  logout()
-  {
-    //localStorage.removeItem("saveUser");
-    localStorage.clear();
-    this.props.history.push("/login");
-    //alert("saveUser"+localStorage.getItem("saveUser"))
-    
-  }
+
+    logout = () => {
+        API.Logout()
+            .then(async (resp) => {
+                if(resp.Error === false) {
+                    this.props.history.push("/login");
+                    AsyncStorage.setItem('Login', JSON.stringify({token: ''}));
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    };
   dropAccnt() {
     return (
      
