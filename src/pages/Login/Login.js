@@ -17,6 +17,12 @@ class Login extends Component {
         this.handleChangePassword = this.handleChangePassword.bind(this);
     }
 
+    componentWillMount = async () => {
+        if (await AsyncStorage.getItem('Login') !== undefined && JSON.parse(await AsyncStorage.getItem('Login')).token !== '') {
+            alert('You are already Logged In.')
+        }
+    };
+
     _login = async () => {
         if (
             this.state.userName !== '' &&
@@ -61,7 +67,7 @@ class Login extends Component {
             <div className="app flex-row align-items-center">
                 <Container>
                     <Row className="justify-content-center">
-                        <Col md="8">
+                        <Col md="4">
                             <CardGroup>
                                 <Card className="p-4">
                                     <CardBody>
@@ -110,17 +116,6 @@ class Login extends Component {
                                                 <Button color="link" className="px-0">Forgot password?</Button>
                                             </Col>
                                         </Row>
-                                    </CardBody>
-                                </Card>
-                                <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: 44 + '%'}}>
-                                    <CardBody className="text-center">
-                                        <div>
-                                            <h2>Sign up</h2>
-                                            <p>If not a user already.. Register!</p>
-                                            <Link to="/register">
-                                                <Button color="primary" className="mt-3" active>Register Now!</Button>
-                                            </Link>
-                                        </div>
                                     </CardBody>
                                 </Card>
                             </CardGroup>
