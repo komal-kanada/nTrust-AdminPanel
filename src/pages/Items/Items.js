@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Card, CardHeader, CardBody } from 'reactstrap';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import {BootstrapTable, TableHeaderColumn, ButtonGroup} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import API from "../../utils/AppUtil";
 import { Link } from 'react-router-dom';
@@ -22,6 +22,7 @@ class Items extends Component {
             clearSearch: true,
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
+            btnGroup: this.createCustomButtonGroup
         }
     }
 
@@ -39,8 +40,9 @@ class Items extends Component {
     _getData = () => {
         API.ItemList()
             .then((response) => {
+                const tableData = _.orderBy(response.Data, [user => user.name],['asc']);
                 this.setState({
-                    table: response.Data
+                    table: tableData,
                 });
             })
             .catch((err) => {
@@ -76,6 +78,16 @@ class Items extends Component {
             });
     };
 
+    createCustomButtonGroup = () => {
+        return (
+            <ButtonGroup>
+                <Link to={`itemsForm/add`}>
+                    <button className="btn-bck">Add</button>
+                </Link>
+            </ButtonGroup>
+        );
+    };
+
     render() {
         return (
             <div className="animated">
@@ -85,15 +97,14 @@ class Items extends Component {
                     </CardHeader>
 
                     <CardBody>
-                        <Link to={`itemsForm/add`}>
-                            <button className="btn-bck">Add</button>
-                        </Link>
+
 
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"
                             version="4"
                             striped
+                            search
                             hover
                             pagination
                             options={this.options}
@@ -109,7 +120,6 @@ class Items extends Component {
 
                             <TableHeaderColumn
                                 dataField="name"
-                                dataSot
                             >
                                 Name
                             </TableHeaderColumn>

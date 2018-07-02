@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import API from '../../utils/AppUtil';
 import {Card, CardHeader, CardBody} from 'reactstrap';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import {BootstrapTable, TableHeaderColumn, ButtonGroup} from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import {Link} from 'react-router-dom';
 import {AsyncStorage} from "AsyncStorage";
+import _ from 'lodash'
 
 class Experiences extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Experiences extends Component {
             clearSearch: true,
             alwaysShowAllBtns: false,
             withFirstAndLast: false,
+            btnGroup: this.createCustomButtonGroup
         };
     }
 
@@ -39,8 +41,9 @@ class Experiences extends Component {
     _getData = () => {
         API.ExperienceList()
             .then((response) => {
+                const tableData = _.orderBy(response.Data, [user => user.name],['asc']);
                 this.setState({
-                    table: response.Data,
+                    table: tableData,
                 });
             })
             .catch((err) => {
@@ -69,6 +72,16 @@ class Experiences extends Component {
             });
     };
 
+    createCustomButtonGroup = () => {
+        return (
+            <ButtonGroup>
+                <Link to={`experienceForm/add`}>
+                    <button className="btn-bck">Add</button>
+                </Link>
+            </ButtonGroup>
+        );
+    };
+
     render() {
         return (
             <div className="animated">
@@ -77,16 +90,14 @@ class Experiences extends Component {
                         Experiences
                     </CardHeader>
                     <CardBody>
-                        <Link to={`experienceForm/add`}>
-                            <button className="btn-bck" onClick={this._addExp}>Add</button>
-                        </Link>
 
                         <BootstrapTable
                             data={this.state.table}
-                            className="experiences-table"
+                            className="experiences-table"s
                             version="4"
                             striped
                             hover
+                            search
                             pagination
                             refresh={true}
                             options={this.options}

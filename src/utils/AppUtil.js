@@ -275,7 +275,7 @@ const API = {
                 return response.json();
             })
             .catch((err) => {
-                console.log('AppUtil err ' + err)
+                console.log(err)
             })
     },
 

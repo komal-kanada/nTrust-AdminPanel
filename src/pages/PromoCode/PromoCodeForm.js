@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import API from "../../utils/AppUtil";
 import {Row, Col, Card, CardBody, FormGroup, Label} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import DatePicker from 'react-date-picker';
 
 class PromoCodeForm extends Component {
     constructor(props) {
@@ -9,25 +10,36 @@ class PromoCodeForm extends Component {
 
         this.state = {
             promoCode: '',
-            disPrice: '',
             subExpId: '',
             subExperience: [{_id: 'aa', name: 'aa'}],
             _id: '',
             modalType: '',
             validateName: '',
-            validateDisPrice: '',
+            fromDate: 'Select Date',
+            toDate: 'Select Date',
             disableSubmit: true,
             disableCancel: false
         };
 
         this.handleChangePromoCode = this.handleChangePromoCode.bind(this);
-        this.handleChangeDisPrice = this.handleChangeDisPrice.bind(this);
         this.handleChangeSubExpId = this.handleChangeSubExpId.bind(this);
+        this.handleFromDateChange = this.handleFromDateChange.bind(this);
+        this.handleToDateChange = this.handleToDateChange.bind(this);
         this._submit = this._submit.bind(this);
     }
 
-    componentWillMount() {
-        this._getSubExperience();
+    componentWillMount = async () => {
+        await API.ItemList()
+            .then((response) => {
+                this.setState({
+                    subExperience: response.Data,
+                    subExpId: response.Data[0]._id
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+
         const {_id} = this.props.match.params;
         if (_id !== '' && _id !== undefined && _id !== null) {
             API.PromoCodeList()
@@ -37,10 +49,11 @@ class PromoCodeForm extends Component {
                             this.setState({
                                 promoCode: value.promocode,
                                 _id: value._id,
-                                disPrice: value.disPrice,
                                 subExpId: value.subExp_id._id,
                                 modalType: 'edit',
-                                disableSubmit: false
+                                disableSubmit: false,
+                                fromDate: new Date(value.from),
+                                toDate: new Date(value.to)
                             });
                         }
                     })
@@ -54,19 +67,6 @@ class PromoCodeForm extends Component {
                 modalType: 'add',
             });
         }
-    }
-
-    _getSubExperience = () => {
-        API.ItemList()
-            .then((response) => {
-                this.setState({
-                    subExperience: response.Data,
-                    subExpId: response.Data[0]._id
-                });
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     };
 
     _submit = (e) => {
@@ -77,21 +77,22 @@ class PromoCodeForm extends Component {
         });
         if (this.state.modalType === 'edit') {
             let data = {
-                disPrice: this.state.disPrice,
                 subExp_id: this.state.subExpId,
                 promocode: this.state.promoCode,
-                promocodeId: this.state._id
+                promocodeId: this.state._id,
+                from: this.state.fromDate.valueOf(),
+                to: this.state.toDate.valueOf(),
             };
             API.EditPromoCode(data)
-                .then(() => {
-                    this.setState({
-                        promoCode: '',
-                        disPrice: '',
-                        subExpId: '',
-                        _id: '',
-                        modalType: '',
-                    });
-                    this.props.history.push({pathname: `/promoCode`});
+                .then((resp) => {
+                    if(resp.Error === true){
+                        if(resp.Message === 'Promocode already exist.'){
+                            alert('Please enter another PromoCode Name')
+                        }
+                    }
+                    else{
+                        this.props.history.push({pathname: `/promoCode`});
+                    }
                 })
                 .catch((err) => {
                     console.log(err)
@@ -99,27 +100,32 @@ class PromoCodeForm extends Component {
         }
         else if (this.state.modalType === 'add') {
             if (
-                this.state.disPrice !== '' &&
-                this.state.disPrice.trim() !== '' &&
                 this.state.subExpId !== '' &&
-                this.state.promoCode.trim() !== '' &&
-                this.state.promoCode !== '') {
+                this.state.subExpId.trim() !== '' &&
+                this.state.promoCode !== '' &&
+                this.state.fromDate !== '' &&
+                this.state.toDate !== ''
+            ) {
                 let data = {
-                    disPrice: this.state.disPrice.trim(),
                     subExp_id: this.state.subExpId,
                     promocode: this.state.promoCode,
+                    from: this.state.fromDate.valueOf(),
+                    to: this.state.toDate.valueOf(),
                 };
                 API.AddPromoCode(data)
-                    .then(() => {
-                        this.props.history.push({pathname: `/promoCode`});
-                        this.setState({
-                            promoCode: '',
-                            disPrice: '',
-                            subExpId: '',
-                            _id: '',
-                            modalType: '',
-                        });
-                        this.props.history.push({pathname: `/promoCode`});
+                    .then((resp) => {
+                        if(resp.Error === true){
+                            if(resp.Message === 'Promocode already exist.'){
+                                alert('Please enter another PromoCode Name');
+                                this.setState({
+                                    disableSubmit: true,
+                                    disableCancel: false
+                                });
+                            }
+                        }
+                        else{
+                            this.props.history.push({pathname: `/promoCode`});
+                        }
                     })
                     .catch((err) => {
                         console.log(err)
@@ -128,54 +134,32 @@ class PromoCodeForm extends Component {
         }
     };
 
-    handleChangePromoCode(event) {
-        const check = /^[a-zA-Z0-9]*$/;
+    handleChangePromoCode = async (event) => {
+        const check = /^[A-Z0-9]*$/;
         if (check.test(event.target.value)) {
-            this.setState({
+            await this.setState({
                 promoCode: event.target.value,
                 validateName: ''
             });
             if (
-                this.state.disPrice !== '' &&
-                this.state.disPrice.trim() !== '' &&
-                this.state.subExpId !== '' &&
-                this.state.subExpId.trim() !== '' &&
-                this.state.promoCode !== ''
+                this.state.promoCode !== '' &&
+                this.state.fromDate !== '' &&
+                this.state.toDate !== '' &&
+                this.state.promoCode.length === 8
             ) {
                 this.setState({
                     disableSubmit: false
                 })
             }
-        }
-        else {
-            this.setState({
-                validateName: 'Enter numbers or alphabets'
-            })
-        }
-    };
-
-    handleChangeDisPrice(event) {
-        const check = /^[0-9]*$/;
-        if (check.test(event.target.value)) {
-            this.setState({
-                disPrice: event.target.value,
-                validateDisPrice: ''
-            });
-            if (
-                this.state.disPrice !== '' &&
-                this.state.disPrice.trim() !== '' &&
-                this.state.subExpId !== '' &&
-                this.state.subExpId.trim() !== '' &&
-                this.state.promoCode !== ''
-            ) {
+            else {
                 this.setState({
-                    disableSubmit: false
+                    validateName: 'and length should be 8 characters'
                 })
             }
         }
-        else {
+        else{
             this.setState({
-                validateDisPrice: 'Enter only numbers'
+                validateName: 'Enter numbers or capital alphabets'
             })
         }
     };
@@ -183,11 +167,45 @@ class PromoCodeForm extends Component {
     handleChangeSubExpId(event) {
         this.setState({subExpId: event.target.value, validateSubExpId: ''});
         if (
-            this.state.disPrice !== '' &&
-            this.state.disPrice.trim() !== '' &&
             this.state.subExpId !== '' &&
             this.state.subExpId.trim() !== '' &&
-            this.state.promoCode !== ''
+            this.state.promoCode !== '' &&
+            this.state.fromDate !== '' &&
+            this.state.toDate !== ''
+        ) {
+            this.setState({
+                disableSubmit: false,
+                validateDisPrice: ''
+            })
+        }
+    };
+
+    handleFromDateChange(date) {
+        this.setState({fromDate: date});
+        this.setState({fromDate: date});
+        if (
+            this.state.subExpId !== '' &&
+            this.state.subExpId.trim() !== '' &&
+            this.state.promoCode !== '' &&
+            this.state.fromDate !== '' &&
+            this.state.toDate !== ''
+        ) {
+            this.setState({
+                disableSubmit: false,
+                validateDisPrice: ''
+            })
+        }
+    };
+
+    handleToDateChange(date) {
+        this.setState({toDate: date});
+        this.setState({toDate: date});
+        if (
+            this.state.subExpId !== '' &&
+            this.state.subExpId.trim() !== '' &&
+            this.state.promoCode !== '' &&
+            this.state.fromDate !== '' &&
+            this.state.toDate !== ''
         ) {
             this.setState({
                 disableSubmit: false,
@@ -247,37 +265,7 @@ class PromoCodeForm extends Component {
                                         <FormGroup row>
                                             <Col md="3">
                                                 <Label>
-                                                    <h5>Discount Price:</h5>
-                                                </Label>
-                                            </Col>
-
-                                            <Col xs="12" md="9">
-                                                <Label>
-                                                    <input
-                                                        type="text"
-                                                        name="disPrice"
-                                                        value={this.state.disPrice}
-                                                        onChange={this.handleChangeDisPrice}
-                                                        required="true"
-                                                    />
-
-                                                    <div
-                                                        style={{
-                                                            fontSize: 10,
-                                                            color: 'red',
-                                                            paddingTop: 5
-                                                        }}
-                                                    >
-                                                        {this.state.validateDisPrice}
-                                                    </div>
-                                                </Label>
-                                            </Col>
-                                        </FormGroup>
-
-                                        <FormGroup row>
-                                            <Col md="3">
-                                                <Label>
-                                                    <h5>Sub-Experience:</h5>
+                                                    <h5>Items:</h5>
                                                 </Label>
                                             </Col>
 
@@ -290,6 +278,43 @@ class PromoCodeForm extends Component {
                                                         })
                                                     }
                                                 </select>
+                                            </Col>
+                                        </FormGroup>
+
+                                        <FormGroup row>
+                                            <Col md="3">
+                                                <Label>
+                                                    <h5>Valid From:</h5>
+                                                </Label>
+                                            </Col>
+
+                                            <Col xs="12" md="9">
+                                                <Label>
+                                                    <DatePicker
+                                                        onChange={this.handleFromDateChange}
+                                                        value={(this.state.fromDate === 'Select Date')? new Date() : new Date(this.state.fromDate)}
+                                                        minDate={new Date()}
+                                                        maxDate={(this.state.toDate === 'Select Date') ? '' : new Date(this.state.toDate)}
+                                                    />
+                                                </Label>
+                                            </Col>
+                                        </FormGroup>
+
+                                        <FormGroup row>
+                                            <Col md="3">
+                                                <Label>
+                                                    <h5>Valid To:</h5>
+                                                </Label>
+                                            </Col>
+
+                                            <Col xs="12" md="9">
+                                                <Label>
+                                                    <DatePicker
+                                                        onChange={this.handleToDateChange}
+                                                        value={(this.state.toDate === 'Select Date')? new Date() : new Date(this.state.toDate)}
+                                                        minDate={(this.state.fromDate === 'Select Date') ? new Date() : new Date(this.state.fromDate)}
+                                                    />
+                                                </Label>
                                             </Col>
                                         </FormGroup>
 

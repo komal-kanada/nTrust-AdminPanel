@@ -9,7 +9,6 @@ const CommonUtils = {
         return fetch(apiUrl,{
             method:'GET',
         }).then((response) => response.json()).then((res) => {
-            console.log("res in food.."+JSON.stringify(res))            
             return res;
         })
         .catch((error)=>{

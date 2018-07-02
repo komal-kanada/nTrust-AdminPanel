@@ -36,7 +36,6 @@ class Product extends Component {
                         <div>
                             {
                                 Object.keys(attributes).map(function(key){
-                                    console.log(key+":"+attributes[key] ) 
                                     var attr = attributes[key];
                                     var arr = [];
                                     if(attr && $.isArray(attr)) {

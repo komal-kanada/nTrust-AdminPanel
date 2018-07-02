@@ -21,6 +21,7 @@ module.exports = env => {
             path: BUILD_DIR,
             filename: '[name].bundle.js'
         },
+
         // watch: true,
         devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
         devServer: {
@@ -29,7 +30,7 @@ module.exports = env => {
             compress: true,
             hot: true,
             open: true,
-            historyApiFallback: true
+            historyApiFallback: true,
         },
         module: {
             rules: [

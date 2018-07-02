@@ -62,7 +62,7 @@ class ItemList extends Component {
 
                             <TableHeaderColumn dataField="name">Name</TableHeaderColumn>
 
-                            <TableHeaderColumn dataField="subExperiences">Sub-Experience</TableHeaderColumn>
+                            <TableHeaderColumn dataField="subExperiences">Items</TableHeaderColumn>
 
                             <TableHeaderColumn dataField="description">Description</TableHeaderColumn>
 

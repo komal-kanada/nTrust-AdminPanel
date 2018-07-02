@@ -148,36 +148,85 @@ class ExperienceForm extends Component {
     };
 
     handleChangeHeader(event) {
-        this.setState({
-            expHeader: event.target.files[0],
-            validateExpHeader: ''
-        });
-        setTimeout(() => {
+        let file_list = event.target.files;
+
+        for (let i = 0, file; file = file_list[i]; i++) {
+            let sFileName = file.name;
+            let sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+
             if (
-                this.state.name !== '' &&
-                this.state.name.trim() !== '' &&
-                this.state.expHeader !== '' &&
-                this.state.expSubHeader !== ''
+                sFileExtension === "jpeg" ||
+                sFileExtension === "tiff" ||
+                sFileExtension === "bmp" ||
+                sFileExtension === "jpg" ||
+                sFileExtension === "png"
             ) {
                 this.setState({
-                    disableSubmit: false
-                })
+                    expHeader: event.target.files[0],
+                    validateExpHeader: ''
+                });
+                setTimeout(() => {
+                    if (
+                        this.state.name !== '' &&
+                        this.state.name.trim() !== '' &&
+                        this.state.expHeader !== '' &&
+                        this.state.expSubHeader !== ''
+                    ) {
+                        this.setState({
+                            disableSubmit: false
+                        })
+                    }
+                }, 10);
             }
-        }, 10);
+            else{
+                this.setState({
+                    expHeader: '',
+                    validateExpHeader: 'Please Enter Valid Image',
+                });
+                alert('Please upload image of extension .jpg, .tiff, .bmp, .jpeg or .png');
+            }
+        }
     }
 
     handleChangeSubHeader(event) {
-        this.setState({
-            expSubHeader: event.target.files[0],
-            validateExpSubHeader: ''
-        });
-        setTimeout(() => {
-            if (this.state.name !== '' && this.state.name.trim() !== '' && this.state.expHeader !== '' && this.state.expSubHeader !== '') {
+        let file_list = event.target.files;
+
+        for (let i = 0, file; file = file_list[i]; i++) {
+            let sFileName = file.name;
+            let sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+            if (
+                sFileExtension === "jpeg" ||
+                sFileExtension === "tiff" ||
+                sFileExtension === "bmp" ||
+                sFileExtension === "jpg" ||
+                sFileExtension === "png"
+            ) {
                 this.setState({
-                    disableSubmit: false
-                })
+                    expSubHeader: event.target.files[0],
+                    validateExpSubHeader: ''
+                });
+                setTimeout(() => {
+                    if (
+                        this.state.name !== '' &&
+                        this.state.name.trim() !== '' &&
+                        this.state.expHeader !== '' &&
+                        this.state.expSubHeader !== ''
+                    ) {
+                        this.setState({
+                            disableSubmit: false,
+                            validateSubExpHeader: ''
+                        })
+                    }
+                }, 10);
             }
-        }, 10);
+            else{
+                this.setState({
+                    expSubHeader: '',
+                    validateSubExpHeader: 'Please Enter Valid Image',
+                });
+                alert('Please upload image of extension .jpg, .tiff, .bmp, .jpeg or .png');
+            }
+        }
     }
 
     _cancel = () => {
@@ -226,7 +275,14 @@ class ExperienceForm extends Component {
                                             </Col>
 
                                             <Col xs="12" md="9">
-                                                <Input type="file" name="expHeader" onChange={this.handleChangeHeader}/>
+                                                <Input
+                                                    type="file"
+                                                    name="expHeader"
+                                                    onChange={this.handleChangeHeader}
+                                                    style={{
+                                                        color: (this.state.expHeader === '')? 'transparent' : 'black'
+                                                    }}
+                                                />
 
                                                 <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>
                                                     {this.state.validateExpHeader}
@@ -246,6 +302,9 @@ class ExperienceForm extends Component {
                                                     type="file"
                                                     name="expSubHeader"
                                                     onChange={this.handleChangeSubHeader}
+                                                    style={{
+                                                        color: (this.state.expSubHeader === '')? 'transparent' : 'black'
+                                                    }}
                                                 />
 
                                                 <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>

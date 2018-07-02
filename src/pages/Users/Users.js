@@ -39,7 +39,10 @@ class Users extends Component {
     _getData = () => {
         API.UserList()
             .then((response) => {
-                this.setState({data: response.Data})
+                const tableData = _.orderBy(response.Data, [user => user.name],['asc']);
+                this.setState({
+                    table: tableData,
+                });
             })
             .catch((err) => {
                 console.log(err)
@@ -104,12 +107,11 @@ class Users extends Component {
 
                     <CardBody>
                         <BootstrapTable
-                            data={this.state.data}
+                            data={this.state.table}
                             version="4"
                             striped
                             hover
                             pagination
-                            search
                             options={this.options}
                             className="experiences-table"
                             refresh={true}

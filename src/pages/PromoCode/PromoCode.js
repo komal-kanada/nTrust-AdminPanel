@@ -21,6 +21,7 @@ class PromoCode extends Component {
             hidePageListOnlyOnePage: true,
             clearSearch: true,
             alwaysShowAllBtns: false,
+            btnGroup: this.createCustomButtonGroup
         };
     }
 
@@ -36,8 +37,9 @@ class PromoCode extends Component {
     _getData = () => {
         API.PromoCodeList()
             .then((response) => {
+                const tableData = _.orderBy(response.Data, [user => user.name],['asc']);
                 this.setState({
-                    table: response.Data
+                    table: tableData,
                 });
             })
             .catch((err) => {
@@ -68,6 +70,16 @@ class PromoCode extends Component {
             });
     };
 
+    createCustomButtonGroup = () => {
+        return (
+            <ButtonGroup>
+                <Link to={`promoCodeForm/add`}>
+                    <button className="btn-bck">Add</button>
+                </Link>
+            </ButtonGroup>
+        );
+    };
+
     render() {
         return (
             <div className="animated">
@@ -77,9 +89,6 @@ class PromoCode extends Component {
                     </CardHeader>
 
                     <CardBody>
-                        <Link to={`promoCodeForm/add`}>
-                            <button className="btn-bck">Add</button>
-                        </Link>
 
                         <BootstrapTable
                             data={this.state.table}
@@ -100,14 +109,9 @@ class PromoCode extends Component {
 
                             <TableHeaderColumn
                                 dataField="promocode"
+                                data-formatter="nameFormatter"
                             >
                                 Name
-                            </TableHeaderColumn>
-
-                            <TableHeaderColumn
-                                dataField="disPrice"
-                            >
-                                Discount Price
                             </TableHeaderColumn>
 
                             <TableHeaderColumn
@@ -117,6 +121,24 @@ class PromoCode extends Component {
                                 }}
                             >
                                 Items
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField="from"
+                                dataFormat={(cell) => {
+                                    return (cell === '') ? '' : new Date(cell).toLocaleDateString();
+                                }}
+                            >
+                                Valid From
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField="to"
+                                dataFormat={(cell) => {
+                                    return (cell === '') ? '' : new Date(cell).toLocaleDateString();
+                                }}
+                            >
+                                Valid To
                             </TableHeaderColumn>
 
                             <TableHeaderColumn

@@ -18,7 +18,8 @@ class ItemsForm extends Component {
             validateName: '',
             validateValue: '',
             disableSubmit: true,
-            disableCancel: false
+            disableCancel: false,
+            validateIcon: ''
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -28,8 +29,18 @@ class ItemsForm extends Component {
         this._submit = this._submit.bind(this);
     }
 
-    componentWillMount() {
-        this._getExperience();
+    componentWillMount = async () => {
+        await API.ExperienceList()
+            .then((response) => {
+                this.setState({
+                    experiences: response.Data,
+                    expId: response.Data[0]._id
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+
         const {_id} = this.props.match.params;
         if (_id !== '' && _id !== undefined && _id !== null) {
             API.ItemList()
@@ -37,14 +48,12 @@ class ItemsForm extends Component {
                     response.Data.map((value) => {
                         if (value._id === _id) {
                             this.setState({
-                                name: value.name,
                                 _id: value._id,
+                                name: value.name,
                                 icon: value.icon,
                                 expId: value.expId._id,
                                 value: value.value,
-                                modalType: 'edit',
-                                disableSubmit: false
-                            });
+                            })
                         }
                     })
                 })
@@ -57,19 +66,6 @@ class ItemsForm extends Component {
                 modalType: 'add'
             });
         }
-    }
-
-    _getExperience = () => {
-        API.ExperienceList()
-            .then((response) => {
-                this.setState({
-                    experiences: response.Data,
-                    expId: response.Data[0]._id
-                });
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     };
 
     _submit = (e) => {
@@ -169,21 +165,44 @@ class ItemsForm extends Component {
     };
 
     handleChangeIcon(event) {
-        this.setState({
-            icon: event.target.files[0],
-        });
-        setTimeout(() => {
-            if(
-                this.state.name !== '' &&
-                this.state.name.trim() !== '' &&
-                this.state.icon !== '' &&
-                this.state.expId !== ''
-            ){
+        let file_list = event.target.files;
+
+        for (let i = 0, file; file = file_list[i]; i++) {
+            let sFileName = file.name;
+            let sFileExtension = sFileName.split('.')[sFileName.split('.').length - 1].toLowerCase();
+
+            if (
+                sFileExtension === "jpeg" ||
+                sFileExtension === "tiff" ||
+                sFileExtension === "bmp" ||
+                sFileExtension === "jpg" ||
+                sFileExtension === "png"
+            ) {
                 this.setState({
-                    disableSubmit: false
-                })
+                    icon: event.target.files[0],
+                    validateIcon: ''
+                });
+                setTimeout(() => {
+                    if(
+                        this.state.name !== '' &&
+                        this.state.name.trim() !== '' &&
+                        this.state.icon !== '' &&
+                        this.state.expId !== ''
+                    ){
+                        this.setState({
+                            disableSubmit: false,
+                        })
+                    }
+                }, 10);
             }
-        }, 10);
+            else{
+                this.setState({
+                    validateIcon: 'Please Enter Valid Image',
+                    icon: ''
+                });
+                alert('Please upload image of extension .jpg, .tiff, .bmp, .jpeg or .png');
+            }
+        }
     };
 
     handleChangeExpId(event) {
@@ -256,6 +275,7 @@ class ItemsForm extends Component {
                                                         onChange={this.handleChangeName}
                                                         required="true"
                                                     />
+
                                                     <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>{this.state.validateName}</div>
                                                 </Label>
                                             </Col>
@@ -265,11 +285,17 @@ class ItemsForm extends Component {
                                                 <Label><h5>Icon:</h5></Label>
                                             </Col>
                                             <Col xs="12" md="9">
-                                                <Label> <input
-                                                    type="file"
-                                                    name="icon"
-                                                    onChange={this.handleChangeIcon}
-                                                />
+                                                <Label>
+                                                    <input
+                                                        type="file"
+                                                        name="icon"
+                                                        onChange={this.handleChangeIcon}
+                                                        style={{
+                                                            color: (this.state.icon === '')? 'transparent' : 'black'
+                                                        }}
+                                                    />
+
+                                                    <div style={{fontSize: 10, color: 'red', paddingTop: 5}}>{this.state.validateIcon}</div>
                                                 </Label>
                                             </Col>
                                         </FormGroup>

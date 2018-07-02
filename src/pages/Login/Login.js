@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, CardGroup, Card, CardBody, Button, Input, InputGroup} from 'reactstrap';
-import {Link} from 'react-router-dom';
 import API from "../../utils/AppUtil";
 import {AsyncStorage} from 'AsyncStorage';
 
@@ -19,7 +18,7 @@ class Login extends Component {
 
     componentWillMount = async () => {
         if (await AsyncStorage.getItem('Login') !== undefined && JSON.parse(await AsyncStorage.getItem('Login')).token !== '') {
-            alert('You are already Logged In.')
+            this.props.history.pop();
         }
     };
 
@@ -38,7 +37,10 @@ class Login extends Component {
                 .then((resp) => {
                     if (resp.Error === false) {
                         AsyncStorage.setItem('Login', JSON.stringify(resp.Data));
-                        this.props.history.push({pathname: `/experiences`});
+                        this.props.history.push({pathname: `/dashboard`});
+                    }
+                    else if (resp.Message === "Wrong username and password."){
+                        alert('Enter Correct Values')
                     }
                 })
                 .catch((err) => {
@@ -67,7 +69,7 @@ class Login extends Component {
             <div className="app flex-row align-items-center">
                 <Container>
                     <Row className="justify-content-center">
-                        <Col md="4">
+                        <Col md="6" lg='4'>
                             <CardGroup>
                                 <Card className="p-4">
                                     <CardBody>
