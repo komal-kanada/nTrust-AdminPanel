@@ -167,7 +167,7 @@ const API = {
             })
     },
 
-    DeleteItem: async function (data) {
+    DeleteItem: async function (data)  {
         return await fetch(API_BASE_URL + '/admin/deleteSubExp', {
             method: 'POST',
             headers: {

@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="36052177-2606-42ac-976b-bc7ccbdd4144" name="Default" comment="- Resolved error in Experience and Items Category">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experiences/ExperienceForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PromoCode/PromoCodeForm.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,7 +19,7 @@
       <file leaf-file-name="AppUtil.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils/AppUtil.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
+            <state relative-caret-position="748">
               <caret line="161" column="34" selection-start-line="161" selection-start-column="34" selection-end-line="161" selection-end-column="34" />
             </state>
           </provider>
@@ -308,7 +305,7 @@
       <workItem from="1530272811070" duration="93000" />
       <workItem from="1530273922777" duration="530000" />
       <workItem from="1530508802515" duration="6632000" />
-      <workItem from="1530592852322" duration="4501000" />
+      <workItem from="1530592852322" duration="4999000" />
     </task>
     <task id="LOCAL-00001" summary="deletion of data.js">
       <created>1528709656571</created>
@@ -370,7 +367,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64455000" />
+    <option name="totallyTimeSpent" value="64953000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -384,7 +381,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32900944" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49962658" visible="true" weight="0.2110849" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49962658" visible="true" weight="0.29245284" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -752,7 +749,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/AppUtil.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
+        <state relative-caret-position="748">
           <caret line="161" column="34" selection-start-line="161" selection-start-column="34" selection-end-line="161" selection-end-column="34" />
         </state>
       </provider>
