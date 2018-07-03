@@ -110,7 +110,7 @@ class PromoCode extends Component {
                                 dataField="promocode"
                                 data-formatter="nameFormatter"
                             >
-                                PromoCode Name
+                                Name
                             </TableHeaderColumn>
 
                             <TableHeaderColumn
