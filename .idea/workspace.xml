@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36052177-2606-42ac-976b-bc7ccbdd4144" name="Default" comment="- Resolved error in Experience and Items Category">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/PromoCode/PromoCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PromoCode/PromoCode.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -74,8 +73,8 @@
       <file leaf-file-name="PromoCode.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/PromoCode/PromoCode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+            <state relative-caret-position="1245">
+              <caret line="83" column="38" lean-forward="true" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -365,7 +364,7 @@
       <workItem from="1530272811070" duration="93000" />
       <workItem from="1530273922777" duration="530000" />
       <workItem from="1530508802515" duration="6632000" />
-      <workItem from="1530592852322" duration="11381000" />
+      <workItem from="1530592852322" duration="11466000" />
     </task>
     <task id="LOCAL-00001" summary="deletion of data.js">
       <created>1528709656571</created>
@@ -427,7 +426,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71335000" />
+    <option name="totallyTimeSpent" value="71420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -807,8 +806,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/PromoCode/PromoCode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="84" column="25" selection-start-line="84" selection-start-column="25" selection-end-line="84" selection-end-column="25" />
+        <state relative-caret-position="1245">
+          <caret line="83" column="38" lean-forward="true" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

@@ -82,7 +82,97 @@ class PromoCode extends Component {
     render() {
         return (
             <div className="animated">
-                PromoCode
+                <Card>
+                    <CardHeader>
+                        PromoCode
+                    </CardHeader>
+
+                    <CardBody>
+
+                        <BootstrapTable
+                            data={this.state.table}
+                            className="experiences-table"
+                            version="4"
+                            striped
+                            hover
+                            pagination
+                            options={this.options}
+                        >
+                            <TableHeaderColumn
+                                dataField="_id"
+                                isKey
+                                hidden={true}
+                            >
+                                Id.
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField="promocode"
+                                data-formatter="nameFormatter"
+                            >
+                                PromoCode Name
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField="subExp_id"
+                                dataFormat={(cell) => {
+                                    return cell.name
+                                }}
+                            >
+                                Items
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField="from"
+                                dataFormat={(cell) => {
+                                    return (cell === '') ? '' : new Date(cell).toLocaleDateString();
+                                }}
+                            >
+                                Valid From
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField="to"
+                                dataFormat={(cell) => {
+                                    return (cell === '') ? '' : new Date(cell).toLocaleDateString();
+                                }}
+                            >
+                                Valid To
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField='_id'
+                                dataFormat={(cell) => {
+                                    return (
+                                        <Link to={`promoCodeForm/edit/${cell}`}>
+                                            <button className="btn-bck">Edit</button>
+                                        </Link>
+                                    )
+                                }}
+                                dataAlign="center"
+                            >
+                                Edit
+                            </TableHeaderColumn>
+
+                            <TableHeaderColumn
+                                dataField='_id'
+                                dataFormat={(cell) => {
+                                    return <button
+                                        className="btn-bck"
+                                        onClick={() => {
+                                            return window.confirm('Are you sure?') ? this._delete(cell) : '';
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                }}
+                                dataAlign="center"
+                            >
+                                Delete
+                            </TableHeaderColumn>
+                        </BootstrapTable>
+                    </CardBody>
+                </Card>
             </div>
         )
     }
