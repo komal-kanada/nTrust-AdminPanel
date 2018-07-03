@@ -98,7 +98,7 @@ class ExperienceForm extends Component {
                     'subheader': this.state.expSubHeader
                 };
                 API.AddExperience(data)
-                    .then(() => {
+                    .then((resp) => {
                         this.setState({
                             modalType: '',
                             name: '',

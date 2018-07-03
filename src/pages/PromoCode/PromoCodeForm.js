@@ -87,7 +87,15 @@ class PromoCodeForm extends Component {
                 .then((resp) => {
                     if(resp.Error === true){
                         if(resp.Message === 'Promocode already exist.'){
-                            alert('Please enter another PromoCode Name')
+                            alert('Please enter another PromoCode Name');
+                            this.setState({
+                                disableSubmit: true,
+                                disableCancel: false
+                            });
+                        }
+                        else{
+                            alert('There is some issue editing PromoCode please try again later.');
+                            this.props.history.push({pathname: `/promoCode`});
                         }
                     }
                     else{
@@ -121,6 +129,10 @@ class PromoCodeForm extends Component {
                                     disableSubmit: true,
                                     disableCancel: false
                                 });
+                            }
+                            else{
+                                alert('There is some issue editing PromoCode please try again later.');
+                                this.props.history.push({pathname: `/promoCode`});
                             }
                         }
                         else{
