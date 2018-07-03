@@ -36,7 +36,7 @@ class PromoCode extends Component {
     _getData = () => {
         API.PromoCodeList()
             .then((response) => {
-                const tableData = _.orderBy(response.Data, [user => user.name],['asc']);
+                const tableData = _.orderBy(response.Data, [user => user.name], ['asc']);
                 this.setState({
                     table: tableData,
                 });
