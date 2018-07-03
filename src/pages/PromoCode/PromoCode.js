@@ -9,7 +9,6 @@ import {AsyncStorage} from "AsyncStorage";
 class PromoCode extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             table: '',
         };
