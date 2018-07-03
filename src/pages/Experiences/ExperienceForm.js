@@ -178,7 +178,7 @@ class ExperienceForm extends Component {
                     }
                 }, 10);
             }
-            else{
+            else {
                 this.setState({
                     expHeader: '',
                     validateExpHeader: 'Please Enter Valid Image',
@@ -219,7 +219,7 @@ class ExperienceForm extends Component {
                     }
                 }, 10);
             }
-            else{
+            else {
                 this.setState({
                     expSubHeader: '',
                     validateSubExpHeader: 'Please Enter Valid Image',
@@ -280,7 +280,7 @@ class ExperienceForm extends Component {
                                                     name="expHeader"
                                                     onChange={this.handleChangeHeader}
                                                     style={{
-                                                        color: (this.state.expHeader === '')? 'transparent' : 'black'
+                                                        color: (this.state.expHeader === '') ? 'transparent' : 'black'
                                                     }}
                                                 />
 
@@ -303,7 +303,7 @@ class ExperienceForm extends Component {
                                                     name="expSubHeader"
                                                     onChange={this.handleChangeSubHeader}
                                                     style={{
-                                                        color: (this.state.expSubHeader === '')? 'transparent' : 'black'
+                                                        color: (this.state.expSubHeader === '') ? 'transparent' : 'black'
                                                     }}
                                                 />
 
