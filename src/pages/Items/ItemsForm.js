@@ -53,6 +53,8 @@ class ItemsForm extends Component {
                                 icon: value.icon,
                                 expId: value.expId._id,
                                 value: value.value,
+                                modalType: 'edit',
+                                disableSubmit: false
                             })
                         }
                     })
@@ -84,7 +86,7 @@ class ItemsForm extends Component {
                     value: this.state.value
                 };
                 API.EditItem(data)
-                    .then(() => {
+                    .then((resp) => {
                         this.setState({
                             modalType: '',
                             _id: '',

@@ -103,7 +103,7 @@ const API = {
             })
     },
 
-    //SubExperience-API-Calls
+    //Items-API-Calls
 
     ItemList: async function () {
         return await fetch(API_BASE_URL + '/admin/getAllSubExp', {

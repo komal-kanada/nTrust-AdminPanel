@@ -37,11 +37,10 @@ class Experiences extends Component {
         }
     };
 
-
     _getData = () => {
         API.ExperienceList()
             .then((response) => {
-                const tableData = _.orderBy(response.Data, [user => user.name],['asc']);
+                let tableData = _.orderBy(response.Data, [user => user.name],['asc']);
                 this.setState({
                     table: tableData,
                 });
@@ -63,7 +62,7 @@ class Experiences extends Component {
                 else {
                     this._getData();
                     setTimeout(() => {
-                        alert('User deleted')
+                        alert('Experience deleted')
                     }, 50);
                 }
             })
