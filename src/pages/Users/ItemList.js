@@ -6,7 +6,6 @@ import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import { Link } from 'react-router-dom';
 
 class ItemList extends Component {
-
     constructor (props) {
         super(props);
 
@@ -45,7 +44,8 @@ class ItemList extends Component {
                     <CardHeader>
                         Product List
                     </CardHeader>
-                    <CardBody>
+
+                    <CardBody className="table-responsive">
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"
@@ -79,9 +79,7 @@ class ItemList extends Component {
                         <Link to='/users'>
                             <button align="center" className="btn-bck" >OK</button>
                         </Link>
-
                     </CardBody>
-
                 </Card>
             </div>
         );

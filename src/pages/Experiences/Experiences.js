@@ -88,7 +88,7 @@ class Experiences extends Component {
                     <CardHeader>
                         Experiences
                     </CardHeader>
-                    <CardBody>
+                    <CardBody className="table-responsive">
 
                         <BootstrapTable
                             data={this.state.table}

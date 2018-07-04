@@ -87,7 +87,7 @@ class PromoCode extends Component {
                         PromoCode
                     </CardHeader>
 
-                    <CardBody>
+                    <CardBody className="table-responsive">
 
                         <BootstrapTable
                             data={this.state.table}

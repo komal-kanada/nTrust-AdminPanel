@@ -26,7 +26,6 @@ class Items extends Component {
         }
     }
 
-
     componentWillMount = async () => {
         if (await AsyncStorage.getItem('Login') === undefined || JSON.parse(await AsyncStorage.getItem('Login')).token === '') {
             this.props.history.push({pathname: `/login`});
@@ -35,7 +34,6 @@ class Items extends Component {
             this._getData();
         }
     };
-
 
     _getData = () => {
         API.ItemList()
@@ -96,9 +94,7 @@ class Items extends Component {
                         Items
                     </CardHeader>
 
-                    <CardBody>
-
-
+                    <CardBody className="table-responsive">
                         <BootstrapTable
                             data={this.state.table}
                             className="experiences-table"

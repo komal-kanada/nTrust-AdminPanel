@@ -105,7 +105,7 @@ class Users extends Component {
                         Users
                     </CardHeader>
 
-                    <CardBody>
+                    <CardBody className='table-responsive'>
                         <BootstrapTable
                             data={this.state.table}
                             version="4"
